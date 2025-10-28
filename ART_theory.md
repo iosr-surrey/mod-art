@@ -161,7 +161,7 @@ $$
     H(z) &{}= C(z) V \left[zI - \Lambda\right]^{-1} W^H B(z) + D(z)
     \\
     &{}=
-    \sum_{i=1}^{M} \frac{C(z) w_i v_i^H b(z)}{z - \lambda_i} + D(z) .
+    \sum_{i=1}^{M} \frac{C(z) v_i w_i^H B(z)}{z - \lambda_i} + D(z) .
 \end{align}
 $$
 
