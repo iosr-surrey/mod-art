@@ -96,7 +96,7 @@ $$
 $$
 
 where $\overline{s}$ is the full state vector of the ART system, and $\overline{A}$ is the full state transition matrix of the ART system.
-The eigenvalues $\Lambda$ and (state-space) eigenvectors $\overline{V}$, $\overline{W}$ are uniquely determined by the state transition matrix $\overline{A}$, and by extension, of the $A \to T_{a}(z)$ loop: they are not influences by the way inputs and outputs are positioned in the loop.
+The eigenvalues $\Lambda$ and (state-space) eigenvectors $\overline{V}$, $\overline{W}$ are uniquely determined by the state transition matrix $\overline{A}$, and by extension, of the $A \to T_{a}(z)$ loop: they are not influenced by the way inputs and outputs are positioned in the loop.
 
 Using $s_1(z)$ and $s_2(z)$, the loop operation takes the form
 
@@ -209,7 +209,7 @@ The output operators need to divide the propagated power by the path etendue.
 
 In the RAVES implementation, the ray-tracing steps (find intersections, bundle per patch, divide by $N_\omega$) are performed at runtime.
 To save some runtime multiplications, the eigenvectors $V$ and $W$ are multiplied by $4\pi$ during the pre-processing.
-The left vectors $W$ are also divided by the relevant path etendues $G_{i \to j}$ to enact the power-to-radiance translation.
+The right vectors $V$ are also divided by the relevant path etendues $G_{i \to j}$ to enact the power-to-radiance translation.
 All of these scaling factors are baked into the eigenvectors saved in the output file `MoD-ART.csv`.
 
 Lastly, when computing residues, we need to make sure we're evaluating $B(\lambda_i)$ and $C(\lambda_i)$ instead of just $B(1)$ and $C(1)$.
@@ -269,7 +269,7 @@ $$
 \end{align}
 $$
 
-where $\left[(x_h - x_i) \in \Omega_h\right]$ is a visibility term equal to $1$ if $x_h$ is visible from $x_i$ and $0$ otherwise, and $\cos \theta_{ij} = n_i \cdot (x_j - x_i)$.
+where $\left[(x_h - x_i) \in \Omega_h\right]$ is a visibility term equal to $1$ if $x_h$ is visible from $x_i$ and $0$ otherwise, and $\cos \theta_{ij} = \frac{n_i \cdot (x_j - x_i)}{\lVert x_j - x_i\rVert^2}$.
 Note that we incorporate visibility in the definition of differential solid angle.
 
 Note that ${\iint_{A_h} \frac{\mathrm{d}A_h}{A_h}}$ indicates an averaging integration.
