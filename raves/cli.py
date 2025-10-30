@@ -12,9 +12,10 @@ def main(argv=None):
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument('folder_path', type=str,
-                        help='Path to your environment folder, or string "all_examples". '
-                             'In the latter case, process all subfolders in "example environments" using the given parameters for all of them. '
-                             'Avoid using "all_examples" with area_threshold > 0!')
+                        help='Path to your environment folder, or a string like "all_examples". '
+                             'In the latter case, process all subfolders in "example environments" using the given parameters for all runs. '
+                             'Also accepts: "all_AudioForGames", "all_DampenedMiddle", "all_Museum"; each of these processes one subset of the example environments. '
+                             'Avoid using any of these with area_threshold > 0!')
 
     parser.add_argument('--overwrite', action='store_true', default=argparse.SUPPRESS,
                         help='Re-compute and overwrite existing ART kernels (they are re-used by default).')
@@ -33,7 +34,7 @@ def main(argv=None):
     parser.add_argument('-rays', '--rays_per_hemisphere', type=int, default=1000,
                         help='Number of rays traced from each surface sample point for the ART numerical integration.')
 
-    parser.add_argument('-pool', '--multiprocess_pool_size', type=int, default=1,
+    parser.add_argument('-pool', '--multiprocess_pool_size', type=int, default=4,
                         help='Number of parallel processes allowed for the ART numerical integration.')
 
     parser.add_argument('-T60', '--T60_threshold', type=float, default=0.1,

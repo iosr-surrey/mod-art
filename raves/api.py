@@ -15,7 +15,7 @@ def raves(folder_path: str,
           skip_ART: bool = False, skip_MoDART: bool = False,
           area_threshold: float = 0., thoroughness: float = 0.,
           points_per_square_meter: float = 30., rays_per_hemisphere: int = 1000,
-          multiprocess_pool_size: int = 1,
+          multiprocess_pool_size: int = 4,
           humidity: float = 50., temperature: float = 20., pressure: float = 100.,
           T60_threshold: float = 1e-1, max_slopes_per_band: int = 10,
           echogram_sample_rate: float = 5e3, skip_T60_plots: bool = False
@@ -27,9 +27,11 @@ def raves(folder_path: str,
     Parameters
     ----------
     folder_path : str
-        Path to the environment folder, or string "all_examples". In the latter
-        case, process all subfolders in "example environments" using the given
-        parameters for all of them.
+        Path to the environment folder, or a string like "all_examples". In the
+        latter case, process all subfolders in "example environments" using the
+        given parameters for all runs. Also accepts: "all_AudioForGames",
+        "all_DampenedMiddle", "all_Museum"; each of these processes one subset
+        of the example environments.
     overwrite : bool, default: False
         If True, any existing ART kernels are re-computed and overwritten.
         Otherwise, existing geometrical data is re-used, whereas material
@@ -48,7 +50,7 @@ def raves(folder_path: str,
         Surface sampling density used during ART.
     rays_per_hemisphere : int, default: 1000
         Number of rays cast from each sample point during ART.
-    multiprocess_pool_size : int, default: 1
+    multiprocess_pool_size : int, default: 4
         Number of worker processes to use. Use 1 to disable multiprocessing.
     humidity : float, default: 50.0
         Ambient relative humidity (%).
@@ -84,18 +86,34 @@ def raves(folder_path: str,
     Examples
     --------
     >>> from raves import raves
-    >>> raves("path/to/your/environment/folder", multiprocess_pool_size=4, echogram_sample_rate=1e4)
+    >>> raves("path/to/your/environment/folder", multiprocess_pool_size=2, echogram_sample_rate=1e4)
     """
-    if folder_path == 'all_examples':
+    if folder_path in ['all_examples', 'all_AudioForGames', 'all_DampenedMiddle', 'all_Museum', 'all_SmallMuseum']:
         example_root = './example environments'
         if not os.path.isdir(example_root):
             raise ValueError('Invalid relative path "./example environments". '
-                             'To use the "all_examples" argument, make sure the working directory is the repository root.')
+                             'To use the "all_examples" argument or one of its relatives, '
+                             'make sure the working directory is the repository root.')
 
         folders_to_try = [os.path.join(example_root, subfolder)
                           for subfolder in os.listdir(example_root)
                           # Do not list files, only directories:
                           if os.path.isdir(os.path.join(example_root, subfolder))]
+
+        if folder_path == 'all_AudioForGames':
+            folders_to_try = [subfolder for subfolder in folders_to_try
+                              if 'AudioForGames' in subfolder]
+        elif folder_path == 'all_DampenedMiddle':
+            folders_to_try = [subfolder for subfolder in folders_to_try
+                              if 'DampenedMiddle' in subfolder]
+        elif folder_path == 'all_Museum':
+            folders_to_try = [subfolder for subfolder in folders_to_try
+                              if 'Museum' in subfolder and 'SmallMuseum' not in subfolder]
+        elif folder_path == 'all_SmallMuseum':
+            folders_to_try = [subfolder for subfolder in folders_to_try
+                              if 'SmallMuseum' in subfolder]
+        # The order of `listdir` is not guaranteed. This does not do miracles, but at least it's deterministic.
+        folders_to_try.sort()
     else:
         folders_to_try = [folder_path]
 

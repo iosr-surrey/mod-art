@@ -78,7 +78,7 @@ def integrate_patch(args: Tuple[TriangleMesh, int, int, List[int], int, float]
     # This pencil will be moved and traced in conjunction with `hemisphere_pencil` to obtain the specular reflection kernel.
     hemisphere_directions = hemisphere_pencil.get_directions()
     hemisphere_cosines = np.einsum('ij,j->i', hemisphere_directions, patch_normal)
-    specular_directions = 2 * hemisphere_cosines[:, np.newaxis] * patch_normal[np.newaxis] - hemisphere_directions
+    specular_directions = 2 * hemisphere_cosines[:, None] * patch_normal[None] - hemisphere_directions
     specular_pencil = RayBundle.from_shared_origin(origin=np.zeros(3), directions=specular_directions)
 
     # These accumulators will be built up at each surface sample point, and combined after the loop to form the patch contributions.
@@ -132,10 +132,10 @@ def integrate_patch(args: Tuple[TriangleMesh, int, int, List[int], int, float]
                 cum_cosines[j] += np.sum(hemisphere_cosines[specular_hits_per_patch[j]])
 
                 for h in range(num_patches):
-                    cum_specular_kernel[h, j] += 2 * np.count_nonzero(hemisphere_hits_per_patch[j] & specular_hits_per_patch[h])
+                    cum_specular_kernel[j, h] += 2 * np.count_nonzero(hemisphere_hits_per_patch[j] & specular_hits_per_patch[h])
                     # The multiplication by 2 makes this equivalent to:
-                    # cum_specular_kernel[h, j] += np.count_nonzero(hemisphere_hits_per_patch[j] & specular_hits_per_patch[h])
-                    # cum_specular_kernel[h, j] += np.count_nonzero(hemisphere_hits_per_patch[h] & specular_hits_per_patch[j])
+                    # cum_specular_kernel[j, h] += np.count_nonzero(hemisphere_hits_per_patch[j] & specular_hits_per_patch[h])
+                    # cum_specular_kernel[j, h] += np.count_nonzero(hemisphere_hits_per_patch[h] & specular_hits_per_patch[j])
 
     return cum_distances, cum_cosines, cum_num_hits, cum_specular_kernel, num_points, this_patch
 
@@ -144,7 +144,7 @@ def assess_ART_on_grid(folder_path: str,
                        points_per_square_meter: List[float], rays_per_hemisphere: List[int],
                        area_threshold: float = 0., thoroughness: float = 0.,
                        compute_missing: bool = True, save_kernels: bool = True,
-                       multiprocess_pool_size: int = 1
+                       multiprocess_pool_size: int = 4
                        ) -> str:
     """
     Assess ART accuracy over a grid of parameters and plot summaries.
@@ -262,7 +262,7 @@ def assess_ART(folder_path: str,
                points_per_square_meter: float, rays_per_hemisphere: int,
                area_threshold: float = 0., thoroughness: float = 0.,
                save_kernels: bool = True,
-               multiprocess_pool_size: int = 1
+               multiprocess_pool_size: int = 4
                ) -> str:
     """
     Compute core ART kernels and assess numerical integration accuracy.
@@ -361,8 +361,8 @@ def assess_ART(folder_path: str,
 
                     # Note: in theory, the diffuse kernel integral involves a multiplication by 2.
                     # In practice, we do not need it because each ray is counted once as "main" and once as specular.
-                    diffuse_kernel[hi, ij] = cum_cosines[j] / (rays_per_hemisphere * num_points)
-                    specular_kernel[hi, ij] = cum_specular_kernel[h, j] / cum_num_hits[h]
+                    diffuse_kernel[ij, hi] = cum_cosines[j] / (rays_per_hemisphere * num_points)
+                    specular_kernel[ij, hi] = cum_specular_kernel[j, h] / cum_num_hits[h]
     else:
         task_list = list()
         for i in range(num_patches):
@@ -401,8 +401,8 @@ def assess_ART(folder_path: str,
 
                             # Note: in theory, the diffuse kernel integral involves a multiplication by 2.
                             # In practice, we do not need it because each ray is counted once as "main" and once as specular.
-                            diffuse_kernel[hi, ij] = cum_cosines[j] / (rays_per_hemisphere * num_points)
-                            specular_kernel[hi, ij] = cum_specular_kernel[h, j] / cum_num_hits[h]
+                            diffuse_kernel[ij, hi] = cum_cosines[j] / (rays_per_hemisphere * num_points)
+                            specular_kernel[ij, hi] = cum_specular_kernel[j, h] / cum_num_hits[h]
 
                     # Advance the progress bar.
                     progress_bar.update()
@@ -453,21 +453,21 @@ def assess_ART(folder_path: str,
     print('\t Average: {:.2f}%'.format(np.mean(etendue_sape)))
     print('\t Valid paths: {}'.format(num_valid_paths))
 
-    # Evaluate the row sums of both kernels. All rows should sum to 1; any divergence is an artefact of numerical integration.
+    # Evaluate the column sums of both kernels. All columns should sum to 1; any divergence is an artefact of numerical integration.
     # As such, we can use these to assess the accuracy of the integration.
-    diffuse_row_sums = diffuse_kernel.sum(axis=1)
-    specular_row_sums = specular_kernel.sum(axis=1)
+    diffuse_col_sums = diffuse_kernel.sum(axis=0)
+    specular_col_sums = specular_kernel.sum(axis=0)
 
-    # Apply the normalization safely w.r.t. zero rows.
+    # Apply the normalization safely w.r.t. zero columns.
     # Also, switch to Compressed Sparse Row (CSR) format to make later operations more efficient.
-    diffuse_row_normalization = np.divide(1., diffuse_row_sums,
+    diffuse_col_normalization = np.divide(1., diffuse_col_sums,
                                           out=np.zeros(num_valid_paths),
-                                          where=(diffuse_row_sums != 0))
-    diffuse_kernel = csr_array(diags(diffuse_row_normalization) @ diffuse_kernel)
-    specular_row_normalization = np.divide(1., specular_row_sums,
+                                          where=(diffuse_col_sums != 0))
+    diffuse_kernel = csr_array(diags(diffuse_col_normalization) @ diffuse_kernel)
+    specular_col_normalization = np.divide(1., specular_col_sums,
                                            out=np.zeros(num_valid_paths),
-                                           where=(specular_row_sums != 0))
-    specular_kernel = csr_array(diags(specular_row_normalization) @ specular_kernel)
+                                           where=(specular_col_sums != 0))
+    specular_kernel = csr_array(diags(specular_col_normalization) @ specular_kernel)
 
     # Prepare the path indexing matrix. Note that:
     #   the indices in this matrix refer to the reduced list, after having removed paths with no visibility.
@@ -510,7 +510,7 @@ def compute_ART(folder_path: str,
                 overwrite: bool = False,
                 area_threshold: float = 0., thoroughness: float = 0.,
                 points_per_square_meter: float = 30., rays_per_hemisphere: int = 1000,
-                multiprocess_pool_size: int = 1,
+                multiprocess_pool_size: int = 4,
                 humidity: float = 50., temperature: float = 20., pressure: float = 100.
                 ) -> str:
     """
@@ -720,8 +720,8 @@ def compute_ART(folder_path: str,
 
                         # Note: in theory, the diffuse kernel integral involves a multiplication by 2.
                         # In practice, we do not need it because each ray is counted once as "main" and once as specular.
-                        diffuse_kernel[hi, ij] = cum_cosines[j] / (rays_per_hemisphere * num_points)
-                        specular_kernel[hi, ij] = cum_specular_kernel[h, j] / cum_num_hits[h]
+                        diffuse_kernel[ij, hi] = cum_cosines[j] / (rays_per_hemisphere * num_points)
+                        specular_kernel[ij, hi] = cum_specular_kernel[j, h] / cum_num_hits[h]
         else:
             task_list = list()
             for i in range(num_patches):
@@ -760,8 +760,8 @@ def compute_ART(folder_path: str,
 
                                 # Note: in theory, the diffuse kernel integral involves a multiplication by 2.
                                 # In practice, we do not need it because each ray is counted once as "main" and once as specular.
-                                diffuse_kernel[hi, ij] = cum_cosines[j] / (rays_per_hemisphere * num_points)
-                                specular_kernel[hi, ij] = cum_specular_kernel[h, j] / cum_num_hits[h]
+                                diffuse_kernel[ij, hi] = cum_cosines[j] / (rays_per_hemisphere * num_points)
+                                specular_kernel[ij, hi] = cum_specular_kernel[j, h] / cum_num_hits[h]
 
                         # Advance the progress bar.
                         progress_bar.update()
@@ -803,7 +803,7 @@ def compute_ART(folder_path: str,
         print('The propagation path etendues should be symmetric, i.e., the SAPEs should be low.')
         print('If they seem too high, consider increasing `points_per_square_meter` and/or `rays_per_hemisphere`.')
         print('N.B.: The etendue values are based on the diffuse kernel before it is normalized.')
-        print('      If the diffuse kernel row sums are significantly different from 1, the upcoming normalization may skew this assessment.')
+        print('      If the diffuse kernel column sums are significantly different from 1, the upcoming normalization may skew this assessment.')
         # For debugging: plot the etendues.
         """
         import matplotlib.pyplot as plt
@@ -829,43 +829,43 @@ def compute_ART(folder_path: str,
         diffuse_kernel = lil_array(diffuse_kernel[path_visibility][:, path_visibility])
         specular_kernel = lil_array(specular_kernel[path_visibility][:, path_visibility])
 
-        # Evaluate the row sums of both kernels. All rows should sum to 1; any divergence is an artefact of numerical integration.
+        # Evaluate the column sums of both kernels. All columns should sum to 1; any divergence is an artefact of numerical integration.
         # As such, we can use these to assess the accuracy of the integration.
-        diffuse_row_sums = diffuse_kernel.sum(axis=1)
-        specular_row_sums = specular_kernel.sum(axis=1)
+        diffuse_col_sums = diffuse_kernel.sum(axis=0)
+        specular_col_sums = specular_kernel.sum(axis=0)
 
-        # Note: the specular kernel may have 0-sum rows even after removing paths without visibility.
-        diffuse_row_sums_rmse = np.sqrt(np.mean(np.abs(diffuse_row_sums - 1.) ** 2))
-        specular_row_sums_rmse = np.sqrt(np.mean(np.abs(specular_row_sums[specular_row_sums != 0] - 1.) ** 2))
+        # Note: the specular kernel may have 0-sum columns even after removing paths without visibility.
+        diffuse_col_sums_rmse = np.sqrt(np.mean(np.abs(diffuse_col_sums - 1.) ** 2))
+        specular_col_sums_rmse = np.sqrt(np.mean(np.abs(specular_col_sums[specular_col_sums != 0] - 1.) ** 2))
 
-        print('\nThe kernel rows sum to 1 with a root mean squared error (RMSE) of',
-              '{:.2e} for the diffuse kernel and {:.2e} for the specular kernel.'.format(diffuse_row_sums_rmse, specular_row_sums_rmse))
+        print('\nThe kernel columns sum to 1 with a root mean squared error (RMSE) of',
+              '{:.2e} for the diffuse kernel and {:.2e} for the specular kernel.'.format(diffuse_col_sums_rmse, specular_col_sums_rmse))
         print('If either of these seems too high, consider increasing `points_per_square_meter` and/or `rays_per_hemisphere`.')
-        print('The row sums will now be forcibly normalized.')
+        print('The column sums will now be forcibly normalized.')
 
-        # Apply the normalization safely w.r.t. zero rows.
+        # Apply the normalization safely w.r.t. zero columns.
         # Also, switch to Compressed Sparse Row (CSR) format to make later operations more efficient.
-        diffuse_row_normalization = np.divide(1., diffuse_row_sums,
+        diffuse_col_normalization = np.divide(1., diffuse_col_sums,
                                               out=np.zeros(num_valid_paths),
-                                              where=(diffuse_row_sums != 0))
-        diffuse_kernel = csr_array(diags(diffuse_row_normalization) @ diffuse_kernel)
-        specular_row_normalization = np.divide(1., specular_row_sums,
+                                              where=(diffuse_col_sums != 0))
+        diffuse_kernel = csr_array(diags(diffuse_col_normalization) @ diffuse_kernel)
+        specular_col_normalization = np.divide(1., specular_col_sums,
                                                out=np.zeros(num_valid_paths),
-                                               where=(specular_row_sums != 0))
-        specular_kernel = csr_array(diags(specular_row_normalization) @ specular_kernel)
+                                               where=(specular_col_sums != 0))
+        specular_kernel = csr_array(diags(specular_col_normalization) @ specular_kernel)
 
-        # For debugging: plot the row sums after normalization.
+        # For debugging: plot the column sums after normalization.
         """
-        diffuse_row_sums = diffuse_kernel.sum(axis=1)
-        specular_row_sums = specular_kernel.sum(axis=1)
-        diffuse_row_sums_rmse = np.sqrt(np.mean(np.abs(diffuse_row_sums - 1.) ** 2))
-        specular_row_sums_rmse = np.sqrt(np.mean(np.abs(specular_row_sums[specular_row_sums != 0] - 1.) ** 2))
+        diffuse_col_sums = diffuse_kernel.sum(axis=0)
+        specular_col_sums = specular_kernel.sum(axis=0)
+        diffuse_col_sums_rmse = np.sqrt(np.mean(np.abs(diffuse_col_sums - 1.) ** 2))
+        specular_col_sums_rmse = np.sqrt(np.mean(np.abs(specular_col_sums[specular_col_sums != 0] - 1.) ** 2))
     
         import matplotlib.pyplot as plt
         
         fig, ax = plt.subplots(dpi=200, figsize=(8, 6))
-        plt.plot(diffuse_row_sums, label='diffuse (RMSE {:.2e})'.format(diffuse_row_sums_rmse))
-        plt.plot(specular_row_sums, label='specular (RMSE {:.2e})'.format(specular_row_sums_rmse))
+        plt.plot(diffuse_col_sums, label='diffuse (RMSE {:.2e})'.format(diffuse_col_sums_rmse))
+        plt.plot(specular_col_sums, label='specular (RMSE {:.2e})'.format(specular_col_sums_rmse))
         plt.tight_layout()
         plt.legend()
         plt.show()

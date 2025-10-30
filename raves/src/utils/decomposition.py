@@ -352,9 +352,9 @@ def real_positive_search(ssm: csr_array,
     # Calibrate the full eigenvectors: their dot products should be 1.
     calibration = np.einsum('ji,ji->i', left_vecs, right_vecs)
     # In theory, we could do either:
-    #   right_vecs /= calibration[np.newaxis]
+    #   right_vecs /= calibration
     # or:
-    #   left_vecs /= calibration[np.newaxis]
+    #   left_vecs /= calibration
     # Instead, split the calibration across both sides, to avoid increasing/decreasing one side too much.
     right_vecs /= np.sign(calibration) * np.sqrt(np.abs(calibration))
     left_vecs /= np.sqrt(np.abs(calibration))

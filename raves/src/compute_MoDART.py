@@ -207,13 +207,13 @@ def compute_MoDART(folder_path: str,
 
         # Prefer pairs of mostly positive vectors rather than pairs of mostly negative vectors (kind of inconsequential).
         V_signs = np.sign(np.mean(V_hat, axis=0))
-        V_hat *= V_signs[np.newaxis]
-        W_hat *= V_signs[np.newaxis]
+        V_hat *= V_signs[None]
+        W_hat *= V_signs[None]
 
         # Scale by the path etendues to "translate" quantities between power and radiance.
         # The signals circulating in the loop are power, and must be translated to radiance
         # in order to use solid angles as detectors. This means dividing by the path etendue (P = G * L).
-        V_hat /= path_etendues[:, np.newaxis]
+        V_hat /= path_etendues[:, None]
 
         # The injectors and detectors, being solid angles, should both sum to 4 pi.
         # Given the way we perform ray-tracing in practice, they sum to 1 instead.
