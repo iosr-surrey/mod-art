@@ -1,0 +1,1797 @@
+mtllib mesh.mtl
+
+################################ Vertices
+
+v 0.0 0.0 0.0                  # Vertex 1
+v 21.0 0.0 0.0                 # Vertex 2
+v 0.0 0.0 5.0                  # Vertex 3
+v 21.0 0.0 5.0                 # Vertex 4
+v 0.0 8.0 0.0                  # Vertex 5
+v 3.25 8.0 0.0                 # Vertex 6
+v 4.75 8.0 0.0                 # Vertex 7
+v 8.0 8.0 0.0                  # Vertex 8
+v 13.0 8.0 0.0                 # Vertex 9
+v 16.25 8.0 0.0                # Vertex 10
+v 17.75 8.0 0.0                # Vertex 11
+v 21.0 8.0 0.0                 # Vertex 12
+v 3.25 8.0 2.5                 # Vertex 13
+v 4.75 8.0 2.5                 # Vertex 14
+v 16.25 8.0 2.5                # Vertex 15
+v 17.75 8.0 2.5                # Vertex 16
+v 8.0 8.0 3.0                  # Vertex 17
+v 13.0 8.0 3.0                 # Vertex 18
+v 0.0 8.0 5.0                  # Vertex 19
+v 8.0 8.0 5.0                  # Vertex 20
+v 13.0 8.0 5.0                 # Vertex 21
+v 21.0 8.0 5.0                 # Vertex 22
+v 8.0 9.25 0.0                 # Vertex 23
+v 13.0 9.25 0.0                # Vertex 24
+v 8.0 9.25 2.5                 # Vertex 25
+v 13.0 9.25 2.5                # Vertex 26
+v 8.0 10.75 0.0                # Vertex 27
+v 13.0 10.75 0.0               # Vertex 28
+v 8.0 10.75 2.5                # Vertex 29
+v 13.0 10.75 2.5               # Vertex 30
+v 8.0 15.0 0.0                 # Vertex 31
+v 9.75 15.0 0.0                # Vertex 32
+v 11.25 15.0 0.0               # Vertex 33
+v 13.0 15.0 0.0                # Vertex 34
+v 9.75 15.0 2.5                # Vertex 35
+v 11.25 15.0 2.5               # Vertex 36
+v 8.0 15.0 3.0                 # Vertex 37
+v 13.0 15.0 3.0                # Vertex 38
+v 8.0 16.25 0.0                # Vertex 39
+v 13.0 16.25 0.0               # Vertex 40
+v 8.0 16.25 2.5                # Vertex 41
+v 13.0 16.25 2.5               # Vertex 42
+v 8.0 17.75 0.0                # Vertex 43
+v 13.0 17.75 0.0               # Vertex 44
+v 8.0 17.75 2.5                # Vertex 45
+v 13.0 17.75 2.5               # Vertex 46
+v 0.0 19.0 0.0                 # Vertex 47
+v 8.0 19.0 0.0                 # Vertex 48
+v 13.0 19.0 0.0                # Vertex 49
+v 21.0 19.0 0.0                # Vertex 50
+v 0.0 19.0 5.0                 # Vertex 51
+v 8.0 19.0 5.0                 # Vertex 52
+v 13.0 19.0 5.0                # Vertex 53
+v 21.0 19.0 5.0                # Vertex 54
+v 8.0 19.0 3.0                 # Vertex 55
+v 13.0 19.0 3.0                # Vertex 56
+v 0.0 6.0 5.0                  # Vertex 57
+v 2.1 6.0 5.0                  # Vertex 58
+v 2.1 8.0 5.0                  # Vertex 59
+v 4.2 6.0 5.0                  # Vertex 60
+v 4.2 8.0 5.0                  # Vertex 61
+v 6.3 6.0 5.0                  # Vertex 62
+v 6.3 8.0 5.0                  # Vertex 63
+v 8.4 6.0 5.0                  # Vertex 64
+v 8.4 8.0 5.0                  # Vertex 65
+v 10.5 6.0 5.0                 # Vertex 66
+v 10.5 8.0 5.0                 # Vertex 67
+v 12.6 6.0 5.0                 # Vertex 68
+v 12.6 8.0 5.0                 # Vertex 69
+v 14.7 6.0 5.0                 # Vertex 70
+v 14.7 8.0 5.0                 # Vertex 71
+v 16.8 6.0 5.0                 # Vertex 72
+v 16.8 8.0 5.0                 # Vertex 73
+v 18.9 6.0 5.0                 # Vertex 74
+v 18.9 8.0 5.0                 # Vertex 75
+v 21.0 6.0 5.0                 # Vertex 76
+v 0.0 4.0 5.0                  # Vertex 77
+v 2.1 4.0 5.0                  # Vertex 78
+v 4.2 4.0 5.0                  # Vertex 79
+v 6.3 4.0 5.0                  # Vertex 80
+v 8.4 4.0 5.0                  # Vertex 81
+v 10.5 4.0 5.0                 # Vertex 82
+v 12.6 4.0 5.0                 # Vertex 83
+v 14.7 4.0 5.0                 # Vertex 84
+v 16.8 4.0 5.0                 # Vertex 85
+v 18.9 4.0 5.0                 # Vertex 86
+v 21.0 4.0 5.0                 # Vertex 87
+v 0.0 2.0 5.0                  # Vertex 88
+v 2.1 2.0 5.0                  # Vertex 89
+v 4.2 2.0 5.0                  # Vertex 90
+v 6.3 2.0 5.0                  # Vertex 91
+v 8.4 2.0 5.0                  # Vertex 92
+v 10.5 2.0 5.0                 # Vertex 93
+v 12.6 2.0 5.0                 # Vertex 94
+v 14.7 2.0 5.0                 # Vertex 95
+v 16.8 2.0 5.0                 # Vertex 96
+v 18.9 2.0 5.0                 # Vertex 97
+v 21.0 2.0 5.0                 # Vertex 98
+v 2.1 0.0 5.0                  # Vertex 99
+v 4.2 0.0 5.0                  # Vertex 100
+v 6.3 0.0 5.0                  # Vertex 101
+v 8.4 0.0 5.0                  # Vertex 102
+v 10.5 0.0 5.0                 # Vertex 103
+v 12.6 0.0 5.0                 # Vertex 104
+v 14.7 0.0 5.0                 # Vertex 105
+v 16.8 0.0 5.0                 # Vertex 106
+v 18.9 0.0 5.0                 # Vertex 107
+v 17.75 8.0 1.6666667          # Vertex 108
+v 19.375 8.0 1.6666667         # Vertex 109
+v 19.375 8.0 0.0               # Vertex 110
+v 21.0 8.0 1.6666667           # Vertex 111
+v 17.75 8.0 3.3333333          # Vertex 112
+v 19.375 8.0 3.3333333         # Vertex 113
+v 21.0 8.0 3.3333333           # Vertex 114
+v 17.75 8.0 5.0                # Vertex 115
+v 19.375 8.0 5.0               # Vertex 116
+v 16.25 8.0 3.75               # Vertex 117
+v 17.75 8.0 3.75               # Vertex 118
+v 16.25 8.0 5.0                # Vertex 119
+v 4.75 8.0 1.6666667           # Vertex 120
+v 6.6666667 8.0 1.6666667      # Vertex 121
+v 6.6666667 8.0 0.0            # Vertex 122
+v 8.5833333 8.0 1.6666667      # Vertex 123
+v 8.5833333 8.0 0.0            # Vertex 124
+v 10.5 8.0 1.6666667           # Vertex 125
+v 10.5 8.0 0.0                 # Vertex 126
+v 12.4166667 8.0 1.6666667     # Vertex 127
+v 12.4166667 8.0 0.0           # Vertex 128
+v 14.3333333 8.0 1.6666667     # Vertex 129
+v 14.3333333 8.0 0.0           # Vertex 130
+v 16.25 8.0 1.6666667          # Vertex 131
+v 4.75 8.0 3.3333333           # Vertex 132
+v 6.6666667 8.0 3.3333333      # Vertex 133
+v 8.5833333 8.0 3.3333333      # Vertex 134
+v 10.5 8.0 3.3333333           # Vertex 135
+v 12.4166667 8.0 3.3333333     # Vertex 136
+v 14.3333333 8.0 3.3333333     # Vertex 137
+v 16.25 8.0 3.3333333          # Vertex 138
+v 4.75 8.0 5.0                 # Vertex 139
+v 6.6666667 8.0 5.0            # Vertex 140
+v 8.5833333 8.0 5.0            # Vertex 141
+v 12.4166667 8.0 5.0           # Vertex 142
+v 14.3333333 8.0 5.0           # Vertex 143
+v 3.25 8.0 3.75                # Vertex 144
+v 4.75 8.0 3.75                # Vertex 145
+v 3.25 8.0 5.0                 # Vertex 146
+v 0.0 8.0 1.6666667            # Vertex 147
+v 1.625 8.0 1.6666667          # Vertex 148
+v 1.625 8.0 0.0                # Vertex 149
+v 3.25 8.0 1.6666667           # Vertex 150
+v 0.0 8.0 3.3333333            # Vertex 151
+v 1.625 8.0 3.3333333          # Vertex 152
+v 3.25 8.0 3.3333333           # Vertex 153
+v 1.625 8.0 5.0                # Vertex 154
+v 0.0 6.0 0.0                  # Vertex 155
+v 0.0 6.0 1.6666667            # Vertex 156
+v 0.0 6.0 3.3333333            # Vertex 157
+v 0.0 4.0 0.0                  # Vertex 158
+v 0.0 4.0 1.6666667            # Vertex 159
+v 0.0 4.0 3.3333333            # Vertex 160
+v 0.0 2.0 0.0                  # Vertex 161
+v 0.0 2.0 1.6666667            # Vertex 162
+v 0.0 2.0 3.3333333            # Vertex 163
+v 0.0 0.0 1.6666667            # Vertex 164
+v 0.0 0.0 3.3333333            # Vertex 165
+v 18.9 0.0 0.0                 # Vertex 166
+v 18.9 2.0 0.0                 # Vertex 167
+v 21.0 2.0 0.0                 # Vertex 168
+v 18.9 4.0 0.0                 # Vertex 169
+v 21.0 4.0 0.0                 # Vertex 170
+v 18.9 6.0 0.0                 # Vertex 171
+v 21.0 6.0 0.0                 # Vertex 172
+v 18.9 8.0 0.0                 # Vertex 173
+v 16.8 0.0 0.0                 # Vertex 174
+v 16.8 2.0 0.0                 # Vertex 175
+v 16.8 4.0 0.0                 # Vertex 176
+v 16.8 6.0 0.0                 # Vertex 177
+v 16.8 8.0 0.0                 # Vertex 178
+v 14.7 0.0 0.0                 # Vertex 179
+v 14.7 2.0 0.0                 # Vertex 180
+v 14.7 4.0 0.0                 # Vertex 181
+v 14.7 6.0 0.0                 # Vertex 182
+v 14.7 8.0 0.0                 # Vertex 183
+v 12.6 0.0 0.0                 # Vertex 184
+v 12.6 2.0 0.0                 # Vertex 185
+v 12.6 4.0 0.0                 # Vertex 186
+v 12.6 6.0 0.0                 # Vertex 187
+v 12.6 8.0 0.0                 # Vertex 188
+v 10.5 0.0 0.0                 # Vertex 189
+v 10.5 2.0 0.0                 # Vertex 190
+v 10.5 4.0 0.0                 # Vertex 191
+v 10.5 6.0 0.0                 # Vertex 192
+v 8.4 0.0 0.0                  # Vertex 193
+v 8.4 2.0 0.0                  # Vertex 194
+v 8.4 4.0 0.0                  # Vertex 195
+v 8.4 6.0 0.0                  # Vertex 196
+v 8.4 8.0 0.0                  # Vertex 197
+v 6.3 0.0 0.0                  # Vertex 198
+v 6.3 2.0 0.0                  # Vertex 199
+v 6.3 4.0 0.0                  # Vertex 200
+v 6.3 6.0 0.0                  # Vertex 201
+v 6.3 8.0 0.0                  # Vertex 202
+v 4.2 0.0 0.0                  # Vertex 203
+v 4.2 2.0 0.0                  # Vertex 204
+v 4.2 4.0 0.0                  # Vertex 205
+v 4.2 6.0 0.0                  # Vertex 206
+v 4.2 8.0 0.0                  # Vertex 207
+v 2.1 0.0 0.0                  # Vertex 208
+v 2.1 2.0 0.0                  # Vertex 209
+v 2.1 4.0 0.0                  # Vertex 210
+v 2.1 6.0 0.0                  # Vertex 211
+v 2.1 8.0 0.0                  # Vertex 212
+v 21.0 0.0 3.3333333           # Vertex 213
+v 21.0 2.0 3.3333333           # Vertex 214
+v 21.0 4.0 3.3333333           # Vertex 215
+v 21.0 6.0 3.3333333           # Vertex 216
+v 21.0 0.0 1.6666667           # Vertex 217
+v 21.0 2.0 1.6666667           # Vertex 218
+v 21.0 4.0 1.6666667           # Vertex 219
+v 21.0 6.0 1.6666667           # Vertex 220
+v 2.1 0.0 3.3333333            # Vertex 221
+v 4.2 0.0 3.3333333            # Vertex 222
+v 6.3 0.0 3.3333333            # Vertex 223
+v 8.4 0.0 3.3333333            # Vertex 224
+v 10.5 0.0 3.3333333           # Vertex 225
+v 12.6 0.0 3.3333333           # Vertex 226
+v 14.7 0.0 3.3333333           # Vertex 227
+v 16.8 0.0 3.3333333           # Vertex 228
+v 18.9 0.0 3.3333333           # Vertex 229
+v 2.1 0.0 1.6666667            # Vertex 230
+v 4.2 0.0 1.6666667            # Vertex 231
+v 6.3 0.0 1.6666667            # Vertex 232
+v 8.4 0.0 1.6666667            # Vertex 233
+v 10.5 0.0 1.6666667           # Vertex 234
+v 12.6 0.0 1.6666667           # Vertex 235
+v 14.7 0.0 1.6666667           # Vertex 236
+v 16.8 0.0 1.6666667           # Vertex 237
+v 18.9 0.0 1.6666667           # Vertex 238
+v 0.0 16.8 5.0                 # Vertex 239
+v 2.0 16.8 5.0                 # Vertex 240
+v 2.0 19.0 5.0                 # Vertex 241
+v 4.0 16.8 5.0                 # Vertex 242
+v 4.0 19.0 5.0                 # Vertex 243
+v 6.0 16.8 5.0                 # Vertex 244
+v 6.0 19.0 5.0                 # Vertex 245
+v 8.0 16.8 5.0                 # Vertex 246
+v 0.0 14.6 5.0                 # Vertex 247
+v 2.0 14.6 5.0                 # Vertex 248
+v 4.0 14.6 5.0                 # Vertex 249
+v 6.0 14.6 5.0                 # Vertex 250
+v 8.0 14.6 5.0                 # Vertex 251
+v 0.0 12.4 5.0                 # Vertex 252
+v 2.0 12.4 5.0                 # Vertex 253
+v 4.0 12.4 5.0                 # Vertex 254
+v 6.0 12.4 5.0                 # Vertex 255
+v 8.0 12.4 5.0                 # Vertex 256
+v 0.0 10.2 5.0                 # Vertex 257
+v 2.0 10.2 5.0                 # Vertex 258
+v 4.0 10.2 5.0                 # Vertex 259
+v 6.0 10.2 5.0                 # Vertex 260
+v 8.0 10.2 5.0                 # Vertex 261
+v 2.0 8.0 5.0                  # Vertex 262
+v 4.0 8.0 5.0                  # Vertex 263
+v 6.0 8.0 5.0                  # Vertex 264
+v 0.0 16.8 0.0                 # Vertex 265
+v 0.0 16.8 1.6666667           # Vertex 266
+v 0.0 19.0 1.6666667           # Vertex 267
+v 0.0 16.8 3.3333333           # Vertex 268
+v 0.0 19.0 3.3333333           # Vertex 269
+v 0.0 14.6 0.0                 # Vertex 270
+v 0.0 14.6 1.6666667           # Vertex 271
+v 0.0 14.6 3.3333333           # Vertex 272
+v 0.0 12.4 0.0                 # Vertex 273
+v 0.0 12.4 1.6666667           # Vertex 274
+v 0.0 12.4 3.3333333           # Vertex 275
+v 0.0 10.2 0.0                 # Vertex 276
+v 0.0 10.2 1.6666667           # Vertex 277
+v 0.0 10.2 3.3333333           # Vertex 278
+v 6.0 8.0 0.0                  # Vertex 279
+v 6.0 10.2 0.0                 # Vertex 280
+v 8.0 10.2 0.0                 # Vertex 281
+v 6.0 12.4 0.0                 # Vertex 282
+v 8.0 12.4 0.0                 # Vertex 283
+v 6.0 14.6 0.0                 # Vertex 284
+v 8.0 14.6 0.0                 # Vertex 285
+v 6.0 16.8 0.0                 # Vertex 286
+v 8.0 16.8 0.0                 # Vertex 287
+v 6.0 19.0 0.0                 # Vertex 288
+v 4.0 8.0 0.0                  # Vertex 289
+v 4.0 10.2 0.0                 # Vertex 290
+v 4.0 12.4 0.0                 # Vertex 291
+v 4.0 14.6 0.0                 # Vertex 292
+v 4.0 16.8 0.0                 # Vertex 293
+v 4.0 19.0 0.0                 # Vertex 294
+v 2.0 8.0 0.0                  # Vertex 295
+v 2.0 10.2 0.0                 # Vertex 296
+v 2.0 12.4 0.0                 # Vertex 297
+v 2.0 14.6 0.0                 # Vertex 298
+v 2.0 16.8 0.0                 # Vertex 299
+v 2.0 19.0 0.0                 # Vertex 300
+v 6.0 19.0 1.6666667           # Vertex 301
+v 8.0 19.0 1.6666667           # Vertex 302
+v 6.0 19.0 3.3333333           # Vertex 303
+v 8.0 19.0 3.3333333           # Vertex 304
+v 4.0 19.0 1.6666667           # Vertex 305
+v 4.0 19.0 3.3333333           # Vertex 306
+v 2.0 19.0 1.6666667           # Vertex 307
+v 2.0 19.0 3.3333333           # Vertex 308
+v 8.0 8.0 1.6666667            # Vertex 309
+v 6.375 8.0 1.6666667          # Vertex 310
+v 6.375 8.0 0.0                # Vertex 311
+v 8.0 8.0 3.3333333            # Vertex 312
+v 6.375 8.0 3.3333333          # Vertex 313
+v 6.375 8.0 5.0                # Vertex 314
+v 8.0 9.25 1.6666667           # Vertex 315
+v 8.0 9.25 3.3333333           # Vertex 316
+v 8.0 9.25 5.0                 # Vertex 317
+v 8.0 10.75 3.75               # Vertex 318
+v 8.0 9.25 3.75                # Vertex 319
+v 8.0 10.75 5.0                # Vertex 320
+v 8.0 16.25 1.6666667          # Vertex 321
+v 8.0 14.4166667 1.6666667     # Vertex 322
+v 8.0 14.4166667 0.0           # Vertex 323
+v 8.0 12.5833333 1.6666667     # Vertex 324
+v 8.0 12.5833333 0.0           # Vertex 325
+v 8.0 10.75 1.6666667          # Vertex 326
+v 8.0 16.25 3.3333333          # Vertex 327
+v 8.0 14.4166667 3.3333333     # Vertex 328
+v 8.0 12.5833333 3.3333333     # Vertex 329
+v 8.0 10.75 3.3333333          # Vertex 330
+v 8.0 16.25 5.0                # Vertex 331
+v 8.0 14.4166667 5.0           # Vertex 332
+v 8.0 12.5833333 5.0           # Vertex 333
+v 8.0 17.75 3.75               # Vertex 334
+v 8.0 16.25 3.75               # Vertex 335
+v 8.0 17.75 5.0                # Vertex 336
+v 8.0 17.75 1.6666667          # Vertex 337
+v 8.0 17.75 3.3333333          # Vertex 338
+v 11.3333333 8.0 0.0           # Vertex 339
+v 11.3333333 10.2 0.0          # Vertex 340
+v 13.0 10.2 0.0                # Vertex 341
+v 11.3333333 12.4 0.0          # Vertex 342
+v 13.0 12.4 0.0                # Vertex 343
+v 11.3333333 14.6 0.0          # Vertex 344
+v 13.0 14.6 0.0                # Vertex 345
+v 11.3333333 16.8 0.0          # Vertex 346
+v 13.0 16.8 0.0                # Vertex 347
+v 11.3333333 19.0 0.0          # Vertex 348
+v 9.6666667 8.0 0.0            # Vertex 349
+v 9.6666667 10.2 0.0           # Vertex 350
+v 9.6666667 12.4 0.0           # Vertex 351
+v 9.6666667 14.6 0.0           # Vertex 352
+v 9.6666667 16.8 0.0           # Vertex 353
+v 9.6666667 19.0 0.0           # Vertex 354
+v 8.0 8.0 1.5                  # Vertex 355
+v 9.6666667 8.0 1.5            # Vertex 356
+v 9.6666667 8.0 3.0            # Vertex 357
+v 11.3333333 8.0 1.5           # Vertex 358
+v 11.3333333 8.0 3.0           # Vertex 359
+v 13.0 8.0 1.5                 # Vertex 360
+v 13.0 9.25 1.5                # Vertex 361
+v 13.0 9.25 3.0                # Vertex 362
+v 13.0 10.75 3.0               # Vertex 363
+v 13.0 16.25 1.5               # Vertex 364
+v 13.0 14.4166667 1.5          # Vertex 365
+v 13.0 14.4166667 0.0          # Vertex 366
+v 13.0 12.5833333 1.5          # Vertex 367
+v 13.0 12.5833333 0.0          # Vertex 368
+v 13.0 10.75 1.5               # Vertex 369
+v 13.0 16.25 3.0               # Vertex 370
+v 13.0 14.4166667 3.0          # Vertex 371
+v 13.0 12.5833333 3.0          # Vertex 372
+v 13.0 17.75 3.0               # Vertex 373
+v 8.0 16.25 3.0                # Vertex 374
+v 8.0 17.75 3.0                # Vertex 375
+v 8.0 10.75 1.5                # Vertex 376
+v 8.0 12.5833333 1.5           # Vertex 377
+v 8.0 14.4166667 1.5           # Vertex 378
+v 8.0 16.25 1.5                # Vertex 379
+v 8.0 10.75 3.0                # Vertex 380
+v 8.0 12.5833333 3.0           # Vertex 381
+v 8.0 14.4166667 3.0           # Vertex 382
+v 8.0 9.25 3.0                 # Vertex 383
+v 8.0 9.25 1.5                 # Vertex 384
+v 8.0 16.8 3.0                 # Vertex 385
+v 9.6666667 16.8 3.0           # Vertex 386
+v 9.6666667 19.0 3.0           # Vertex 387
+v 11.3333333 16.8 3.0          # Vertex 388
+v 11.3333333 19.0 3.0          # Vertex 389
+v 13.0 16.8 3.0                # Vertex 390
+v 8.0 14.6 3.0                 # Vertex 391
+v 9.6666667 14.6 3.0           # Vertex 392
+v 11.3333333 14.6 3.0          # Vertex 393
+v 13.0 14.6 3.0                # Vertex 394
+v 8.0 12.4 3.0                 # Vertex 395
+v 9.6666667 12.4 3.0           # Vertex 396
+v 11.3333333 12.4 3.0          # Vertex 397
+v 13.0 12.4 3.0                # Vertex 398
+v 8.0 10.2 3.0                 # Vertex 399
+v 9.6666667 10.2 3.0           # Vertex 400
+v 11.3333333 10.2 3.0          # Vertex 401
+v 13.0 10.2 3.0                # Vertex 402
+v 11.3333333 19.0 1.5          # Vertex 403
+v 13.0 19.0 1.5                # Vertex 404
+v 9.6666667 19.0 1.5           # Vertex 405
+v 8.0 19.0 1.5                 # Vertex 406
+v 13.0 16.8 5.0                # Vertex 407
+v 15.0 16.8 5.0                # Vertex 408
+v 15.0 19.0 5.0                # Vertex 409
+v 17.0 16.8 5.0                # Vertex 410
+v 17.0 19.0 5.0                # Vertex 411
+v 19.0 16.8 5.0                # Vertex 412
+v 19.0 19.0 5.0                # Vertex 413
+v 21.0 16.8 5.0                # Vertex 414
+v 13.0 14.6 5.0                # Vertex 415
+v 15.0 14.6 5.0                # Vertex 416
+v 17.0 14.6 5.0                # Vertex 417
+v 19.0 14.6 5.0                # Vertex 418
+v 21.0 14.6 5.0                # Vertex 419
+v 13.0 12.4 5.0                # Vertex 420
+v 15.0 12.4 5.0                # Vertex 421
+v 17.0 12.4 5.0                # Vertex 422
+v 19.0 12.4 5.0                # Vertex 423
+v 21.0 12.4 5.0                # Vertex 424
+v 13.0 10.2 5.0                # Vertex 425
+v 15.0 10.2 5.0                # Vertex 426
+v 17.0 10.2 5.0                # Vertex 427
+v 19.0 10.2 5.0                # Vertex 428
+v 21.0 10.2 5.0                # Vertex 429
+v 15.0 8.0 5.0                 # Vertex 430
+v 17.0 8.0 5.0                 # Vertex 431
+v 19.0 8.0 5.0                 # Vertex 432
+v 19.0 8.0 0.0                 # Vertex 433
+v 19.0 10.2 0.0                # Vertex 434
+v 21.0 10.2 0.0                # Vertex 435
+v 19.0 12.4 0.0                # Vertex 436
+v 21.0 12.4 0.0                # Vertex 437
+v 19.0 14.6 0.0                # Vertex 438
+v 21.0 14.6 0.0                # Vertex 439
+v 19.0 16.8 0.0                # Vertex 440
+v 21.0 16.8 0.0                # Vertex 441
+v 19.0 19.0 0.0                # Vertex 442
+v 17.0 8.0 0.0                 # Vertex 443
+v 17.0 10.2 0.0                # Vertex 444
+v 17.0 12.4 0.0                # Vertex 445
+v 17.0 14.6 0.0                # Vertex 446
+v 17.0 16.8 0.0                # Vertex 447
+v 17.0 19.0 0.0                # Vertex 448
+v 15.0 8.0 0.0                 # Vertex 449
+v 15.0 10.2 0.0                # Vertex 450
+v 15.0 12.4 0.0                # Vertex 451
+v 15.0 14.6 0.0                # Vertex 452
+v 15.0 16.8 0.0                # Vertex 453
+v 15.0 19.0 0.0                # Vertex 454
+v 19.0 19.0 1.6666667          # Vertex 455
+v 21.0 19.0 1.6666667          # Vertex 456
+v 19.0 19.0 3.3333333          # Vertex 457
+v 21.0 19.0 3.3333333          # Vertex 458
+v 17.0 19.0 1.6666667          # Vertex 459
+v 17.0 19.0 3.3333333          # Vertex 460
+v 15.0 19.0 1.6666667          # Vertex 461
+v 15.0 19.0 3.3333333          # Vertex 462
+v 13.0 19.0 1.6666667          # Vertex 463
+v 13.0 19.0 3.3333333          # Vertex 464
+v 14.625 8.0 1.6666667         # Vertex 465
+v 14.625 8.0 0.0               # Vertex 466
+v 13.0 8.0 1.6666667           # Vertex 467
+v 14.625 8.0 3.3333333         # Vertex 468
+v 13.0 8.0 3.3333333           # Vertex 469
+v 14.625 8.0 5.0               # Vertex 470
+v 21.0 10.2 3.3333333          # Vertex 471
+v 21.0 12.4 3.3333333          # Vertex 472
+v 21.0 14.6 3.3333333          # Vertex 473
+v 21.0 16.8 3.3333333          # Vertex 474
+v 21.0 10.2 1.6666667          # Vertex 475
+v 21.0 12.4 1.6666667          # Vertex 476
+v 21.0 14.6 1.6666667          # Vertex 477
+v 21.0 16.8 1.6666667          # Vertex 478
+v 13.0 17.75 1.6666667         # Vertex 479
+v 13.0 17.75 3.3333333         # Vertex 480
+v 13.0 17.75 5.0               # Vertex 481
+v 13.0 16.25 3.75              # Vertex 482
+v 13.0 17.75 3.75              # Vertex 483
+v 13.0 16.25 5.0               # Vertex 484
+v 13.0 10.75 1.6666667         # Vertex 485
+v 13.0 12.5833333 1.6666667    # Vertex 486
+v 13.0 14.4166667 1.6666667    # Vertex 487
+v 13.0 16.25 1.6666667         # Vertex 488
+v 13.0 10.75 3.3333333         # Vertex 489
+v 13.0 12.5833333 3.3333333    # Vertex 490
+v 13.0 14.4166667 3.3333333    # Vertex 491
+v 13.0 16.25 3.3333333         # Vertex 492
+v 13.0 10.75 5.0               # Vertex 493
+v 13.0 12.5833333 5.0          # Vertex 494
+v 13.0 14.4166667 5.0          # Vertex 495
+v 13.0 9.25 3.75               # Vertex 496
+v 13.0 10.75 3.75              # Vertex 497
+v 13.0 9.25 5.0                # Vertex 498
+v 13.0 9.25 1.6666667          # Vertex 499
+v 13.0 9.25 3.3333333          # Vertex 500
+
+################################ Faces
+
+usemtl Patch_1_Mat_Outdoors_Ceiling
+f 19 58 57
+f 19 59 58
+usemtl Patch_2_Mat_Outdoors_Ceiling
+f 59 60 58
+f 59 61 60
+usemtl Patch_3_Mat_Outdoors_Ceiling
+f 61 62 60
+f 61 63 62
+usemtl Patch_4_Mat_Outdoors_Ceiling
+f 63 64 62
+f 63 65 64
+usemtl Patch_5_Mat_Outdoors_Ceiling
+f 65 66 64
+f 65 67 66
+usemtl Patch_6_Mat_Outdoors_Ceiling
+f 67 68 66
+f 67 69 68
+usemtl Patch_7_Mat_Outdoors_Ceiling
+f 69 70 68
+f 69 71 70
+usemtl Patch_8_Mat_Outdoors_Ceiling
+f 71 72 70
+f 71 73 72
+usemtl Patch_9_Mat_Outdoors_Ceiling
+f 73 74 72
+f 73 75 74
+usemtl Patch_10_Mat_Outdoors_Ceiling
+f 75 76 74
+f 75 22 76
+usemtl Patch_11_Mat_Outdoors_Ceiling
+f 57 78 77
+f 57 58 78
+usemtl Patch_12_Mat_Outdoors_Ceiling
+f 58 79 78
+f 58 60 79
+usemtl Patch_13_Mat_Outdoors_Ceiling
+f 60 80 79
+f 60 62 80
+usemtl Patch_14_Mat_Outdoors_Ceiling
+f 62 81 80
+f 62 64 81
+usemtl Patch_15_Mat_Outdoors_Ceiling
+f 64 82 81
+f 64 66 82
+usemtl Patch_16_Mat_Outdoors_Ceiling
+f 66 83 82
+f 66 68 83
+usemtl Patch_17_Mat_Outdoors_Ceiling
+f 68 84 83
+f 68 70 84
+usemtl Patch_18_Mat_Outdoors_Ceiling
+f 70 85 84
+f 70 72 85
+usemtl Patch_19_Mat_Outdoors_Ceiling
+f 72 86 85
+f 72 74 86
+usemtl Patch_20_Mat_Outdoors_Ceiling
+f 74 87 86
+f 74 76 87
+usemtl Patch_21_Mat_Outdoors_Ceiling
+f 77 89 88
+f 77 78 89
+usemtl Patch_22_Mat_Outdoors_Ceiling
+f 78 90 89
+f 78 79 90
+usemtl Patch_23_Mat_Outdoors_Ceiling
+f 79 91 90
+f 79 80 91
+usemtl Patch_24_Mat_Outdoors_Ceiling
+f 80 92 91
+f 80 81 92
+usemtl Patch_25_Mat_Outdoors_Ceiling
+f 81 93 92
+f 81 82 93
+usemtl Patch_26_Mat_Outdoors_Ceiling
+f 82 94 93
+f 82 83 94
+usemtl Patch_27_Mat_Outdoors_Ceiling
+f 83 95 94
+f 83 84 95
+usemtl Patch_28_Mat_Outdoors_Ceiling
+f 84 96 95
+f 84 85 96
+usemtl Patch_29_Mat_Outdoors_Ceiling
+f 85 97 96
+f 85 86 97
+usemtl Patch_30_Mat_Outdoors_Ceiling
+f 86 98 97
+f 86 87 98
+usemtl Patch_31_Mat_Outdoors_Ceiling
+f 88 99 3
+f 88 89 99
+usemtl Patch_32_Mat_Outdoors_Ceiling
+f 89 100 99
+f 89 90 100
+usemtl Patch_33_Mat_Outdoors_Ceiling
+f 90 101 100
+f 90 91 101
+usemtl Patch_34_Mat_Outdoors_Ceiling
+f 91 102 101
+f 91 92 102
+usemtl Patch_35_Mat_Outdoors_Ceiling
+f 92 103 102
+f 92 93 103
+usemtl Patch_36_Mat_Outdoors_Ceiling
+f 93 104 103
+f 93 94 104
+usemtl Patch_37_Mat_Outdoors_Ceiling
+f 94 105 104
+f 94 95 105
+usemtl Patch_38_Mat_Outdoors_Ceiling
+f 95 106 105
+f 95 96 106
+usemtl Patch_39_Mat_Outdoors_Ceiling
+f 96 107 106
+f 96 97 107
+usemtl Patch_40_Mat_Outdoors_Ceiling
+f 97 4 107
+f 97 98 4
+usemtl Patch_41_Mat_Outdoors_North
+f 11 109 108
+f 11 110 109
+usemtl Patch_42_Mat_Outdoors_North
+f 110 111 109
+f 110 12 111
+usemtl Patch_43_Mat_Outdoors_North
+f 108 113 112
+f 108 109 113
+usemtl Patch_44_Mat_Outdoors_North
+f 109 114 113
+f 109 111 114
+usemtl Patch_45_Mat_Outdoors_North
+f 112 116 115
+f 112 113 116
+usemtl Patch_46_Mat_Outdoors_North
+f 113 22 116
+f 113 114 22
+usemtl Patch_47_Mat_Outdoors_North
+f 15 118 117
+f 15 16 118
+usemtl Patch_48_Mat_Outdoors_North
+f 117 115 119
+f 117 118 115
+usemtl Patch_49_Mat_Outdoors_North
+f 7 121 120
+f 7 122 121
+usemtl Patch_50_Mat_Outdoors_North
+f 122 123 121
+f 122 124 123
+usemtl Patch_51_Mat_Outdoors_North
+f 124 125 123
+f 124 126 125
+usemtl Patch_52_Mat_Outdoors_North
+f 126 127 125
+f 126 128 127
+usemtl Patch_53_Mat_Outdoors_North
+f 128 129 127
+f 128 130 129
+usemtl Patch_54_Mat_Outdoors_North
+f 130 131 129
+f 130 10 131
+usemtl Patch_55_Mat_Outdoors_North
+f 120 133 132
+f 120 121 133
+usemtl Patch_56_Mat_Outdoors_North
+f 121 134 133
+f 121 123 134
+usemtl Patch_57_Mat_Outdoors_North
+f 123 135 134
+f 123 125 135
+usemtl Patch_58_Mat_Outdoors_North
+f 125 136 135
+f 125 127 136
+usemtl Patch_59_Mat_Outdoors_North
+f 127 137 136
+f 127 129 137
+usemtl Patch_60_Mat_Outdoors_North
+f 129 138 137
+f 129 131 138
+usemtl Patch_61_Mat_Outdoors_North
+f 132 140 139
+f 132 133 140
+usemtl Patch_62_Mat_Outdoors_North
+f 133 141 140
+f 133 134 141
+usemtl Patch_63_Mat_Outdoors_North
+f 134 67 141
+f 134 135 67
+usemtl Patch_64_Mat_Outdoors_North
+f 135 142 67
+f 135 136 142
+usemtl Patch_65_Mat_Outdoors_North
+f 136 143 142
+f 136 137 143
+usemtl Patch_66_Mat_Outdoors_North
+f 137 119 143
+f 137 138 119
+usemtl Patch_67_Mat_Outdoors_North
+f 13 145 144
+f 13 14 145
+usemtl Patch_68_Mat_Outdoors_North
+f 144 139 146
+f 144 145 139
+usemtl Patch_69_Mat_Outdoors_North
+f 5 148 147
+f 5 149 148
+usemtl Patch_70_Mat_Outdoors_North
+f 149 150 148
+f 149 6 150
+usemtl Patch_71_Mat_Outdoors_North
+f 147 152 151
+f 147 148 152
+usemtl Patch_72_Mat_Outdoors_North
+f 148 153 152
+f 148 150 153
+usemtl Patch_73_Mat_Outdoors_North
+f 151 154 19
+f 151 152 154
+usemtl Patch_74_Mat_Outdoors_North
+f 152 146 154
+f 152 153 146
+usemtl Patch_75_Mat_Outdoors_West
+f 5 156 155
+f 5 147 156
+usemtl Patch_76_Mat_Outdoors_West
+f 147 157 156
+f 147 151 157
+usemtl Patch_77_Mat_Outdoors_West
+f 151 57 157
+f 151 19 57
+usemtl Patch_78_Mat_Outdoors_West
+f 155 159 158
+f 155 156 159
+usemtl Patch_79_Mat_Outdoors_West
+f 156 160 159
+f 156 157 160
+usemtl Patch_80_Mat_Outdoors_West
+f 157 77 160
+f 157 57 77
+usemtl Patch_81_Mat_Outdoors_West
+f 158 162 161
+f 158 159 162
+usemtl Patch_82_Mat_Outdoors_West
+f 159 163 162
+f 159 160 163
+usemtl Patch_83_Mat_Outdoors_West
+f 160 88 163
+f 160 77 88
+usemtl Patch_84_Mat_Outdoors_West
+f 161 164 1
+f 161 162 164
+usemtl Patch_85_Mat_Outdoors_West
+f 162 165 164
+f 162 163 165
+usemtl Patch_86_Mat_Outdoors_West
+f 163 3 165
+f 163 88 3
+usemtl Patch_87_Mat_Outdoors_Floor
+f 2 167 166
+f 2 168 167
+usemtl Patch_88_Mat_Outdoors_Floor
+f 168 169 167
+f 168 170 169
+usemtl Patch_89_Mat_Outdoors_Floor
+f 170 171 169
+f 170 172 171
+usemtl Patch_90_Mat_Outdoors_Floor
+f 172 173 171
+f 172 12 173
+usemtl Patch_91_Mat_Outdoors_Floor
+f 166 175 174
+f 166 167 175
+usemtl Patch_92_Mat_Outdoors_Floor
+f 167 176 175
+f 167 169 176
+usemtl Patch_93_Mat_Outdoors_Floor
+f 169 177 176
+f 169 171 177
+usemtl Patch_94_Mat_Outdoors_Floor
+f 171 178 177
+f 171 173 178
+usemtl Patch_95_Mat_Outdoors_Floor
+f 174 180 179
+f 174 175 180
+usemtl Patch_96_Mat_Outdoors_Floor
+f 175 181 180
+f 175 176 181
+usemtl Patch_97_Mat_Outdoors_Floor
+f 176 182 181
+f 176 177 182
+usemtl Patch_98_Mat_Outdoors_Floor
+f 177 183 182
+f 177 178 183
+usemtl Patch_99_Mat_Outdoors_Floor
+f 179 185 184
+f 179 180 185
+usemtl Patch_100_Mat_Outdoors_Floor
+f 180 186 185
+f 180 181 186
+usemtl Patch_101_Mat_Outdoors_Floor
+f 181 187 186
+f 181 182 187
+usemtl Patch_102_Mat_Outdoors_Floor
+f 182 188 187
+f 182 183 188
+usemtl Patch_103_Mat_Outdoors_Floor
+f 184 190 189
+f 184 185 190
+usemtl Patch_104_Mat_Outdoors_Floor
+f 185 191 190
+f 185 186 191
+usemtl Patch_105_Mat_Outdoors_Floor
+f 186 192 191
+f 186 187 192
+usemtl Patch_106_Mat_Outdoors_Floor
+f 187 126 192
+f 187 188 126
+usemtl Patch_107_Mat_Outdoors_Floor
+f 189 194 193
+f 189 190 194
+usemtl Patch_108_Mat_Outdoors_Floor
+f 190 195 194
+f 190 191 195
+usemtl Patch_109_Mat_Outdoors_Floor
+f 191 196 195
+f 191 192 196
+usemtl Patch_110_Mat_Outdoors_Floor
+f 192 197 196
+f 192 126 197
+usemtl Patch_111_Mat_Outdoors_Floor
+f 193 199 198
+f 193 194 199
+usemtl Patch_112_Mat_Outdoors_Floor
+f 194 200 199
+f 194 195 200
+usemtl Patch_113_Mat_Outdoors_Floor
+f 195 201 200
+f 195 196 201
+usemtl Patch_114_Mat_Outdoors_Floor
+f 196 202 201
+f 196 197 202
+usemtl Patch_115_Mat_Outdoors_Floor
+f 198 204 203
+f 198 199 204
+usemtl Patch_116_Mat_Outdoors_Floor
+f 199 205 204
+f 199 200 205
+usemtl Patch_117_Mat_Outdoors_Floor
+f 200 206 205
+f 200 201 206
+usemtl Patch_118_Mat_Outdoors_Floor
+f 201 207 206
+f 201 202 207
+usemtl Patch_119_Mat_Outdoors_Floor
+f 203 209 208
+f 203 204 209
+usemtl Patch_120_Mat_Outdoors_Floor
+f 204 210 209
+f 204 205 210
+usemtl Patch_121_Mat_Outdoors_Floor
+f 205 211 210
+f 205 206 211
+usemtl Patch_122_Mat_Outdoors_Floor
+f 206 212 211
+f 206 207 212
+usemtl Patch_123_Mat_Outdoors_Floor
+f 208 161 1
+f 208 209 161
+usemtl Patch_124_Mat_Outdoors_Floor
+f 209 158 161
+f 209 210 158
+usemtl Patch_125_Mat_Outdoors_Floor
+f 210 155 158
+f 210 211 155
+usemtl Patch_126_Mat_Outdoors_Floor
+f 211 5 155
+f 211 212 5
+usemtl Patch_127_Mat_Outdoors_East
+f 4 214 213
+f 4 98 214
+usemtl Patch_128_Mat_Outdoors_East
+f 98 215 214
+f 98 87 215
+usemtl Patch_129_Mat_Outdoors_East
+f 87 216 215
+f 87 76 216
+usemtl Patch_130_Mat_Outdoors_East
+f 76 114 216
+f 76 22 114
+usemtl Patch_131_Mat_Outdoors_East
+f 213 218 217
+f 213 214 218
+usemtl Patch_132_Mat_Outdoors_East
+f 214 219 218
+f 214 215 219
+usemtl Patch_133_Mat_Outdoors_East
+f 215 220 219
+f 215 216 220
+usemtl Patch_134_Mat_Outdoors_East
+f 216 111 220
+f 216 114 111
+usemtl Patch_135_Mat_Outdoors_East
+f 217 168 2
+f 217 218 168
+usemtl Patch_136_Mat_Outdoors_East
+f 218 170 168
+f 218 219 170
+usemtl Patch_137_Mat_Outdoors_East
+f 219 172 170
+f 219 220 172
+usemtl Patch_138_Mat_Outdoors_East
+f 220 12 172
+f 220 111 12
+usemtl Patch_139_Mat_Outdoors_South
+f 3 221 165
+f 3 99 221
+usemtl Patch_140_Mat_Outdoors_South
+f 99 222 221
+f 99 100 222
+usemtl Patch_141_Mat_Outdoors_South
+f 100 223 222
+f 100 101 223
+usemtl Patch_142_Mat_Outdoors_South
+f 101 224 223
+f 101 102 224
+usemtl Patch_143_Mat_Outdoors_South
+f 102 225 224
+f 102 103 225
+usemtl Patch_144_Mat_Outdoors_South
+f 103 226 225
+f 103 104 226
+usemtl Patch_145_Mat_Outdoors_South
+f 104 227 226
+f 104 105 227
+usemtl Patch_146_Mat_Outdoors_South
+f 105 228 227
+f 105 106 228
+usemtl Patch_147_Mat_Outdoors_South
+f 106 229 228
+f 106 107 229
+usemtl Patch_148_Mat_Outdoors_South
+f 107 213 229
+f 107 4 213
+usemtl Patch_149_Mat_Outdoors_South
+f 165 230 164
+f 165 221 230
+usemtl Patch_150_Mat_Outdoors_South
+f 221 231 230
+f 221 222 231
+usemtl Patch_151_Mat_Outdoors_South
+f 222 232 231
+f 222 223 232
+usemtl Patch_152_Mat_Outdoors_South
+f 223 233 232
+f 223 224 233
+usemtl Patch_153_Mat_Outdoors_South
+f 224 234 233
+f 224 225 234
+usemtl Patch_154_Mat_Outdoors_South
+f 225 235 234
+f 225 226 235
+usemtl Patch_155_Mat_Outdoors_South
+f 226 236 235
+f 226 227 236
+usemtl Patch_156_Mat_Outdoors_South
+f 227 237 236
+f 227 228 237
+usemtl Patch_157_Mat_Outdoors_South
+f 228 238 237
+f 228 229 238
+usemtl Patch_158_Mat_Outdoors_South
+f 229 217 238
+f 229 213 217
+usemtl Patch_159_Mat_Outdoors_South
+f 164 208 1
+f 164 230 208
+usemtl Patch_160_Mat_Outdoors_South
+f 230 203 208
+f 230 231 203
+usemtl Patch_161_Mat_Outdoors_South
+f 231 198 203
+f 231 232 198
+usemtl Patch_162_Mat_Outdoors_South
+f 232 193 198
+f 232 233 193
+usemtl Patch_163_Mat_Outdoors_South
+f 233 189 193
+f 233 234 189
+usemtl Patch_164_Mat_Outdoors_South
+f 234 184 189
+f 234 235 184
+usemtl Patch_165_Mat_Outdoors_South
+f 235 179 184
+f 235 236 179
+usemtl Patch_166_Mat_Outdoors_South
+f 236 174 179
+f 236 237 174
+usemtl Patch_167_Mat_Outdoors_South
+f 237 166 174
+f 237 238 166
+usemtl Patch_168_Mat_Outdoors_South
+f 238 2 166
+f 238 217 2
+usemtl Patch_169_Mat_Large_exhibit_Ceiling
+f 51 240 239
+f 51 241 240
+usemtl Patch_170_Mat_Large_exhibit_Ceiling
+f 241 242 240
+f 241 243 242
+usemtl Patch_171_Mat_Large_exhibit_Ceiling
+f 243 244 242
+f 243 245 244
+usemtl Patch_172_Mat_Large_exhibit_Ceiling
+f 245 246 244
+f 245 52 246
+usemtl Patch_173_Mat_Large_exhibit_Ceiling
+f 239 248 247
+f 239 240 248
+usemtl Patch_174_Mat_Large_exhibit_Ceiling
+f 240 249 248
+f 240 242 249
+usemtl Patch_175_Mat_Large_exhibit_Ceiling
+f 242 250 249
+f 242 244 250
+usemtl Patch_176_Mat_Large_exhibit_Ceiling
+f 244 251 250
+f 244 246 251
+usemtl Patch_177_Mat_Large_exhibit_Ceiling
+f 247 253 252
+f 247 248 253
+usemtl Patch_178_Mat_Large_exhibit_Ceiling
+f 248 254 253
+f 248 249 254
+usemtl Patch_179_Mat_Large_exhibit_Ceiling
+f 249 255 254
+f 249 250 255
+usemtl Patch_180_Mat_Large_exhibit_Ceiling
+f 250 256 255
+f 250 251 256
+usemtl Patch_181_Mat_Large_exhibit_Ceiling
+f 252 258 257
+f 252 253 258
+usemtl Patch_182_Mat_Large_exhibit_Ceiling
+f 253 259 258
+f 253 254 259
+usemtl Patch_183_Mat_Large_exhibit_Ceiling
+f 254 260 259
+f 254 255 260
+usemtl Patch_184_Mat_Large_exhibit_Ceiling
+f 255 261 260
+f 255 256 261
+usemtl Patch_185_Mat_Large_exhibit_Ceiling
+f 257 262 19
+f 257 258 262
+usemtl Patch_186_Mat_Large_exhibit_Ceiling
+f 258 263 262
+f 258 259 263
+usemtl Patch_187_Mat_Large_exhibit_Ceiling
+f 259 264 263
+f 259 260 264
+usemtl Patch_188_Mat_Large_exhibit_Ceiling
+f 260 20 264
+f 260 261 20
+usemtl Patch_189_Mat_Large_exhibit_West
+f 47 266 265
+f 47 267 266
+usemtl Patch_190_Mat_Large_exhibit_West
+f 267 268 266
+f 267 269 268
+usemtl Patch_191_Mat_Large_exhibit_West
+f 269 239 268
+f 269 51 239
+usemtl Patch_192_Mat_Large_exhibit_West
+f 265 271 270
+f 265 266 271
+usemtl Patch_193_Mat_Large_exhibit_West
+f 266 272 271
+f 266 268 272
+usemtl Patch_194_Mat_Large_exhibit_West
+f 268 247 272
+f 268 239 247
+usemtl Patch_195_Mat_Large_exhibit_West
+f 270 274 273
+f 270 271 274
+usemtl Patch_196_Mat_Large_exhibit_West
+f 271 275 274
+f 271 272 275
+usemtl Patch_197_Mat_Large_exhibit_West
+f 272 252 275
+f 272 247 252
+usemtl Patch_198_Mat_Large_exhibit_West
+f 273 277 276
+f 273 274 277
+usemtl Patch_199_Mat_Large_exhibit_West
+f 274 278 277
+f 274 275 278
+usemtl Patch_200_Mat_Large_exhibit_West
+f 275 257 278
+f 275 252 257
+usemtl Patch_201_Mat_Large_exhibit_West
+f 276 147 5
+f 276 277 147
+usemtl Patch_202_Mat_Large_exhibit_West
+f 277 151 147
+f 277 278 151
+usemtl Patch_203_Mat_Large_exhibit_West
+f 278 19 151
+f 278 257 19
+usemtl Patch_204_Mat_Large_exhibit_Floor
+f 8 280 279
+f 8 281 280
+usemtl Patch_205_Mat_Large_exhibit_Floor
+f 281 282 280
+f 281 283 282
+usemtl Patch_206_Mat_Large_exhibit_Floor
+f 283 284 282
+f 283 285 284
+usemtl Patch_207_Mat_Large_exhibit_Floor
+f 285 286 284
+f 285 287 286
+usemtl Patch_208_Mat_Large_exhibit_Floor
+f 287 288 286
+f 287 48 288
+usemtl Patch_209_Mat_Large_exhibit_Floor
+f 279 290 289
+f 279 280 290
+usemtl Patch_210_Mat_Large_exhibit_Floor
+f 280 291 290
+f 280 282 291
+usemtl Patch_211_Mat_Large_exhibit_Floor
+f 282 292 291
+f 282 284 292
+usemtl Patch_212_Mat_Large_exhibit_Floor
+f 284 293 292
+f 284 286 293
+usemtl Patch_213_Mat_Large_exhibit_Floor
+f 286 294 293
+f 286 288 294
+usemtl Patch_214_Mat_Large_exhibit_Floor
+f 289 296 295
+f 289 290 296
+usemtl Patch_215_Mat_Large_exhibit_Floor
+f 290 297 296
+f 290 291 297
+usemtl Patch_216_Mat_Large_exhibit_Floor
+f 291 298 297
+f 291 292 298
+usemtl Patch_217_Mat_Large_exhibit_Floor
+f 292 299 298
+f 292 293 299
+usemtl Patch_218_Mat_Large_exhibit_Floor
+f 293 300 299
+f 293 294 300
+usemtl Patch_219_Mat_Large_exhibit_Floor
+f 295 276 5
+f 295 296 276
+usemtl Patch_220_Mat_Large_exhibit_Floor
+f 296 273 276
+f 296 297 273
+usemtl Patch_221_Mat_Large_exhibit_Floor
+f 297 270 273
+f 297 298 270
+usemtl Patch_222_Mat_Large_exhibit_Floor
+f 298 265 270
+f 298 299 265
+usemtl Patch_223_Mat_Large_exhibit_Floor
+f 299 47 265
+f 299 300 47
+usemtl Patch_224_Mat_Large_exhibit_North
+f 48 301 288
+f 48 302 301
+usemtl Patch_225_Mat_Large_exhibit_North
+f 302 303 301
+f 302 304 303
+usemtl Patch_226_Mat_Large_exhibit_North
+f 304 245 303
+f 304 52 245
+usemtl Patch_227_Mat_Large_exhibit_North
+f 288 305 294
+f 288 301 305
+usemtl Patch_228_Mat_Large_exhibit_North
+f 301 306 305
+f 301 303 306
+usemtl Patch_229_Mat_Large_exhibit_North
+f 303 243 306
+f 303 245 243
+usemtl Patch_230_Mat_Large_exhibit_North
+f 294 307 300
+f 294 305 307
+usemtl Patch_231_Mat_Large_exhibit_North
+f 305 308 307
+f 305 306 308
+usemtl Patch_232_Mat_Large_exhibit_North
+f 306 241 308
+f 306 243 241
+usemtl Patch_233_Mat_Large_exhibit_North
+f 300 267 47
+f 300 307 267
+usemtl Patch_234_Mat_Large_exhibit_North
+f 307 269 267
+f 307 308 269
+usemtl Patch_235_Mat_Large_exhibit_North
+f 308 51 269
+f 308 241 51
+usemtl Patch_236_Mat_Large_exhibit_South
+f 6 148 150
+f 6 149 148
+usemtl Patch_237_Mat_Large_exhibit_South
+f 149 147 148
+f 149 5 147
+usemtl Patch_238_Mat_Large_exhibit_South
+f 150 152 153
+f 150 148 152
+usemtl Patch_239_Mat_Large_exhibit_South
+f 148 151 152
+f 148 147 151
+usemtl Patch_240_Mat_Large_exhibit_South
+f 153 154 146
+f 153 152 154
+usemtl Patch_241_Mat_Large_exhibit_South
+f 152 19 154
+f 152 151 19
+usemtl Patch_242_Mat_Large_exhibit_South
+f 14 144 145
+f 14 13 144
+usemtl Patch_243_Mat_Large_exhibit_South
+f 145 146 139
+f 145 144 146
+usemtl Patch_244_Mat_Large_exhibit_South
+f 8 310 309
+f 8 311 310
+usemtl Patch_245_Mat_Large_exhibit_South
+f 311 120 310
+f 311 7 120
+usemtl Patch_246_Mat_Large_exhibit_South
+f 309 313 312
+f 309 310 313
+usemtl Patch_247_Mat_Large_exhibit_South
+f 310 132 313
+f 310 120 132
+usemtl Patch_248_Mat_Large_exhibit_South
+f 312 314 20
+f 312 313 314
+usemtl Patch_249_Mat_Large_exhibit_South
+f 313 139 314
+f 313 132 139
+usemtl Patch_250_Mat_Large_exhibit_East
+f 23 309 315
+f 23 8 309
+usemtl Patch_251_Mat_Large_exhibit_East
+f 315 312 316
+f 315 309 312
+usemtl Patch_252_Mat_Large_exhibit_East
+f 316 20 317
+f 316 312 20
+usemtl Patch_253_Mat_Large_exhibit_East
+f 29 319 318
+f 29 25 319
+usemtl Patch_254_Mat_Large_exhibit_East
+f 318 317 320
+f 318 319 317
+usemtl Patch_255_Mat_Large_exhibit_East
+f 39 322 321
+f 39 323 322
+usemtl Patch_256_Mat_Large_exhibit_East
+f 323 324 322
+f 323 325 324
+usemtl Patch_257_Mat_Large_exhibit_East
+f 325 326 324
+f 325 27 326
+usemtl Patch_258_Mat_Large_exhibit_East
+f 321 328 327
+f 321 322 328
+usemtl Patch_259_Mat_Large_exhibit_East
+f 322 329 328
+f 322 324 329
+usemtl Patch_260_Mat_Large_exhibit_East
+f 324 330 329
+f 324 326 330
+usemtl Patch_261_Mat_Large_exhibit_East
+f 327 332 331
+f 327 328 332
+usemtl Patch_262_Mat_Large_exhibit_East
+f 328 333 332
+f 328 329 333
+usemtl Patch_263_Mat_Large_exhibit_East
+f 329 320 333
+f 329 330 320
+usemtl Patch_264_Mat_Large_exhibit_East
+f 45 335 334
+f 45 41 335
+usemtl Patch_265_Mat_Large_exhibit_East
+f 334 331 336
+f 334 335 331
+usemtl Patch_266_Mat_Large_exhibit_East
+f 48 337 302
+f 48 43 337
+usemtl Patch_267_Mat_Large_exhibit_East
+f 302 338 304
+f 302 337 338
+usemtl Patch_268_Mat_Large_exhibit_East
+f 304 336 52
+f 304 338 336
+usemtl Patch_269_Mat_Small_exhibit_Floor
+f 9 340 339
+f 9 341 340
+usemtl Patch_270_Mat_Small_exhibit_Floor
+f 341 342 340
+f 341 343 342
+usemtl Patch_271_Mat_Small_exhibit_Floor
+f 343 344 342
+f 343 345 344
+usemtl Patch_272_Mat_Small_exhibit_Floor
+f 345 346 344
+f 345 347 346
+usemtl Patch_273_Mat_Small_exhibit_Floor
+f 347 348 346
+f 347 49 348
+usemtl Patch_274_Mat_Small_exhibit_Floor
+f 339 350 349
+f 339 340 350
+usemtl Patch_275_Mat_Small_exhibit_Floor
+f 340 351 350
+f 340 342 351
+usemtl Patch_276_Mat_Small_exhibit_Floor
+f 342 352 351
+f 342 344 352
+usemtl Patch_277_Mat_Small_exhibit_Floor
+f 344 353 352
+f 344 346 353
+usemtl Patch_278_Mat_Small_exhibit_Floor
+f 346 354 353
+f 346 348 354
+usemtl Patch_279_Mat_Small_exhibit_Floor
+f 349 281 8
+f 349 350 281
+usemtl Patch_280_Mat_Small_exhibit_Floor
+f 350 283 281
+f 350 351 283
+usemtl Patch_281_Mat_Small_exhibit_Floor
+f 351 285 283
+f 351 352 285
+usemtl Patch_282_Mat_Small_exhibit_Floor
+f 352 287 285
+f 352 353 287
+usemtl Patch_283_Mat_Small_exhibit_Floor
+f 353 48 287
+f 353 354 48
+usemtl Patch_284_Mat_Small_exhibit_South
+f 17 356 355
+f 17 357 356
+usemtl Patch_285_Mat_Small_exhibit_South
+f 357 358 356
+f 357 359 358
+usemtl Patch_286_Mat_Small_exhibit_South
+f 359 360 358
+f 359 18 360
+usemtl Patch_287_Mat_Small_exhibit_South
+f 355 349 8
+f 355 356 349
+usemtl Patch_288_Mat_Small_exhibit_South
+f 356 339 349
+f 356 358 339
+usemtl Patch_289_Mat_Small_exhibit_South
+f 358 9 339
+f 358 360 9
+usemtl Patch_290_Mat_Small_exhibit_East
+f 24 360 361
+f 24 9 360
+usemtl Patch_291_Mat_Small_exhibit_East
+f 361 18 362
+f 361 360 18
+usemtl Patch_292_Mat_Small_exhibit_East
+f 30 362 363
+f 30 26 362
+usemtl Patch_293_Mat_Small_exhibit_East
+f 40 365 364
+f 40 366 365
+usemtl Patch_294_Mat_Small_exhibit_East
+f 366 367 365
+f 366 368 367
+usemtl Patch_295_Mat_Small_exhibit_East
+f 368 369 367
+f 368 28 369
+usemtl Patch_296_Mat_Small_exhibit_East
+f 364 371 370
+f 364 365 371
+usemtl Patch_297_Mat_Small_exhibit_East
+f 365 372 371
+f 365 367 372
+usemtl Patch_298_Mat_Small_exhibit_East
+f 367 363 372
+f 367 369 363
+usemtl Patch_299_Mat_Small_exhibit_East
+f 46 370 373
+f 46 42 370
+usemtl Patch_300_Mat_Small_exhibit_West
+f 41 375 374
+f 41 45 375
+usemtl Patch_301_Mat_Small_exhibit_West
+f 27 377 376
+f 27 325 377
+usemtl Patch_302_Mat_Small_exhibit_West
+f 325 378 377
+f 325 323 378
+usemtl Patch_303_Mat_Small_exhibit_West
+f 323 379 378
+f 323 39 379
+usemtl Patch_304_Mat_Small_exhibit_West
+f 376 381 380
+f 376 377 381
+usemtl Patch_305_Mat_Small_exhibit_West
+f 377 382 381
+f 377 378 382
+usemtl Patch_306_Mat_Small_exhibit_West
+f 378 374 382
+f 378 379 374
+usemtl Patch_307_Mat_Small_exhibit_West
+f 25 380 383
+f 25 29 380
+usemtl Patch_308_Mat_Small_exhibit_West
+f 8 384 355
+f 8 23 384
+usemtl Patch_309_Mat_Small_exhibit_West
+f 355 383 17
+f 355 384 383
+usemtl Patch_310_Mat_Small_exhibit_Ceiling
+f 55 386 385
+f 55 387 386
+usemtl Patch_311_Mat_Small_exhibit_Ceiling
+f 387 388 386
+f 387 389 388
+usemtl Patch_312_Mat_Small_exhibit_Ceiling
+f 389 390 388
+f 389 56 390
+usemtl Patch_313_Mat_Small_exhibit_Ceiling
+f 385 392 391
+f 385 386 392
+usemtl Patch_314_Mat_Small_exhibit_Ceiling
+f 386 393 392
+f 386 388 393
+usemtl Patch_315_Mat_Small_exhibit_Ceiling
+f 388 394 393
+f 388 390 394
+usemtl Patch_316_Mat_Small_exhibit_Ceiling
+f 391 396 395
+f 391 392 396
+usemtl Patch_317_Mat_Small_exhibit_Ceiling
+f 392 397 396
+f 392 393 397
+usemtl Patch_318_Mat_Small_exhibit_Ceiling
+f 393 398 397
+f 393 394 398
+usemtl Patch_319_Mat_Small_exhibit_Ceiling
+f 395 400 399
+f 395 396 400
+usemtl Patch_320_Mat_Small_exhibit_Ceiling
+f 396 401 400
+f 396 397 401
+usemtl Patch_321_Mat_Small_exhibit_Ceiling
+f 397 402 401
+f 397 398 402
+usemtl Patch_322_Mat_Small_exhibit_Ceiling
+f 399 357 17
+f 399 400 357
+usemtl Patch_323_Mat_Small_exhibit_Ceiling
+f 400 359 357
+f 400 401 359
+usemtl Patch_324_Mat_Small_exhibit_Ceiling
+f 401 18 359
+f 401 402 18
+usemtl Patch_325_Mat_Small_exhibit_North
+f 49 403 348
+f 49 404 403
+usemtl Patch_326_Mat_Small_exhibit_North
+f 404 389 403
+f 404 56 389
+usemtl Patch_327_Mat_Small_exhibit_North
+f 348 405 354
+f 348 403 405
+usemtl Patch_328_Mat_Small_exhibit_North
+f 403 387 405
+f 403 389 387
+usemtl Patch_329_Mat_Small_exhibit_North
+f 354 406 48
+f 354 405 406
+usemtl Patch_330_Mat_Small_exhibit_North
+f 405 55 406
+f 405 387 55
+usemtl Patch_331_Mat_Ballroom_Ceiling
+f 53 408 407
+f 53 409 408
+usemtl Patch_332_Mat_Ballroom_Ceiling
+f 409 410 408
+f 409 411 410
+usemtl Patch_333_Mat_Ballroom_Ceiling
+f 411 412 410
+f 411 413 412
+usemtl Patch_334_Mat_Ballroom_Ceiling
+f 413 414 412
+f 413 54 414
+usemtl Patch_335_Mat_Ballroom_Ceiling
+f 407 416 415
+f 407 408 416
+usemtl Patch_336_Mat_Ballroom_Ceiling
+f 408 417 416
+f 408 410 417
+usemtl Patch_337_Mat_Ballroom_Ceiling
+f 410 418 417
+f 410 412 418
+usemtl Patch_338_Mat_Ballroom_Ceiling
+f 412 419 418
+f 412 414 419
+usemtl Patch_339_Mat_Ballroom_Ceiling
+f 415 421 420
+f 415 416 421
+usemtl Patch_340_Mat_Ballroom_Ceiling
+f 416 422 421
+f 416 417 422
+usemtl Patch_341_Mat_Ballroom_Ceiling
+f 417 423 422
+f 417 418 423
+usemtl Patch_342_Mat_Ballroom_Ceiling
+f 418 424 423
+f 418 419 424
+usemtl Patch_343_Mat_Ballroom_Ceiling
+f 420 426 425
+f 420 421 426
+usemtl Patch_344_Mat_Ballroom_Ceiling
+f 421 427 426
+f 421 422 427
+usemtl Patch_345_Mat_Ballroom_Ceiling
+f 422 428 427
+f 422 423 428
+usemtl Patch_346_Mat_Ballroom_Ceiling
+f 423 429 428
+f 423 424 429
+usemtl Patch_347_Mat_Ballroom_Ceiling
+f 425 430 21
+f 425 426 430
+usemtl Patch_348_Mat_Ballroom_Ceiling
+f 426 431 430
+f 426 427 431
+usemtl Patch_349_Mat_Ballroom_Ceiling
+f 427 432 431
+f 427 428 432
+usemtl Patch_350_Mat_Ballroom_Ceiling
+f 428 22 432
+f 428 429 22
+usemtl Patch_351_Mat_Ballroom_Floor
+f 12 434 433
+f 12 435 434
+usemtl Patch_352_Mat_Ballroom_Floor
+f 435 436 434
+f 435 437 436
+usemtl Patch_353_Mat_Ballroom_Floor
+f 437 438 436
+f 437 439 438
+usemtl Patch_354_Mat_Ballroom_Floor
+f 439 440 438
+f 439 441 440
+usemtl Patch_355_Mat_Ballroom_Floor
+f 441 442 440
+f 441 50 442
+usemtl Patch_356_Mat_Ballroom_Floor
+f 433 444 443
+f 433 434 444
+usemtl Patch_357_Mat_Ballroom_Floor
+f 434 445 444
+f 434 436 445
+usemtl Patch_358_Mat_Ballroom_Floor
+f 436 446 445
+f 436 438 446
+usemtl Patch_359_Mat_Ballroom_Floor
+f 438 447 446
+f 438 440 447
+usemtl Patch_360_Mat_Ballroom_Floor
+f 440 448 447
+f 440 442 448
+usemtl Patch_361_Mat_Ballroom_Floor
+f 443 450 449
+f 443 444 450
+usemtl Patch_362_Mat_Ballroom_Floor
+f 444 451 450
+f 444 445 451
+usemtl Patch_363_Mat_Ballroom_Floor
+f 445 452 451
+f 445 446 452
+usemtl Patch_364_Mat_Ballroom_Floor
+f 446 453 452
+f 446 447 453
+usemtl Patch_365_Mat_Ballroom_Floor
+f 447 454 453
+f 447 448 454
+usemtl Patch_366_Mat_Ballroom_Floor
+f 449 341 9
+f 449 450 341
+usemtl Patch_367_Mat_Ballroom_Floor
+f 450 343 341
+f 450 451 343
+usemtl Patch_368_Mat_Ballroom_Floor
+f 451 345 343
+f 451 452 345
+usemtl Patch_369_Mat_Ballroom_Floor
+f 452 347 345
+f 452 453 347
+usemtl Patch_370_Mat_Ballroom_Floor
+f 453 49 347
+f 453 454 49
+usemtl Patch_371_Mat_Ballroom_North
+f 50 455 442
+f 50 456 455
+usemtl Patch_372_Mat_Ballroom_North
+f 456 457 455
+f 456 458 457
+usemtl Patch_373_Mat_Ballroom_North
+f 458 413 457
+f 458 54 413
+usemtl Patch_374_Mat_Ballroom_North
+f 442 459 448
+f 442 455 459
+usemtl Patch_375_Mat_Ballroom_North
+f 455 460 459
+f 455 457 460
+usemtl Patch_376_Mat_Ballroom_North
+f 457 411 460
+f 457 413 411
+usemtl Patch_377_Mat_Ballroom_North
+f 448 461 454
+f 448 459 461
+usemtl Patch_378_Mat_Ballroom_North
+f 459 462 461
+f 459 460 462
+usemtl Patch_379_Mat_Ballroom_North
+f 460 409 462
+f 460 411 409
+usemtl Patch_380_Mat_Ballroom_North
+f 454 463 49
+f 454 461 463
+usemtl Patch_381_Mat_Ballroom_North
+f 461 464 463
+f 461 462 464
+usemtl Patch_382_Mat_Ballroom_North
+f 462 53 464
+f 462 409 53
+usemtl Patch_383_Mat_Ballroom_South
+f 10 465 131
+f 10 466 465
+usemtl Patch_384_Mat_Ballroom_South
+f 466 467 465
+f 466 9 467
+usemtl Patch_385_Mat_Ballroom_South
+f 131 468 138
+f 131 465 468
+usemtl Patch_386_Mat_Ballroom_South
+f 465 469 468
+f 465 467 469
+usemtl Patch_387_Mat_Ballroom_South
+f 138 470 119
+f 138 468 470
+usemtl Patch_388_Mat_Ballroom_South
+f 468 21 470
+f 468 469 21
+usemtl Patch_389_Mat_Ballroom_South
+f 16 117 118
+f 16 15 117
+usemtl Patch_390_Mat_Ballroom_South
+f 118 119 115
+f 118 117 119
+usemtl Patch_391_Mat_Ballroom_South
+f 12 109 111
+f 12 110 109
+usemtl Patch_392_Mat_Ballroom_South
+f 110 108 109
+f 110 11 108
+usemtl Patch_393_Mat_Ballroom_South
+f 111 113 114
+f 111 109 113
+usemtl Patch_394_Mat_Ballroom_South
+f 109 112 113
+f 109 108 112
+usemtl Patch_395_Mat_Ballroom_South
+f 114 116 22
+f 114 113 116
+usemtl Patch_396_Mat_Ballroom_South
+f 113 115 116
+f 113 112 115
+usemtl Patch_397_Mat_Ballroom_East
+f 22 471 114
+f 22 429 471
+usemtl Patch_398_Mat_Ballroom_East
+f 429 472 471
+f 429 424 472
+usemtl Patch_399_Mat_Ballroom_East
+f 424 473 472
+f 424 419 473
+usemtl Patch_400_Mat_Ballroom_East
+f 419 474 473
+f 419 414 474
+usemtl Patch_401_Mat_Ballroom_East
+f 414 458 474
+f 414 54 458
+usemtl Patch_402_Mat_Ballroom_East
+f 114 475 111
+f 114 471 475
+usemtl Patch_403_Mat_Ballroom_East
+f 471 476 475
+f 471 472 476
+usemtl Patch_404_Mat_Ballroom_East
+f 472 477 476
+f 472 473 477
+usemtl Patch_405_Mat_Ballroom_East
+f 473 478 477
+f 473 474 478
+usemtl Patch_406_Mat_Ballroom_East
+f 474 456 478
+f 474 458 456
+usemtl Patch_407_Mat_Ballroom_East
+f 111 435 12
+f 111 475 435
+usemtl Patch_408_Mat_Ballroom_East
+f 475 437 435
+f 475 476 437
+usemtl Patch_409_Mat_Ballroom_East
+f 476 439 437
+f 476 477 439
+usemtl Patch_410_Mat_Ballroom_East
+f 477 441 439
+f 477 478 441
+usemtl Patch_411_Mat_Ballroom_East
+f 478 50 441
+f 478 456 50
+usemtl Patch_412_Mat_Ballroom_West
+f 44 463 479
+f 44 49 463
+usemtl Patch_413_Mat_Ballroom_West
+f 479 464 480
+f 479 463 464
+usemtl Patch_414_Mat_Ballroom_West
+f 480 53 481
+f 480 464 53
+usemtl Patch_415_Mat_Ballroom_West
+f 42 483 482
+f 42 46 483
+usemtl Patch_416_Mat_Ballroom_West
+f 482 481 484
+f 482 483 481
+usemtl Patch_417_Mat_Ballroom_West
+f 28 486 485
+f 28 368 486
+usemtl Patch_418_Mat_Ballroom_West
+f 368 487 486
+f 368 366 487
+usemtl Patch_419_Mat_Ballroom_West
+f 366 488 487
+f 366 40 488
+usemtl Patch_420_Mat_Ballroom_West
+f 485 490 489
+f 485 486 490
+usemtl Patch_421_Mat_Ballroom_West
+f 486 491 490
+f 486 487 491
+usemtl Patch_422_Mat_Ballroom_West
+f 487 492 491
+f 487 488 492
+usemtl Patch_423_Mat_Ballroom_West
+f 489 494 493
+f 489 490 494
+usemtl Patch_424_Mat_Ballroom_West
+f 490 495 494
+f 490 491 495
+usemtl Patch_425_Mat_Ballroom_West
+f 491 484 495
+f 491 492 484
+usemtl Patch_426_Mat_Ballroom_West
+f 26 497 496
+f 26 30 497
+usemtl Patch_427_Mat_Ballroom_West
+f 496 493 498
+f 496 497 493
+usemtl Patch_428_Mat_Ballroom_West
+f 9 499 467
+f 9 24 499
+usemtl Patch_429_Mat_Ballroom_West
+f 467 500 469
+f 467 499 500
+usemtl Patch_430_Mat_Ballroom_West
+f 469 498 21
+f 469 500 498

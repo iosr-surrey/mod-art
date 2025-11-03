@@ -1,0 +1,215 @@
+mtllib mesh.mtl
+
+################################ Vertices
+
+v 0.0 0.0 0.0                  # Vertex 1
+v 21.0 0.0 0.0                 # Vertex 2
+v 0.0 0.0 5.0                  # Vertex 3
+v 21.0 0.0 5.0                 # Vertex 4
+v 0.0 8.0 0.0                  # Vertex 5
+v 3.25 8.0 0.0                 # Vertex 6
+v 4.75 8.0 0.0                 # Vertex 7
+v 8.0 8.0 0.0                  # Vertex 8
+v 13.0 8.0 0.0                 # Vertex 9
+v 16.25 8.0 0.0                # Vertex 10
+v 17.75 8.0 0.0                # Vertex 11
+v 21.0 8.0 0.0                 # Vertex 12
+v 3.25 8.0 2.5                 # Vertex 13
+v 4.75 8.0 2.5                 # Vertex 14
+v 16.25 8.0 2.5                # Vertex 15
+v 17.75 8.0 2.5                # Vertex 16
+v 8.0 8.0 3.0                  # Vertex 17
+v 13.0 8.0 3.0                 # Vertex 18
+v 0.0 8.0 5.0                  # Vertex 19
+v 8.0 8.0 5.0                  # Vertex 20
+v 13.0 8.0 5.0                 # Vertex 21
+v 21.0 8.0 5.0                 # Vertex 22
+v 8.0 9.25 0.0                 # Vertex 23
+v 13.0 9.25 0.0                # Vertex 24
+v 8.0 9.25 2.5                 # Vertex 25
+v 13.0 9.25 2.5                # Vertex 26
+v 8.0 10.75 0.0                # Vertex 27
+v 13.0 10.75 0.0               # Vertex 28
+v 8.0 10.75 2.5                # Vertex 29
+v 13.0 10.75 2.5               # Vertex 30
+v 8.0 15.0 0.0                 # Vertex 31
+v 9.75 15.0 0.0                # Vertex 32
+v 11.25 15.0 0.0               # Vertex 33
+v 13.0 15.0 0.0                # Vertex 34
+v 9.75 15.0 2.5                # Vertex 35
+v 11.25 15.0 2.5               # Vertex 36
+v 8.0 15.0 3.0                 # Vertex 37
+v 13.0 15.0 3.0                # Vertex 38
+v 8.0 16.25 0.0                # Vertex 39
+v 13.0 16.25 0.0               # Vertex 40
+v 8.0 16.25 2.5                # Vertex 41
+v 13.0 16.25 2.5               # Vertex 42
+v 8.0 17.75 0.0                # Vertex 43
+v 13.0 17.75 0.0               # Vertex 44
+v 8.0 17.75 2.5                # Vertex 45
+v 13.0 17.75 2.5               # Vertex 46
+v 0.0 19.0 0.0                 # Vertex 47
+v 8.0 19.0 0.0                 # Vertex 48
+v 13.0 19.0 0.0                # Vertex 49
+v 21.0 19.0 0.0                # Vertex 50
+v 0.0 19.0 5.0                 # Vertex 51
+v 8.0 19.0 5.0                 # Vertex 52
+v 13.0 19.0 5.0                # Vertex 53
+v 21.0 19.0 5.0                # Vertex 54
+v 8.0 19.0 3.0                 # Vertex 55
+v 13.0 19.0 3.0                # Vertex 56
+v 17.75 8.0 5.0                # Vertex 57
+v 16.25 8.0 5.0                # Vertex 58
+v 4.75 8.0 5.0                 # Vertex 59
+v 3.25 8.0 5.0                 # Vertex 60
+v 8.0 9.25 5.0                 # Vertex 61
+v 8.0 10.75 5.0                # Vertex 62
+v 8.0 16.25 5.0                # Vertex 63
+v 8.0 17.75 5.0                # Vertex 64
+v 13.0 9.25 3.0                # Vertex 65
+v 13.0 10.75 3.0               # Vertex 66
+v 13.0 16.25 3.0               # Vertex 67
+v 13.0 17.75 3.0               # Vertex 68
+v 8.0 16.25 3.0                # Vertex 69
+v 8.0 17.75 3.0                # Vertex 70
+v 8.0 10.75 3.0                # Vertex 71
+v 8.0 9.25 3.0                 # Vertex 72
+v 13.0 17.75 5.0               # Vertex 73
+v 13.0 16.25 5.0               # Vertex 74
+v 13.0 10.75 5.0               # Vertex 75
+v 13.0 9.25 5.0                # Vertex 76
+
+################################ Faces
+
+usemtl Patch_1_Mat_Outdoors_Ceiling
+f 19 4 3
+f 19 22 4
+usemtl Patch_2_Mat_Outdoors_North
+f 11 22 57
+f 11 12 22
+usemtl Patch_3_Mat_Outdoors_North
+f 15 57 58
+f 15 16 57
+usemtl Patch_4_Mat_Outdoors_North
+f 7 58 59
+f 7 10 58
+usemtl Patch_5_Mat_Outdoors_North
+f 13 59 60
+f 13 14 59
+usemtl Patch_6_Mat_Outdoors_North
+f 5 60 19
+f 5 6 60
+usemtl Patch_7_Mat_Outdoors_West
+f 5 3 1
+f 5 19 3
+usemtl Patch_8_Mat_Outdoors_Floor
+f 2 5 1
+f 2 12 5
+usemtl Patch_9_Mat_Outdoors_East
+f 4 12 2
+f 4 22 12
+usemtl Patch_10_Mat_Outdoors_South
+f 3 2 1
+f 3 4 2
+usemtl Patch_11_Mat_Large_exhibit_Ceiling
+f 51 20 19
+f 51 52 20
+usemtl Patch_12_Mat_Large_exhibit_West
+f 47 19 5
+f 47 51 19
+usemtl Patch_13_Mat_Large_exhibit_Floor
+f 8 47 5
+f 8 48 47
+usemtl Patch_14_Mat_Large_exhibit_North
+f 48 51 47
+f 48 52 51
+usemtl Patch_15_Mat_Large_exhibit_South
+f 6 19 60
+f 6 5 19
+usemtl Patch_16_Mat_Large_exhibit_South
+f 14 60 59
+f 14 13 60
+usemtl Patch_17_Mat_Large_exhibit_South
+f 8 59 20
+f 8 7 59
+usemtl Patch_18_Mat_Large_exhibit_East
+f 23 20 61
+f 23 8 20
+usemtl Patch_19_Mat_Large_exhibit_East
+f 29 61 62
+f 29 25 61
+usemtl Patch_20_Mat_Large_exhibit_East
+f 39 62 63
+f 39 27 62
+usemtl Patch_21_Mat_Large_exhibit_East
+f 45 63 64
+f 45 41 63
+usemtl Patch_22_Mat_Large_exhibit_East
+f 48 64 52
+f 48 43 64
+usemtl Patch_23_Mat_Small_exhibit_Floor
+f 9 48 8
+f 9 49 48
+usemtl Patch_24_Mat_Small_exhibit_South
+f 17 9 8
+f 17 18 9
+usemtl Patch_25_Mat_Small_exhibit_East
+f 24 18 65
+f 24 9 18
+f 30 65 66
+f 30 26 65
+f 40 66 67
+f 40 28 66
+f 46 67 68
+f 46 42 67
+usemtl Patch_26_Mat_Small_exhibit_West
+f 41 70 69
+f 41 45 70
+f 27 69 71
+f 27 39 69
+f 25 71 72
+f 25 29 71
+f 8 72 17
+f 8 23 72
+usemtl Patch_27_Mat_Small_exhibit_Ceiling
+f 55 18 17
+f 55 56 18
+usemtl Patch_28_Mat_Small_exhibit_North
+f 49 55 48
+f 49 56 55
+usemtl Patch_29_Mat_Ballroom_Ceiling
+f 53 22 21
+f 53 54 22
+usemtl Patch_30_Mat_Ballroom_Floor
+f 12 49 9
+f 12 50 49
+usemtl Patch_31_Mat_Ballroom_North
+f 50 53 49
+f 50 54 53
+usemtl Patch_32_Mat_Ballroom_South
+f 10 21 58
+f 10 9 21
+usemtl Patch_33_Mat_Ballroom_South
+f 16 58 57
+f 16 15 58
+usemtl Patch_34_Mat_Ballroom_South
+f 12 57 22
+f 12 11 57
+usemtl Patch_35_Mat_Ballroom_East
+f 22 50 12
+f 22 54 50
+usemtl Patch_36_Mat_Ballroom_West
+f 44 53 73
+f 44 49 53
+usemtl Patch_37_Mat_Ballroom_West
+f 42 73 74
+f 42 46 73
+usemtl Patch_38_Mat_Ballroom_West
+f 28 74 75
+f 28 40 74
+usemtl Patch_39_Mat_Ballroom_West
+f 26 75 76
+f 26 30 75
+usemtl Patch_40_Mat_Ballroom_West
+f 9 76 21
+f 9 24 76
