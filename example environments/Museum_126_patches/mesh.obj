@@ -1,0 +1,584 @@
+mtllib mesh.mtl
+
+################################ Vertices
+
+v 0.0 0.0 0.0                  # Vertex 1
+v 21.0 0.0 0.0                 # Vertex 2
+v 0.0 0.0 5.0                  # Vertex 3
+v 21.0 0.0 5.0                 # Vertex 4
+v 0.0 8.0 0.0                  # Vertex 5
+v 3.25 8.0 0.0                 # Vertex 6
+v 4.75 8.0 0.0                 # Vertex 7
+v 8.0 8.0 0.0                  # Vertex 8
+v 13.0 8.0 0.0                 # Vertex 9
+v 16.25 8.0 0.0                # Vertex 10
+v 17.75 8.0 0.0                # Vertex 11
+v 21.0 8.0 0.0                 # Vertex 12
+v 3.25 8.0 2.5                 # Vertex 13
+v 4.75 8.0 2.5                 # Vertex 14
+v 16.25 8.0 2.5                # Vertex 15
+v 17.75 8.0 2.5                # Vertex 16
+v 8.0 8.0 3.0                  # Vertex 17
+v 13.0 8.0 3.0                 # Vertex 18
+v 0.0 8.0 5.0                  # Vertex 19
+v 8.0 8.0 5.0                  # Vertex 20
+v 13.0 8.0 5.0                 # Vertex 21
+v 21.0 8.0 5.0                 # Vertex 22
+v 8.0 9.25 0.0                 # Vertex 23
+v 13.0 9.25 0.0                # Vertex 24
+v 8.0 9.25 2.5                 # Vertex 25
+v 13.0 9.25 2.5                # Vertex 26
+v 8.0 10.75 0.0                # Vertex 27
+v 13.0 10.75 0.0               # Vertex 28
+v 8.0 10.75 2.5                # Vertex 29
+v 13.0 10.75 2.5               # Vertex 30
+v 8.0 15.0 0.0                 # Vertex 31
+v 9.75 15.0 0.0                # Vertex 32
+v 11.25 15.0 0.0               # Vertex 33
+v 13.0 15.0 0.0                # Vertex 34
+v 9.75 15.0 2.5                # Vertex 35
+v 11.25 15.0 2.5               # Vertex 36
+v 8.0 15.0 3.0                 # Vertex 37
+v 13.0 15.0 3.0                # Vertex 38
+v 8.0 16.25 0.0                # Vertex 39
+v 13.0 16.25 0.0               # Vertex 40
+v 8.0 16.25 2.5                # Vertex 41
+v 13.0 16.25 2.5               # Vertex 42
+v 8.0 17.75 0.0                # Vertex 43
+v 13.0 17.75 0.0               # Vertex 44
+v 8.0 17.75 2.5                # Vertex 45
+v 13.0 17.75 2.5               # Vertex 46
+v 0.0 19.0 0.0                 # Vertex 47
+v 2.0 19.0 0.0                 # Vertex 48
+v 6.0 19.0 0.0                 # Vertex 49
+v 8.0 19.0 0.0                 # Vertex 50
+v 13.0 19.0 0.0                # Vertex 51
+v 21.0 19.0 0.0                # Vertex 52
+v 2.0 19.0 3.0                 # Vertex 53
+v 6.0 19.0 3.0                 # Vertex 54
+v 13.0 19.0 3.0                # Vertex 55
+v 21.0 19.0 3.0                # Vertex 56
+v 0.0 19.0 5.0                 # Vertex 57
+v 8.0 19.0 5.0                 # Vertex 58
+v 13.0 19.0 5.0                # Vertex 59
+v 21.0 19.0 5.0                # Vertex 60
+v 13.0 19.75 0.0               # Vertex 61
+v 13.0 19.75 2.5               # Vertex 62
+v 0.0 21.0 0.0                 # Vertex 63
+v 8.0 21.0 0.0                 # Vertex 64
+v 8.0 21.0 2.5                 # Vertex 65
+v 0.0 21.0 3.0                 # Vertex 66
+v 8.0 21.0 3.0                 # Vertex 67
+v 13.0 21.25 0.0               # Vertex 68
+v 13.0 21.25 2.5               # Vertex 69
+v 8.0 21.75 0.0                # Vertex 70
+v 8.0 21.75 2.5                # Vertex 71
+v 8.0 21.75 3.0                # Vertex 72
+v 13.0 22.0 0.0                # Vertex 73
+v 15.0 22.0 0.0                # Vertex 74
+v 13.0 22.0 3.0                # Vertex 75
+v 15.0 22.0 3.0                # Vertex 76
+v 4.0 22.5 0.0                 # Vertex 77
+v 4.0 22.5 3.0                 # Vertex 78
+v 8.0 23.25 0.0                # Vertex 79
+v 13.0 23.25 0.0               # Vertex 80
+v 8.0 23.25 2.5                # Vertex 81
+v 13.0 23.25 2.5               # Vertex 82
+v 8.0 23.25 3.0                # Vertex 83
+v 0.0 24.0 0.0                 # Vertex 84
+v 8.0 24.0 0.0                 # Vertex 85
+v 8.0 24.0 2.5                 # Vertex 86
+v 0.0 24.0 3.0                 # Vertex 87
+v 8.0 24.0 3.0                 # Vertex 88
+v 13.0 24.75 0.0               # Vertex 89
+v 13.0 24.75 2.5               # Vertex 90
+v 2.0 26.0 0.0                 # Vertex 91
+v 6.0 26.0 0.0                 # Vertex 92
+v 8.0 26.0 0.0                 # Vertex 93
+v 13.0 26.0 0.0                # Vertex 94
+v 15.0 26.0 0.0                # Vertex 95
+v 21.0 26.0 0.0                # Vertex 96
+v 2.0 26.0 3.0                 # Vertex 97
+v 6.0 26.0 3.0                 # Vertex 98
+v 8.0 26.0 3.0                 # Vertex 99
+v 13.0 26.0 3.0                # Vertex 100
+v 15.0 26.0 3.0                # Vertex 101
+v 21.0 26.0 3.0                # Vertex 102
+v 0.0 4.0 5.0                  # Vertex 103
+v 7.0 4.0 5.0                  # Vertex 104
+v 7.0 8.0 5.0                  # Vertex 105
+v 14.0 4.0 5.0                 # Vertex 106
+v 14.0 8.0 5.0                 # Vertex 107
+v 21.0 4.0 5.0                 # Vertex 108
+v 7.0 0.0 5.0                  # Vertex 109
+v 14.0 0.0 5.0                 # Vertex 110
+v 17.75 8.0 5.0                # Vertex 111
+v 16.25 8.0 5.0                # Vertex 112
+v 4.75 8.0 5.0                 # Vertex 113
+v 10.5 8.0 5.0                 # Vertex 114
+v 10.5 8.0 0.0                 # Vertex 115
+v 3.25 8.0 5.0                 # Vertex 116
+v 0.0 4.0 0.0                  # Vertex 117
+v 14.0 0.0 0.0                 # Vertex 118
+v 14.0 4.0 0.0                 # Vertex 119
+v 21.0 4.0 0.0                 # Vertex 120
+v 14.0 8.0 0.0                 # Vertex 121
+v 7.0 0.0 0.0                  # Vertex 122
+v 7.0 4.0 0.0                  # Vertex 123
+v 7.0 8.0 0.0                  # Vertex 124
+v 0.0 13.5 5.0                 # Vertex 125
+v 4.0 13.5 5.0                 # Vertex 126
+v 4.0 19.0 5.0                 # Vertex 127
+v 8.0 13.5 5.0                 # Vertex 128
+v 4.0 8.0 5.0                  # Vertex 129
+v 0.0 13.5 0.0                 # Vertex 130
+v 4.0 8.0 0.0                  # Vertex 131
+v 4.0 13.5 0.0                 # Vertex 132
+v 8.0 13.5 0.0                 # Vertex 133
+v 4.0 19.0 0.0                 # Vertex 134
+v 8.0 9.25 5.0                 # Vertex 135
+v 8.0 10.75 5.0                # Vertex 136
+v 8.0 16.25 5.0                # Vertex 137
+v 8.0 17.75 5.0                # Vertex 138
+v 13.0 9.25 3.0                # Vertex 139
+v 13.0 10.75 3.0               # Vertex 140
+v 8.0 9.25 3.0                 # Vertex 141
+v 8.0 10.75 3.0                # Vertex 142
+v 11.25 15.0 3.0               # Vertex 143
+v 9.75 15.0 3.0                # Vertex 144
+v 13.0 13.5 5.0                # Vertex 145
+v 17.0 13.5 5.0                # Vertex 146
+v 17.0 19.0 5.0                # Vertex 147
+v 21.0 13.5 5.0                # Vertex 148
+v 17.0 8.0 5.0                 # Vertex 149
+v 17.0 8.0 0.0                 # Vertex 150
+v 17.0 13.5 0.0                # Vertex 151
+v 21.0 13.5 0.0                # Vertex 152
+v 17.0 19.0 0.0                # Vertex 153
+v 13.0 13.5 0.0                # Vertex 154
+v 13.0 17.75 5.0               # Vertex 155
+v 13.0 16.25 5.0               # Vertex 156
+v 13.0 10.75 5.0               # Vertex 157
+v 13.0 9.25 5.0                # Vertex 158
+v 8.0 20.5 0.0                 # Vertex 159
+v 13.0 20.5 0.0                # Vertex 160
+v 13.0 16.25 3.0               # Vertex 161
+v 13.0 17.75 3.0               # Vertex 162
+v 13.0 19.75 3.0               # Vertex 163
+v 13.0 21.25 3.0               # Vertex 164
+v 13.0 23.25 3.0               # Vertex 165
+v 13.0 24.75 3.0               # Vertex 166
+v 8.0 16.25 3.0                # Vertex 167
+v 8.0 17.75 3.0                # Vertex 168
+v 8.0 20.5 3.0                 # Vertex 169
+v 13.0 20.5 3.0                # Vertex 170
+v 17.0 22.0 0.0                # Vertex 171
+v 21.0 22.0 0.0                # Vertex 172
+v 21.0 22.0 3.0                # Vertex 173
+v 17.0 22.0 3.0                # Vertex 174
+v 17.0 19.0 3.0                # Vertex 175
+
+################################ Faces
+
+usemtl Patch_1_Mat_Outdoors_Ceiling
+f 19 104 103
+f 19 105 104
+usemtl Patch_2_Mat_Outdoors_Ceiling
+f 105 106 104
+f 105 107 106
+usemtl Patch_3_Mat_Outdoors_Ceiling
+f 107 108 106
+f 107 22 108
+usemtl Patch_4_Mat_Outdoors_Ceiling
+f 103 109 3
+f 103 104 109
+usemtl Patch_5_Mat_Outdoors_Ceiling
+f 104 110 109
+f 104 106 110
+usemtl Patch_6_Mat_Outdoors_Ceiling
+f 106 4 110
+f 106 108 4
+usemtl Patch_7_Mat_Outdoors_North
+f 11 22 111
+f 11 12 22
+usemtl Patch_8_Mat_Outdoors_North
+f 15 111 112
+f 15 16 111
+usemtl Patch_9_Mat_Outdoors_North
+f 7 114 113
+f 7 115 114
+usemtl Patch_10_Mat_Outdoors_North
+f 115 112 114
+f 115 10 112
+usemtl Patch_11_Mat_Outdoors_North
+f 13 113 116
+f 13 14 113
+usemtl Patch_12_Mat_Outdoors_North
+f 5 116 19
+f 5 6 116
+usemtl Patch_13_Mat_Outdoors_West
+f 5 103 117
+f 5 19 103
+usemtl Patch_14_Mat_Outdoors_West
+f 117 3 1
+f 117 103 3
+usemtl Patch_15_Mat_Outdoors_Floor
+f 2 119 118
+f 2 120 119
+usemtl Patch_16_Mat_Outdoors_Floor
+f 120 121 119
+f 120 12 121
+usemtl Patch_17_Mat_Outdoors_Floor
+f 118 123 122
+f 118 119 123
+usemtl Patch_18_Mat_Outdoors_Floor
+f 119 124 123
+f 119 121 124
+usemtl Patch_19_Mat_Outdoors_Floor
+f 122 117 1
+f 122 123 117
+usemtl Patch_20_Mat_Outdoors_Floor
+f 123 5 117
+f 123 124 5
+usemtl Patch_21_Mat_Outdoors_East
+f 4 120 2
+f 4 108 120
+usemtl Patch_22_Mat_Outdoors_East
+f 108 12 120
+f 108 22 12
+usemtl Patch_23_Mat_Outdoors_South
+f 3 122 1
+f 3 109 122
+usemtl Patch_24_Mat_Outdoors_South
+f 109 118 122
+f 109 110 118
+usemtl Patch_25_Mat_Outdoors_South
+f 110 2 118
+f 110 4 2
+usemtl Patch_26_Mat_Large_exhibit_Ceiling
+f 57 126 125
+f 57 127 126
+usemtl Patch_27_Mat_Large_exhibit_Ceiling
+f 127 128 126
+f 127 58 128
+usemtl Patch_28_Mat_Large_exhibit_Ceiling
+f 125 129 19
+f 125 126 129
+usemtl Patch_29_Mat_Large_exhibit_Ceiling
+f 126 20 129
+f 126 128 20
+usemtl Patch_30_Mat_Large_exhibit_West
+f 47 125 130
+f 47 57 125
+usemtl Patch_31_Mat_Large_exhibit_West
+f 130 19 5
+f 130 125 19
+usemtl Patch_32_Mat_Large_exhibit_Floor
+f 8 132 131
+f 8 133 132
+usemtl Patch_33_Mat_Large_exhibit_Floor
+f 133 134 132
+f 133 50 134
+usemtl Patch_34_Mat_Large_exhibit_Floor
+f 131 130 5
+f 131 132 130
+usemtl Patch_35_Mat_Large_exhibit_Floor
+f 132 47 130
+f 132 134 47
+usemtl Patch_36_Mat_Large_exhibit_North
+f 50 127 134
+f 50 58 127
+usemtl Patch_37_Mat_Large_exhibit_North
+f 134 57 47
+f 134 127 57
+usemtl Patch_38_Mat_Large_exhibit_South
+f 6 19 116
+f 6 5 19
+usemtl Patch_39_Mat_Large_exhibit_South
+f 14 116 113
+f 14 13 116
+usemtl Patch_40_Mat_Large_exhibit_South
+f 8 113 20
+f 8 7 113
+usemtl Patch_41_Mat_Large_exhibit_East
+f 23 20 135
+f 23 8 20
+usemtl Patch_42_Mat_Large_exhibit_East
+f 29 135 136
+f 29 25 135
+usemtl Patch_43_Mat_Large_exhibit_East
+f 39 136 137
+f 39 27 136
+usemtl Patch_44_Mat_Large_exhibit_East
+f 45 137 138
+f 45 41 137
+usemtl Patch_45_Mat_Large_exhibit_East
+f 50 138 58
+f 50 43 138
+usemtl Patch_46_Mat_Small_exhibit_Floor
+f 9 31 8
+f 9 34 31
+usemtl Patch_47_Mat_Small_exhibit_South
+f 17 9 8
+f 17 18 9
+usemtl Patch_48_Mat_Small_exhibit_East
+f 24 18 139
+f 24 9 18
+f 30 139 140
+f 30 26 139
+usemtl Patch_49_Mat_Small_exhibit_East
+f 34 140 38
+f 34 28 140
+usemtl Patch_50_Mat_Small_exhibit_West
+f 25 142 141
+f 25 29 142
+f 8 141 17
+f 8 23 141
+usemtl Patch_51_Mat_Small_exhibit_West
+f 27 37 142
+f 27 31 37
+usemtl Patch_52_Mat_Small_exhibit_Ceiling
+f 37 18 17
+f 37 38 18
+usemtl Patch_53_Mat_Small_exhibit_North
+f 33 38 143
+f 33 34 38
+f 35 143 144
+f 35 36 143
+f 31 144 37
+f 31 32 144
+usemtl Patch_54_Mat_Ballroom_Ceiling
+f 59 146 145
+f 59 147 146
+usemtl Patch_55_Mat_Ballroom_Ceiling
+f 147 148 146
+f 147 60 148
+usemtl Patch_56_Mat_Ballroom_Ceiling
+f 145 149 21
+f 145 146 149
+usemtl Patch_57_Mat_Ballroom_Ceiling
+f 146 22 149
+f 146 148 22
+usemtl Patch_58_Mat_Ballroom_Floor
+f 12 151 150
+f 12 152 151
+usemtl Patch_59_Mat_Ballroom_Floor
+f 152 153 151
+f 152 52 153
+usemtl Patch_60_Mat_Ballroom_Floor
+f 150 154 9
+f 150 151 154
+usemtl Patch_61_Mat_Ballroom_Floor
+f 151 51 154
+f 151 153 51
+usemtl Patch_62_Mat_Ballroom_North
+f 52 147 153
+f 52 60 147
+usemtl Patch_63_Mat_Ballroom_North
+f 153 59 51
+f 153 147 59
+usemtl Patch_64_Mat_Ballroom_South
+f 10 21 112
+f 10 9 21
+usemtl Patch_65_Mat_Ballroom_South
+f 16 112 111
+f 16 15 112
+usemtl Patch_66_Mat_Ballroom_South
+f 12 111 22
+f 12 11 111
+usemtl Patch_67_Mat_Ballroom_East
+f 22 152 12
+f 22 148 152
+usemtl Patch_68_Mat_Ballroom_East
+f 148 52 152
+f 148 60 52
+usemtl Patch_69_Mat_Ballroom_West
+f 44 59 155
+f 44 51 59
+usemtl Patch_70_Mat_Ballroom_West
+f 42 155 156
+f 42 46 155
+usemtl Patch_71_Mat_Ballroom_West
+f 28 156 157
+f 28 40 156
+usemtl Patch_72_Mat_Ballroom_West
+f 26 157 158
+f 26 30 157
+usemtl Patch_73_Mat_Ballroom_West
+f 9 158 21
+f 9 24 158
+usemtl Patch_74_Mat_Hallway_Floor
+f 34 159 31
+f 34 160 159
+usemtl Patch_75_Mat_Hallway_Floor
+f 160 93 159
+f 160 94 93
+usemtl Patch_76_Mat_Hallway_East
+f 40 38 161
+f 40 34 38
+f 46 161 162
+f 46 42 161
+f 61 162 163
+f 61 44 162
+f 69 163 164
+f 69 62 163
+f 80 164 165
+f 80 68 164
+f 90 165 166
+f 90 82 165
+f 94 166 100
+f 94 89 166
+usemtl Patch_77_Mat_Hallway_West
+f 79 99 83
+f 79 93 99
+f 71 83 72
+f 71 81 83
+usemtl Patch_78_Mat_Hallway_West
+f 41 168 167
+f 41 45 168
+f 31 167 37
+f 31 39 167
+usemtl Patch_79_Mat_Hallway_West
+f 43 72 168
+f 43 70 72
+usemtl Patch_80_Mat_Hallway_Ceiling
+f 99 170 169
+f 99 100 170
+usemtl Patch_81_Mat_Hallway_Ceiling
+f 169 38 37
+f 169 170 38
+usemtl Patch_82_Mat_Hallway_North
+f 94 99 93
+f 94 100 99
+usemtl Patch_83_Mat_Hallway_South
+f 32 37 144
+f 32 31 37
+f 36 144 143
+f 36 35 144
+f 34 143 38
+f 34 33 143
+usemtl Patch_84_Mat_Meeting_room_Floor
+f 49 77 48
+usemtl Patch_85_Mat_Meeting_room_Floor
+f 64 77 49
+usemtl Patch_86_Mat_Meeting_room_Floor
+f 64 85 77
+usemtl Patch_87_Mat_Meeting_room_Floor
+f 85 92 77
+usemtl Patch_88_Mat_Meeting_room_Floor
+f 92 91 77
+usemtl Patch_89_Mat_Meeting_room_Floor
+f 77 91 84
+usemtl Patch_90_Mat_Meeting_room_Floor
+f 77 84 63
+usemtl Patch_91_Mat_Meeting_room_Floor
+f 77 63 48
+usemtl Patch_92_Mat_Meeting_room_Ceiling
+f 54 53 78
+usemtl Patch_93_Mat_Meeting_room_Ceiling
+f 67 54 78
+usemtl Patch_94_Mat_Meeting_room_Ceiling
+f 88 78 98
+usemtl Patch_95_Mat_Meeting_room_Ceiling
+f 98 78 97
+usemtl Patch_96_Mat_Meeting_room_Ceiling
+f 78 87 97
+usemtl Patch_97_Mat_Meeting_room_Ceiling
+f 78 66 87
+usemtl Patch_98_Mat_Meeting_room_Ceiling
+f 78 53 66
+usemtl Patch_99_Mat_Meeting_room_Ceiling
+f 88 67 78
+usemtl Patch_100_Mat_Meeting_room_South
+f 53 49 48
+f 53 54 49
+usemtl Patch_101_Mat_Meeting_room_SouthEast
+f 85 88 98
+f 85 98 92
+usemtl Patch_102_Mat_Meeting_room_East
+f 83 88 85
+f 83 85 79
+f 72 83 81
+f 72 81 71
+f 67 72 70
+f 67 70 64
+usemtl Patch_103_Mat_Meeting_room_NorthEast
+f 54 64 49
+f 54 67 64
+usemtl Patch_104_Mat_Meeting_room_North
+f 91 92 98
+f 91 98 97
+usemtl Patch_105_Mat_Meeting_room_NorthWest
+f 48 63 66
+f 48 66 53
+usemtl Patch_106_Mat_Meeting_room_West
+f 84 66 63
+f 84 87 66
+usemtl Patch_107_Mat_Meeting_room_SouthWest
+f 91 87 84
+f 91 97 87
+usemtl Patch_108_Mat_Cinema_Floor
+f 51 153 171
+f 51 171 73
+usemtl Patch_109_Mat_Cinema_Floor
+f 153 52 172
+f 153 172 171
+usemtl Patch_110_Mat_Cinema_Floor
+f 74 172 96
+f 74 96 95
+usemtl Patch_111_Mat_Cinema_East
+f 56 96 52
+f 56 102 96
+usemtl Patch_112_Mat_Cinema_Ceiling
+f 101 102 173
+f 101 173 76
+usemtl Patch_113_Mat_Cinema_Ceiling
+f 75 174 175
+f 75 175 55
+usemtl Patch_114_Mat_Cinema_Ceiling
+f 174 173 56
+f 174 56 175
+usemtl Patch_115_Mat_Cinema_South
+f 55 153 51
+f 55 175 153
+usemtl Patch_116_Mat_Cinema_South
+f 175 52 153
+f 175 56 52
+usemtl Patch_117_Mat_Cinema_North
+f 96 101 95
+f 96 102 101
+usemtl Patch_118_Mat_Cinema_NorthL
+f 74 75 73
+f 74 76 75
+usemtl Patch_119_Mat_Cinema_West
+f 68 75 164
+f 68 73 75
+f 62 164 163
+f 62 69 164
+f 51 163 55
+f 51 61 163
+usemtl Patch_120_Mat_Cinema_WestL
+f 95 76 74
+f 95 101 76
+usemtl Patch_121_Mat_Restroom_Floor
+f 74 94 73
+f 74 95 94
+usemtl Patch_122_Mat_Restroom_Ceiling
+f 100 76 75
+f 100 101 76
+usemtl Patch_123_Mat_Restroom_North
+f 95 100 94
+f 95 101 100
+usemtl Patch_124_Mat_Restroom_South
+f 75 74 73
+f 75 76 74
+usemtl Patch_125_Mat_Restroom_West
+f 89 100 166
+f 89 94 100
+f 82 166 165
+f 82 90 166
+f 73 165 75
+f 73 80 165
+usemtl Patch_126_Mat_Restroom_East
+f 76 95 74
+f 76 101 95

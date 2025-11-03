@@ -3,3 +3,15 @@ __pycache__/*
 .DS_store
 *.pyc
 *.py[cod]
+*/Museum_464_patches/ART_kernel_*.mtx
+*/Museum_464_patches/MoD-ART.csv
+*/Museum_464_patches/MoD-ART extra.csv
+*/Museum_648_patches/ART_kernel_*.mtx
+*/Museum_648_patches/MoD-ART.csv
+*/Museum_648_patches/MoD-ART extra.csv
+*/SmallMuseum_318_patches/ART_kernel_*.mtx
+*/SmallMuseum_318_patches/MoD-ART.csv
+*/SmallMuseum_318_patches/MoD-ART extra.csv
+*/SmallMuseum_430_patches/ART_kernel_*.mtx
+*/SmallMuseum_430_patches/MoD-ART.csv
+*/SmallMuseum_430_patches/MoD-ART extra.csv

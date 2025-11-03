@@ -109,12 +109,12 @@ with open('./materials.csv', 'w') as file:
             elif room == 'Cinema':
                 scat_material = 'Generic_rough'
             elif room == 'Restroom':
-                scat_material = 'Smooth_painted_concrete'
+                scat_material = 'Bookshelf'
 
             abso_material_coeffs = reference_absorptions[abso_material]
             scat_material_coeffs = reference_scatterings[scat_material]
 
             # Add two octave bands (8k and 16k).
             file.write(raves_material + ', ' + ', '.join(abso_material_coeffs) + ', ' + abso_material_coeffs[-1] + ', ' + abso_material_coeffs[-1] + '\n')
-            # Use the minimum recommended value for scattering: ART tends to overestimate diffusion.
-            file.write(raves_material + ', ' + scat_material_coeffs[0] + '\n')
+            # Use the maximum recommended value for scattering: ART is not good with specular reflections.
+            file.write(raves_material + ', ' + scat_material_coeffs[-1] + '\n')
