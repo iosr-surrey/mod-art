@@ -4,16 +4,19 @@
 
 You can either import the main functions into your own Python script, or run the preprocessing from the command line.
 To import in a Python script, clone the repository somewhere that your Python script can see, and use one or more of the following lines:
-```
+```python
 from raves import raves
 from raves import compute_ART
 from raves import compute_MoDART
 
-raves("path/to/your/environment/folder")
+# The '__main__' scope is necessary because `compute_ART` (and, by extension, `raves`)
+#  makes use of multiprocessing, unless you manually set `multiprocess_pool_size=1`.
+if __name__ == '__main__':
+    raves("path/to/your/environment/folder")
 ```
 To launch from the command line, run
-```
-python -m raves "path/to/your/environment/folder"
+```bash
+$ python -m raves "path/to/your/environment/folder"
 ```
 from the root directory of the repository.
 
