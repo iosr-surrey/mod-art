@@ -88,7 +88,7 @@ def raves(folder_path: str,
     >>> from raves import raves
     >>> raves("path/to/your/environment/folder", multiprocess_pool_size=2, echogram_sample_rate=1e4)
     """
-    if folder_path in ['all_examples', 'all_AudioForGames', 'all_DampenedMiddle', 'all_Museum', 'all_SmallMuseum']:
+    if folder_path in ['all_examples', 'all_AudioForGames', 'all_DampenedMiddle', 'all_Museum']:
         example_root = './example environments'
         if not os.path.isdir(example_root):
             raise ValueError('Invalid relative path "./example environments". '
@@ -108,10 +108,7 @@ def raves(folder_path: str,
                               if 'DampenedMiddle' in subfolder]
         elif folder_path == 'all_Museum':
             folders_to_try = [subfolder for subfolder in folders_to_try
-                              if 'Museum' in subfolder and 'SmallMuseum' not in subfolder]
-        elif folder_path == 'all_SmallMuseum':
-            folders_to_try = [subfolder for subfolder in folders_to_try
-                              if 'SmallMuseum' in subfolder]
+                              if 'Museum' in subfolder]
         # The order of `listdir` is not guaranteed. This does not do miracles, but at least it's deterministic.
         folders_to_try.sort()
     else:
