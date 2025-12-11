@@ -2,8 +2,9 @@ import os
 import warnings
 import numpy as np
 from scipy.io import mmread
+from typing import Dict
 
-from .utils import build_ssm, real_positive_search
+from .utils import load_frequencies, build_ssm, real_positive_search
 
 
 def eig_to_T60(eigenvalue: float, fs: float) -> float:
@@ -66,6 +67,103 @@ def T60_to_eig(T60: float, fs: float) -> float:
         return 1.
 
 
+def plot_T60(folder_path: str,
+             all_pole_T60s: Dict[int, np.ndarray],
+             max_slopes_per_band: int = 10,
+             echogram_sample_rate: float = 5e3
+             ) -> None:
+    """
+    Plot the set of energy modes located in each frequency band.
+
+    Parameters
+    ----------
+    folder_path : str
+        Path to the environment folder. If it contains `materials.csv`,
+        the frequency band centers will be used for the X axis of the plots.
+    all_pole_T60s : dict
+        Dictonary containing the T60 values located in each frequency band,
+        keyed by band index.
+    max_slopes_per_band : int, default: 10
+        Maximum number of modes reported per band in MoD-ART.csv.
+    echogram_sample_rate : float, default: 5e3
+        Sample rate in Hz used to quantize propagation delays.
+
+    Returns
+    -------
+    None
+        Plots are saved to:
+        - MoD-ART (rate {echogram_sample_rate}) T60 values, lin scale.png
+        - MoD-ART (rate {echogram_sample_rate}) T60 values, log scale.png
+    """
+    
+    if (type(folder_path) != str
+            or type(all_pole_T60s) != dict
+            or type(max_slopes_per_band) != int
+            or type(echogram_sample_rate) != float):
+        raise ValueError('Please respect the type hints.')
+
+    if not os.path.isdir(folder_path):
+        raise ValueError('Not a valid folder path:\n\t' + folder_path)
+
+    try:
+        import matplotlib.ticker as ticker
+        import matplotlib.pyplot as plt
+    except ImportError as e:
+        print('Failed to import matplotlib package. Aborting T60 plots. Encountered error:\n', e)
+        return
+
+    try:
+        frequencies = load_frequencies(folder_path)
+        frequencies_load_succeded = True
+    except Exception as e:
+        print('Failed to import frequency band centers. The T60 plots will only specify band indices. Encountered error:\n', e)
+        frequencies = np.range(1, len(all_pole_T60s)+1)
+        frequencies_load_succeded = False
+
+    print('\tPlotting results.')
+
+    fig, ax = plt.subplots(dpi=200, figsize=(8, 8))
+
+    for band_idx, T60s in all_pole_T60s.items():
+        num_selected = min(len(T60s), max_slopes_per_band)
+        plt.scatter(np.full(num_selected, frequencies[band_idx-1]),
+                    T60s[:num_selected], marker='o',
+                    facecolors='none', edgecolors='black')
+        plt.scatter(np.full(len(T60s), frequencies[band_idx-1]),
+                    T60s, marker='+')
+
+    plt.title('The modes circled in black are reported in `MoD-ART.csv`.\nAll modes are reported in `MoD-ART extra.csv`.')
+
+    if frequencies_load_succeded:
+        plt.xlabel('Frequency band center')
+        plt.xscale('log')
+        plt.xticks(frequencies)
+        ax.xaxis.set_major_formatter(ticker.ScalarFormatter())
+        ax.xaxis.set_tick_params(which='minor', bottom=False)
+    else:
+        plt.xlabel('Frequency band index')
+        ax.xaxis.set_major_locator(ticker.MaxNLocator(integer=True))
+
+    plt.ylabel('T60 [s]')
+    plt.grid(True, axis='y')
+    plt.ylim(0, None)
+
+    plt.savefig(os.path.join(folder_path, 'MoD-ART (rate {:.0f}) T60 values, lin scale.png'.format(echogram_sample_rate)))
+
+    plt.yscale('log')
+    plt.autoscale(axis='y')
+
+    ax.yaxis.set_major_locator(ticker.LogLocator(subs=np.arange(0.1, 1, 0.1)))
+    ax.yaxis.set_major_formatter(ticker.ScalarFormatter())
+    ax.yaxis.set_minor_locator(ticker.LogLocator(subs=np.arange(0.01, 1, 0.01)))
+    ax.yaxis.set_minor_formatter(ticker.NullFormatter())
+
+    plt.savefig(os.path.join(folder_path, 'MoD-ART (rate {:.0f}) T60 values, log scale.png'.format(echogram_sample_rate)))
+
+    # plt.show()
+    plt.close()
+
+
 def compute_MoDART(folder_path: str,
                    T60_threshold: float = 1e-1, max_slopes_per_band: int = 10,
                    echogram_sample_rate: float = 5e3, skip_T60_plots: bool = False
@@ -87,10 +185,11 @@ def compute_MoDART(folder_path: str,
         - path_etendues.csv
         - ART_kernel_band_1.mtx, ART_kernel_band_2.mtx, ...
     T60_threshold : float, default: 1e-1
-        Minimum T60 (seconds) used to derive the eigenvalue threshold for
-        pole search.
+        Minimum T60 (seconds) used to derive the eigenvalue threshold for pole search.
+        The search will continue until a mode below this threshold is found.
     max_slopes_per_band : int, default: 10
-        Maximum number of modes reported per band in MoD-ART.csv.
+        Maximum number of modes reported per band in `MoD-ART.csv`.
+        Additional modes found will be reported in `MoD-ART extra.csv`.
     echogram_sample_rate : float, default: 5e3
         Sample rate in Hz used to quantize propagation delays.
     skip_T60_plots : bool, default: False
@@ -173,9 +272,11 @@ def compute_MoDART(folder_path: str,
 
         # Perform modal decomposition, keeping only real positive eigenvalues.
         # N.B. These are the STATE-SPACE eigenvectors; their size is the system order.
-        poles, right_vecs, left_vecs = real_positive_search(state_transition_matrix,
-                                                            T60_to_eig(T60_threshold, echogram_sample_rate),
-                                                            max_slopes_per_band)
+        poles, right_vecs, left_vecs = \
+            real_positive_search(ssm=state_transition_matrix,
+                                 mag_thresh=T60_to_eig(T60_threshold,
+                                                       echogram_sample_rate),
+                                 num_thresh=None)
 
         print('\tRearranging and scaling results.')
 
@@ -236,41 +337,9 @@ def compute_MoDART(folder_path: str,
         all_pole_T60s[band_idx] = [eig_to_T60(p, echogram_sample_rate) for p in poles]
 
     if not skip_T60_plots:
-        import matplotlib.ticker as ticker
-        import matplotlib.pyplot as plt
-
-        print('\tPlotting results.')
-
-        fig, ax = plt.subplots(dpi=200, figsize=(8, 8))
-
-        for band_idx, T60s in all_pole_T60s.items():
-            num_selected = min(len(T60s), max_slopes_per_band)
-            plt.scatter(np.full(num_selected, band_idx), T60s[:num_selected],
-                        marker='o', facecolors='none', edgecolors='black')
-            plt.scatter(np.full(len(T60s), band_idx), T60s,
-                        marker='+')
-
-        plt.title('The modes circled in black are reported in `MoD-ART.csv`.\nAll modes are reported in `MoD-ART extra.csv`.')
-
-        plt.xlabel('Frequency band index')
-
-        plt.ylabel('T60 [s]')
-        plt.grid(True, axis='y')
-        plt.ylim(0, None)
-
-        plt.savefig(os.path.join(folder_path, 'MoD-ART (rate {:.0f}) T60 values, lin scale.png'.format(echogram_sample_rate)))
-
-        plt.yscale('log')
-        plt.autoscale(axis='y')
-
-        ax.yaxis.set_major_locator(ticker.LogLocator(subs=np.arange(0.1, 1, 0.1)))
-        ax.yaxis.set_major_formatter(ticker.ScalarFormatter())
-        ax.yaxis.set_minor_locator(ticker.LogLocator(subs=np.arange(0.01, 1, 0.01)))
-        ax.yaxis.set_minor_formatter(ticker.NullFormatter())
-
-        plt.savefig(os.path.join(folder_path, 'MoD-ART (rate {:.0f}) T60 values, log scale.png'.format(echogram_sample_rate)))
-
-        # plt.show()
-        plt.close()
+        plot_T60(folder_path,
+                 all_pole_T60s,
+                 max_slopes_per_band,
+                 echogram_sample_rate)
 
     print('\n')

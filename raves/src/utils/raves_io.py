@@ -521,7 +521,8 @@ def load_mesh(folder_path: str,
                                          mesh.d_0[triangle_b])
 
                 if not (parallel_normals and same_offset):
-                    raise ValueError('Patches should only contain coplanar triangles.'
+                    raise ValueError('All triangles forming a single ART surface patch should lie on the same plane.'
+                                     + ' See the section `Preparing the environment mesh` of `README.md`.'
                                      + ' Bad patch ID: ' + str(patch_id)
                                      + ' Bad triangle ID A: ' + str(triangle_a)
                                      + ' Bad triangle ID B: ' + str(triangle_b))
@@ -729,6 +730,38 @@ def load_materials(folder_path: str, expected_names: Set[str]) -> Dict[str, np.n
                          + ' These materials were not found: ' + str(missing_names))
 
     return material_coefficients
+
+
+def load_frequencies(folder_path: str) -> np.ndarray:
+    """
+    Load band centers from CSV, ignoring other data.
+
+    The first line of the file ``materials.csv`` is parsed following the specifications in `README.md`.
+
+    Parameters
+    ----------
+    folder_path : str
+        Path to the environment folder.
+
+    Returns
+    -------
+    1D array of band center frequencies.
+    """
+    with open(os.path.join(folder_path, 'materials.csv'), mode='r', newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', skipinitialspace=True)
+
+        first_row = next(reader, None)
+        if first_row is not None:
+            mat_name = first_row.pop(0)
+            band_centers = np.array(first_row, dtype=float)
+            if mat_name != 'Frequencies':
+                raise ValueError('The first row of material.csv should start with the word "Frequencies" and contain the band center frequencies.')
+            if len(first_row) == 0:
+                warnings.warn('No band center frequencies are reported in material.csv. Using broadband mode (one band centered at 0).')
+                band_centers = np.zeros(1)
+            return band_centers
+        else:
+            raise ValueError('The first row of material.csv should start with the word "Frequencies" and contain the band center frequencies.')
 
 
 def visualize_mesh(folder_path: str, cull_back_faces: bool = True) -> None:

@@ -194,9 +194,11 @@ def real_positive_search(ssm: csr_array,
     mag_thresh : float
         Target magnitude threshold for early stopping. Search stops once any
         valid eigenvalue has magnitude <= this value.
+        Set to None to deactivate this stopping criterion.
     num_thresh : int
         Target count threshold for early stopping. Search stops once at least
         this many valid eigenvalues are found.
+        Set to None to deactivate this stopping criterion.
     imaginary_part_thresh : float, default 1e-7
         Maximum absolute imaginary part for an eigenvalue to be treated as real.
 
@@ -218,14 +220,21 @@ def real_positive_search(ssm: csr_array,
     - Returned count K equals the number of matched valid eigenpairs; it may
       be less than the number initially found on either side.
     """
+    if mag_thresh is None and num_thresh is None:
+        raise ValueError('The arguments mag_thresh and num_thresh cannot both be None.')
+    
     # Start with a right eigenvector search, stopping when
     #   a. we find a (real, positive) pole with T60 < T60_thresh, or
     #   b. we find more than num_thresh (real, positive) poles, or
     #   c. we try looking for more poles than scipy.sparse.eigs() can look for, or
     #   d. the search fails to converge.
     print('\tEigenvalue search (right eigenvectors).')
+    if num_thresh is not None:
+        k = num_thresh
+    else:
+        k = 4
+    
     # https://stackoverflow.com/a/46902086
-    k = num_thresh
     convergence_failed = False
     while True:
         print('\t\tSearching with', k, 'estimates.')
@@ -248,20 +257,27 @@ def real_positive_search(ssm: csr_array,
         right_vals = np.real(right_vals[valid_idxs])
         right_vecs = np.real(right_vecs[:, valid_idxs])
 
-        print('\t\t\tNumber found / sought: ', len(right_vals), '/', num_thresh)
-        print('\t\t\tLowest found T60 is {:.0f}% of stopping value.'.format(100. * np.log10(mag_thresh) / np.log10(np.min(right_vals))))
-
-        if np.min(right_vals) <= mag_thresh:
-            break
-        if len(right_vals) >= num_thresh:
-            break
-        if k == ssm.shape[0] - 2:
-            break
+        # Consider the "number of located modes" stopping condition.
+        if num_thresh is not None:
+            print('\t\t\tNumber found / sought: ', len(right_vals), '/', num_thresh)
+            if len(right_vals) >= num_thresh:
+                break
+        # Consider the "lowest located mode" stopping condition.
+        if mag_thresh is not None:
+            print('\t\t\tLowest found T60 is {:.0f}% of stopping value.'.format(100. * np.log10(mag_thresh) / np.log10(np.min(right_vals))))
+            if np.min(right_vals) <= mag_thresh:
+                break
+        # If the search failed, it has no chance of succeeding at the next loop.
         if convergence_failed:
             break
 
+        # Try again with twice as many candidates. Note that the search locates
+        #  values in a radius around 1, including complex values -- increasing
+        #  k linearly would make it very slow.
         k *= 2
-        k = min(k, ssm.shape[0] - 2)
+        # `eigs` has a limitation on the number of requested eigenvalues.
+        if k >= ssm.shape[0] - 2:
+            break
 
     # Having found the right eigenpairs, look for the left counterparts.
     # There are some algorithms to find both at the same time, but they
