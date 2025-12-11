@@ -1,0 +1,12 @@
+newmtl Patch_1_Mat_Carpet
+Kd 1.0 0.7232 0.102
+newmtl Patch_2_Mat_Plaster
+Kd 0.7154 0.7154 0.7154
+newmtl Patch_3_Mat_PaintedConcrete
+Kd 0.0 0.5751 0.898
+newmtl Patch_4_Mat_PaintedConcrete
+Kd 0.0 0.5751 0.898
+newmtl Patch_5_Mat_PaintedConcrete
+Kd 0.0 0.5751 0.898
+newmtl Patch_6_Mat_PaintedConcrete
+Kd 0.0 0.5751 0.898

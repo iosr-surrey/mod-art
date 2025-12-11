@@ -1,0 +1,39 @@
+mtllib mesh.mtl
+
+################################ Vertices
+
+v 0.0 0.0 0.0                  # Vertex 1
+v 0.0 0.0 3.0                  # Vertex 2
+v 0.0 7.0 0.0                  # Vertex 3
+v 0.0 7.0 3.0                  # Vertex 4
+v 4.0 0.0 0.0                  # Vertex 5
+v 4.0 0.0 3.0                  # Vertex 6
+v 4.0 7.0 0.0                  # Vertex 7
+v 4.0 7.0 3.0                  # Vertex 8
+
+################################ Faces
+
+# Floor
+usemtl Patch_1_Mat_Carpet
+f 3 1 5
+f 3 5 7
+# Ceiling
+usemtl Patch_2_Mat_Plaster
+f 2 4 6
+f 6 4 8
+# West
+usemtl Patch_3_Mat_PaintedConcrete
+f 4 2 1
+f 3 4 1
+# North
+usemtl Patch_4_Mat_PaintedConcrete
+f 3 8 4
+f 3 7 8
+# East
+usemtl Patch_5_Mat_PaintedConcrete
+f 7 6 8
+f 7 5 6
+# South
+usemtl Patch_6_Mat_PaintedConcrete
+f 2 6 5
+f 1 2 5
