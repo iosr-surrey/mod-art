@@ -1,8 +1,0 @@
-# Requirements ascertained using pipreqs: https://github.com/bndr/pipreqs
-matplotlib==3.10.8
-networkx==3.6
-numpy==2.3.5
-polyscope==2.5.0
-pymeshlab==2025.7
-scipy==1.16.3
-tqdm==4.67.1

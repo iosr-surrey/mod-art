@@ -1,13 +1,16 @@
 """
 This lets you run RAVES from the command line, using the following syntax:
 ```
-python -m raves "path/to/your/environment/folder"
+# After pip installation:
+$ raves "path/to/your/environment/folder"
+
+# Alternatively (without pip-install, run from root directory):
+$ python -m raves "path/to/your/environment/folder"
 ```
-Assuming you run this command from the root directory of the repository.
 Run it with argument `-h` or `--help` to see a list of optional arguments.
 For an example, try
 ```
-python -m raves "./example environments/Shoebox_6_patches"
+raves "./example environments/Shoebox_6_patches"
 ```
 """
 from .cli import main

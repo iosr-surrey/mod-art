@@ -6,6 +6,67 @@ from scipy.sparse import coo_array, csr_array, lil_array, dia_array, block_array
 from scipy.sparse.linalg import ArpackNoConvergence, eigs
 
 
+def eig_to_T60(eigenvalue: float, fs: float) -> float:
+    """
+    Translate eigenvalue magnitude to T60 (seconds).
+
+    If abs(eigenvalue) >= 1, the decay does not converge and T60 is set to
+    infinity. If abs(eigenvalue) == 0, T60 is 0. Otherwise the mapping
+    uses the base-10 logarithm:
+
+        T60 = -6 / (log10(abs(eigenvalue)) * fs)
+
+    Parameters
+    ----------
+    eigenvalue : float
+        Real eigenvalue (pole) of the state transition matrix.
+    fs : float
+        Sample rate used in the decomposed ART model, in Hz.
+
+    Returns
+    -------
+    float
+        Reverberation time in seconds.
+    """
+    if np.abs(eigenvalue) >= 1:
+        return np.inf
+    elif np.abs(eigenvalue) == 0:
+        return 0.
+    else:
+        return -6 / (np.log10(np.abs(eigenvalue)) * fs)
+
+
+def T60_to_eig(T60: float, fs: float) -> float:
+    """
+    Translate T60 (seconds) to eigenvalue magnitude.
+
+    If T60 is 0, the result is 0. For finite nonzero T60, it is
+
+        eig = 10 ** (-6 / (T60 * fs))
+
+    and for non-finite T60 the result is 1.
+
+    Parameters
+    ----------
+    T60  : float
+        Reverberation time in seconds.
+    fs : float
+        Sample rate used in the decomposed ART model, in Hz.
+
+    Returns
+    -------
+    float
+        Real eigenvalue magnitude in [0, 1].
+    """
+    if T60 == 0:
+        return 0.
+    elif np.isfinite(T60):
+        return 10**(-6 / (T60 * fs))
+    else:
+        return 1.
+
+
+
 def build_ssm(kernel: csr_array, m: np.ndarray,
               element_wise_assembly: bool = True
               ) -> csr_array:
@@ -30,7 +91,7 @@ def build_ssm(kernel: csr_array, m: np.ndarray,
 
     Parameters
     ----------
-    kernel : csr_array
+    kernel : scipy.sparse.csr_array
         Feedback matrix of shape (N, N), where N == len(m).
     m : array_like of int
         Per-line integer delay lengths; each m_i must be >= 3.
@@ -166,8 +227,9 @@ def build_ssm(kernel: csr_array, m: np.ndarray,
 
 
 def real_positive_search(ssm: csr_array,
-                         mag_thresh: float,
+                         T60_thresh: float,
                          num_thresh: int,
+                         sample_rate: float = 5e3,
                          imaginary_part_thresh: float = 1e-7
                          ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
@@ -177,7 +239,7 @@ def real_positive_search(ssm: csr_array,
     Performs a shift-invert Arnoldi search (sigma=1) for right eigenpairs of
     the state transition matrix, filters to real positive eigenvalues (by
     bounding the imaginary part to `imaginary_part_thresh`), and stops when:
-      1) at least one valid eigenvalue has magnitude <= `mag_thresh`, or
+      1) at least one valid eigenvalue has T60 <= `T60_thresh`, or
       2) at least `num_thresh` valid eigenvalues have been found, or
       3) the search size reaches dim-2 (max allowed by Arnoldi), or
       4) convergence fails.
@@ -189,11 +251,11 @@ def real_positive_search(ssm: csr_array,
 
     Parameters
     ----------
-    ssm : csr_array
+    ssm : scipy.sparse.csr_array
         Square sparse state transition matrix.
-    mag_thresh : float
+    T60_thresh : float
         Target magnitude threshold for early stopping. Search stops once any
-        valid eigenvalue has magnitude <= this value.
+        valid eigenvalue has T60 <= this value.
         Set to None to deactivate this stopping criterion.
     num_thresh : int
         Target count threshold for early stopping. Search stops once at least
@@ -220,9 +282,14 @@ def real_positive_search(ssm: csr_array,
     - Returned count K equals the number of matched valid eigenpairs; it may
       be less than the number initially found on either side.
     """
-    if mag_thresh is None and num_thresh is None:
-        raise ValueError('The arguments mag_thresh and num_thresh cannot both be None.')
-    
+    if T60_thresh is None and num_thresh is None:
+        raise ValueError('The arguments T60_thresh and num_thresh cannot both be None.')
+
+    if T60_thresh is None:
+        mag_thresh = None
+    else:
+        mag_thresh = T60_to_eig(T60_thresh, sample_rate)
+
     # Start with a right eigenvector search, stopping when
     #   a. we find a (real, positive) pole with T60 < T60_thresh, or
     #   b. we find more than num_thresh (real, positive) poles, or
@@ -233,7 +300,7 @@ def real_positive_search(ssm: csr_array,
         k = num_thresh
     else:
         k = 4
-    
+
     # https://stackoverflow.com/a/46902086
     convergence_failed = False
     while True:
@@ -263,7 +330,7 @@ def real_positive_search(ssm: csr_array,
             if len(right_vals) >= num_thresh:
                 break
         # Consider the "lowest located mode" stopping condition.
-        if mag_thresh is not None:
+        if T60_thresh is not None:
             print('\t\t\tLowest found T60 is {:.0f}% of stopping value.'.format(100. * np.log10(mag_thresh) / np.log10(np.min(right_vals))))
             if np.min(right_vals) <= mag_thresh:
                 break
@@ -365,13 +432,23 @@ def real_positive_search(ssm: csr_array,
     # Take the average, to slightly improve the numerical accuracy.
     mean_vals = (right_vals + left_vals) / 2
 
-    # Calibrate the full eigenvectors: their dot products should be 1.
+    # Calibrate the full eigenvectors.
+    # First, consider a calibration such that their dot products is 1.
+    # This makes it so the pair (V, W) forms a valid diagonalization.
+    # See "ART_theory.md" for details, specifically the end of section
+    #   "MoD-ART eigenvectors".
     calibration = np.einsum('ji,ji->i', left_vecs, right_vecs)
+    # Now, we need to add a second calibration, because the eigenvectors are
+    #   currently dependent on the sample rate used for decomposition.
+    # We want the eigenvector values to be sample-rate-agnostic.
+    calibration /= sample_rate
+    # Finally, we need to apply the compensation we evaluated.
     # In theory, we could do either:
     #   right_vecs /= calibration
     # or:
     #   left_vecs /= calibration
-    # Instead, split the calibration across both sides, to avoid increasing/decreasing one side too much.
+    # Instead, we split the calibration across both sides, to avoid increasing
+    #   or decreasing one side too much (which could cause rounding errors).
     right_vecs /= np.sign(calibration) * np.sqrt(np.abs(calibration))
     left_vecs /= np.sqrt(np.abs(calibration))
 

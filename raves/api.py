@@ -3,11 +3,10 @@ from .src import compute_ART, compute_MoDART
 
 
 # Project-wide TODOs
-# TODO: Add `source_parameters`: ray-tracing to find input weights and delays, replicating runtime code
-# TODO: Add `listener_parameters`: ray-tracing to find output weights and delays, replicating runtime code
-# TODO: Add `run_ART`: compute I/O parameters for a set of sources and listeners, run the ART model to produce echograms.
-# TODO: Add `run_MoDART`: compute I/O parameters for a set of sources and listeners, run the ART model to produce echograms.
-# TODO: Add complex-valued decomposition.
+# TODO: More plotting utilities (e.g., EDCs).
+# TODO: More accurate air absorption (avoid baking it into kernels; account for it in injectors and detectors).
+# TODO: Add complex-valued decomposition (for flutter echoes and such).
+# TODO: Add higher-order energy injection (with ray-tracing early reflections).
 
 
 def raves(folder_path: str,

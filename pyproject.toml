@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "raves"
+version = "0.1.0"
+description = "Pre-processing tools for RAVES, using the Modal Decomposition of Acoustic Radiance Transfer (MoD-ART)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Matteo Scerbo" }]
+dependencies = [
+    "matplotlib>=3.10.8",
+    "numpy>=2.3.5",
+    "scipy>=1.16.3",
+    "tqdm>=4.67.1",
+]
+
+[project.optional-dependencies]
+remesh = [
+    "networkx>=3.6",
+]
+mesh_vis = [
+    "polyscope>=2.5.0",
+    "pymeshlab>=2025.7",
+]
+
+[project.scripts]
+raves = "raves.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["raves*"]
+exclude = ["example environments*", "example usage*"]

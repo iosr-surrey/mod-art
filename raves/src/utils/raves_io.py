@@ -3,7 +3,6 @@ import re
 import csv
 import warnings
 import numpy as np
-import networkx as nx
 from itertools import combinations
 from collections import defaultdict
 from typing import Tuple, List, Dict, Set
@@ -105,8 +104,14 @@ def merge_small_patches(vertices: np.ndarray,
     - Coplanarity is checked using triangle normals and plane offsets from
       the provided ``mesh``.
     """
-    warnings.warn('This feature is experimental! It still needs some work.')
+    try:
+        import networkx as nx
+    except ImportError as e:
+        raise ImportError('This feature requires optional dependencies. ' +
+                          'Install with: pip install "raves[remesh]"') from e
 
+    warnings.warn('This feature is experimental! It still needs some work.')
+    
     thoroughness = np.clip(thoroughness, 0., 1.)
 
     # Compute patch_areas
@@ -787,8 +792,12 @@ def visualize_mesh(folder_path: str, cull_back_faces: bool = True) -> None:
     -----
     Disables creation of imgui.ini and log files for tidiness.
     """
-    import pymeshlab
-    import polyscope
+    try:
+        import pymeshlab
+        import polyscope
+    except ImportError as e:
+        raise ImportError('This feature requires optional dependencies. ' +
+                          'Install with: pip install "raves[mesh_vis]"') from e
 
     ms = pymeshlab.MeshSet()
     ms.load_new_mesh(os.path.join(folder_path, 'mesh.obj'))

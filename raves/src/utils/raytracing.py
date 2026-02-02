@@ -197,7 +197,7 @@ class RayBundle:
     bookkeeping used by the tracing kernel:
       - radiance
       - total_distance
-      - current_triangle (for future self-hit handling)
+      - current_triangle (for self-hit handling, yet to be implemented)
       - front_distance, front_cosine, front_patch
       - back_distance, back_cosine, back_patch
 
@@ -274,7 +274,7 @@ class RayBundle:
 
         return cls(origins, directions)
 
-    # TODO: Allow using this method to construct several pencils.
+    # TODO: Allow using this method to construct several pencils (N origins, M directions).
     @classmethod
     def from_origins_and_directions(cls,
                                     origins: np.ndarray,
@@ -312,7 +312,7 @@ class RayBundle:
 
         return cls(origins, directions)
 
-    # TODO: Allow using this method to construct several pencils.
+    # TODO: Allow using this method to construct several pencils (N origins, M directions).
     @classmethod
     def sample_sphere(cls,
                       num_rays: int,

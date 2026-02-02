@@ -4,67 +4,7 @@ import numpy as np
 from scipy.io import mmread
 from typing import Dict
 
-from .utils import load_frequencies, build_ssm, real_positive_search
-
-
-def eig_to_T60(eigenvalue: float, fs: float) -> float:
-    """
-    Translate eigenvalue magnitude to T60 (seconds).
-
-    If abs(eigenvalue) >= 1, the decay does not converge and T60 is set to
-    infinity. If abs(eigenvalue) == 0, T60 is 0. Otherwise the mapping
-    uses the base-10 logarithm:
-
-        T60 = -6 / (log10(abs(eigenvalue)) * fs)
-
-    Parameters
-    ----------
-    eigenvalue : float
-        Real eigenvalue (pole) of the state transition matrix.
-    fs : float
-        Sample rate used in the decomposed ART model, in Hz.
-
-    Returns
-    -------
-    float
-        Reverberation time in seconds.
-    """
-    if np.abs(eigenvalue) >= 1:
-        return np.inf
-    elif np.abs(eigenvalue) == 0:
-        return 0.
-    else:
-        return -6 / (np.log10(np.abs(eigenvalue)) * fs)
-
-
-def T60_to_eig(T60: float, fs: float) -> float:
-    """
-    Translate T60 (seconds) to eigenvalue magnitude.
-
-    If T60 is 0, the result is 0. For finite nonzero T60, it is
-
-        eig = 10 ** (-6 / (T60 * fs))
-
-    and for non-finite T60 the result is 1.
-
-    Parameters
-    ----------
-    T60  : float
-        Reverberation time in seconds.
-    fs : float
-        Sample rate used in the decomposed ART model, in Hz.
-
-    Returns
-    -------
-    float
-        Real eigenvalue magnitude in [0, 1].
-    """
-    if T60 == 0:
-        return 0.
-    elif np.isfinite(T60):
-        return 10**(-6 / (T60 * fs))
-    else:
-        return 1.
+from .utils import eig_to_T60, load_frequencies, build_ssm, real_positive_search
 
 
 def plot_T60(folder_path: str,
@@ -95,13 +35,6 @@ def plot_T60(folder_path: str,
         - MoD-ART (rate {echogram_sample_rate}) T60 values, lin scale.png
         - MoD-ART (rate {echogram_sample_rate}) T60 values, log scale.png
     """
-    
-    if (type(folder_path) != str
-            or type(all_pole_T60s) != dict
-            or type(max_slopes_per_band) != int
-            or type(echogram_sample_rate) != float):
-        raise ValueError('Please respect the type hints.')
-
     if not os.path.isdir(folder_path):
         raise ValueError('Not a valid folder path:\n\t' + folder_path)
 
@@ -213,14 +146,6 @@ def compute_MoDART(folder_path: str,
     - Modes in each band are sorted by decreasing T60. Eigenvectors are scaled as
       discussed in `ART_theory.md`.
     """
-
-    if (type(folder_path) != str
-            or type(T60_threshold) != float
-            or type(max_slopes_per_band) != int
-            or type(echogram_sample_rate) != float
-            or type(skip_T60_plots) != bool):
-        raise ValueError('Please respect the type hints.')
-
     if not os.path.isdir(folder_path):
         raise ValueError('Not a valid folder path:\n\t' + folder_path)
 
@@ -256,7 +181,7 @@ def compute_MoDART(folder_path: str,
         band_idx += 1
         if not os.path.isfile(os.path.join(folder_path, 'ART_kernel_band_{}.mtx'.format(band_idx))):
             if band_idx == 1:
-                raise ValueError('Unable run MoD-ART. ART kernel must be prepared for at least one frequency band (i.e., `ART_kernel_band_1.mtx` needs to exist).')
+                raise ValueError('Unable to run MoD-ART. ART kernel must be prepared for at least one frequency band (i.e., `ART_kernel_band_1.mtx` needs to exist).')
             else:
                 break
 
@@ -274,8 +199,8 @@ def compute_MoDART(folder_path: str,
         # N.B. These are the STATE-SPACE eigenvectors; their size is the system order.
         poles, right_vecs, left_vecs = \
             real_positive_search(ssm=state_transition_matrix,
-                                 mag_thresh=T60_to_eig(T60_threshold,
-                                                       echogram_sample_rate),
+                                 T60_thresh=T60_threshold,
+                                 sample_rate=echogram_sample_rate,
                                  num_thresh=None)
 
         print('\tRearranging and scaling results.')

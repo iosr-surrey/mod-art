@@ -557,16 +557,6 @@ def compute_ART(folder_path: str,
     -----
     If `area_threshold > 0`, this may write a simplified mesh to a different folder.
     """
-
-    if (type(folder_path) != str
-            or type(overwrite) != bool
-            or type(points_per_square_meter) != float
-            or type(rays_per_hemisphere) != int
-            or type(humidity) != float
-            or type(temperature) != float
-            or type(pressure) != float):
-        raise ValueError('Please respect the type hints.')
-
     if not os.path.isdir(folder_path):
         raise ValueError('Not a valid folder path:\n\t' + folder_path)
 
@@ -610,7 +600,7 @@ def compute_ART(folder_path: str,
     """
     import matplotlib as mpl
     import matplotlib.pyplot as plt
-    
+
     all_plots = list()
     for i in range(num_patches):
         for triangle_idx in patch_triangles[i]:
@@ -807,7 +797,7 @@ def compute_ART(folder_path: str,
         # For debugging: plot the etendues.
         """
         import matplotlib.pyplot as plt
-        
+
         fig, ax = plt.subplots(dpi=200, figsize=(8, 6))
         plt.plot(path_etendues[path_visibility])
         plt.plot(reverse_path_etendues[path_visibility])
@@ -860,9 +850,9 @@ def compute_ART(folder_path: str,
         specular_col_sums = specular_kernel.sum(axis=0)
         diffuse_col_sums_rmse = np.sqrt(np.mean(np.abs(diffuse_col_sums - 1.) ** 2))
         specular_col_sums_rmse = np.sqrt(np.mean(np.abs(specular_col_sums[specular_col_sums != 0] - 1.) ** 2))
-    
+
         import matplotlib.pyplot as plt
-        
+
         fig, ax = plt.subplots(dpi=200, figsize=(8, 6))
         plt.plot(diffuse_col_sums, label='diffuse (RMSE {:.2e})'.format(diffuse_col_sums_rmse))
         plt.plot(specular_col_sums, label='specular (RMSE {:.2e})'.format(specular_col_sums_rmse))
