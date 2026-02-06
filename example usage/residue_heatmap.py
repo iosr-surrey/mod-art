@@ -207,4 +207,5 @@ if __name__ == '__main__':
 
         if b == shown_band:
             plt.show()
-        plt.close()
+        else:
+            plt.close()

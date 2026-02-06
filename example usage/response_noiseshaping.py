@@ -155,12 +155,13 @@ if __name__ == '__main__':
 
     print('Generating responses.')
 
+    responses_dict = dict()
     for s in range(num_sources):
         for l in range(num_listeners):
             response = np.zeros_like(noise_signal)
 
             for b in range(num_bands):
-                sos = butter(5, (lower_band_edges[b], upper_band_edges[b]),
+                sos = butter(7, (lower_band_edges[b], upper_band_edges[b]),
                              btype='bandpass',
                              fs=aural_sample_rate, output='sos')
 
@@ -180,3 +181,74 @@ if __name__ == '__main__':
             file_name = 'S{}, L{}.wav'.format(s+1, l+1)
             write(os.path.join(responses_subfolder, file_name),
                   int(aural_sample_rate), response)
+            
+            responses_dict[(s, l)] = response
+
+    try:
+        from librosa import amplitude_to_db
+        from librosa.core import cqt
+        from librosa.display import specshow
+        
+        import matplotlib.pyplot as plt
+        import matplotlib.patheffects as pe
+    except ImportError:
+        print('Install librosa to plot the spectrograms.')
+    else:
+        print('Plotting constant-Q spectrograms.')
+        
+        all_band_edges = np.append(lower_band_edges, upper_band_edges[-1])
+        
+        bins_per_octave = 24
+        nyquist = aural_sample_rate / 2
+        n_octaves = np.log2(nyquist / all_band_edges[0])
+        n_bins = int(np.floor(n_octaves * bins_per_octave))
+        
+        spectrograms_dict = {key: cqt(y=response, sr=aural_sample_rate,
+                                      bins_per_octave=bins_per_octave,
+                                      n_bins=n_bins, fmin=all_band_edges[0])
+                             for key, response in responses_dict.items()}
+        
+        max_linear_value = np.max([np.max(np.abs(spec))
+                                   for spec in spectrograms_dict.values()])
+        
+        spectrograms_dict = {key: amplitude_to_db(spec, ref=max_linear_value)
+                             for key, spec in spectrograms_dict.items()}
+        
+        max_value = np.max([np.max(spec)
+                            for spec in spectrograms_dict.values()])
+        min_value = max_value - 70
+        
+        fig, ax = plt.subplots(num_sources, num_listeners,
+                               figsize=(4*num_listeners, 3*num_sources),
+                               squeeze=False, constrained_layout=True)
+        
+        cs = None
+        for s in range(num_sources):
+            for l in range(num_listeners):
+                cs = specshow(spectrograms_dict[s, l],
+                              x_axis='time', y_axis='cqt_hz',
+                              ax=ax[s, l], cmap='viridis',
+                              sr=aural_sample_rate,
+                              fmin=all_band_edges[0],
+                              bins_per_octave=bins_per_octave,
+                              vmin=min_value, vmax=max_value)
+                
+                line = ax[s, l].hlines(all_band_edges, 0, response_duration,
+                                       color='white', ls='--', linewidth=1)
+                line.set_path_effects([pe.Stroke(linewidth=1.5,
+                                                 foreground='black'),
+                                       pe.Normal(),])
+     
+                ax[s, l].set_xlim(0, response_duration)
+                ax[s, l].set_ylim(all_band_edges[0] * 0.95, nyquist)
+                
+                ax[s, l].set_title('S{}, L{}'.format(s+1, l+1))
+        
+        cbar = fig.colorbar(cs, ax=ax)
+        cbar.set_label('dB')
+
+        plt.suptitle('Dotted lines show frequency band limits.')
+        
+        plt.savefig(os.path.join(responses_subfolder, 'CQT spectrograms.png'))
+                    
+        plt.show()
