@@ -4,16 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "raves"
-version = "0.1.0"
+version = "0.1.1"
 description = "Pre-processing tools for RAVES, using the Modal Decomposition of Acoustic Radiance Transfer (MoD-ART)"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Matteo Scerbo" }]
 dependencies = [
-    "matplotlib>=3.10.8",
-    "numpy>=2.3.5",
-    "scipy>=1.16.3",
+    "matplotlib>=3.8.4",
+    "numpy>=2.2.5",
+    "scipy>=1.14.1",
     "tqdm>=4.67.1",
 ]
 
