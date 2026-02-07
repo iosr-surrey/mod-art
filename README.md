@@ -32,7 +32,10 @@ In the latter case (install-free alternative), the command needs to be run from 
 ### Examples
 
 The repository includes example input files describing different environments, and example Python scripts illustrating how to use the package.
-The example scripts are:
+The main resource is the Jupyter notebook tutorial `Tutorial.ipynb`, which demonstrates how to use the basic features of the package.
+The notebook includes example results and plots, which you can view online [here](/example%20usage/Tutorial.ipynb).
+
+Other example scripts are:
 - `echogram_comparison.py`
     - For a set of sound source and listener positions, generate echograms with both TD-ART and MoD-ART, and compare the two approaches.
     ![Line plots comparing the echograms produced by TD-ART and MoD-ART for three sound source positions and six listener positions.](/example%20environments/DampenedMiddle_20_patches/Echograms/Echograms%20for%20band%203.png)
