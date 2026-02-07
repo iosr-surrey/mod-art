@@ -8,9 +8,10 @@ from .utils import eig_to_T60, load_frequencies, build_ssm, real_positive_search
 
 
 def plot_T60(folder_path: str,
-             all_pole_T60s: Dict[int, np.ndarray],
+             all_pole_T60s: Dict[int, np.ndarray] = None,
              max_slopes_per_band: int = 10,
-             echogram_sample_rate: float = 5e3
+             echogram_sample_rate: float = 5e3,
+             show_figure: bool = False
              ) -> None:
     """
     Plot the set of energy modes located in each frequency band.
@@ -20,13 +21,16 @@ def plot_T60(folder_path: str,
     folder_path : str
         Path to the environment folder. If it contains `materials.csv`,
         the frequency band centers will be used for the X axis of the plots.
-    all_pole_T60s : dict
+    all_pole_T60s : dict, default: None
         Dictonary containing the T60 values located in each frequency band,
-        keyed by band index.
+        keyed by band index. If None, the values are loaded from MoD-ART.csv.
     max_slopes_per_band : int, default: 10
         Maximum number of modes reported per band in MoD-ART.csv.
     echogram_sample_rate : float, default: 5e3
         Sample rate in Hz used to quantize propagation delays.
+    show_figure : bool, default: False
+        If False, suppress the matplotlib figure from actually displaying
+        (i.e., save only the file).
 
     Returns
     -------
@@ -34,10 +38,42 @@ def plot_T60(folder_path: str,
         Plots are saved to:
         - MoD-ART (rate {echogram_sample_rate}) T60 values, lin scale.png
         - MoD-ART (rate {echogram_sample_rate}) T60 values, log scale.png
+    
+    Notes
+    -----
+    If the values are loaded from an existing file, the echogram sample rate
+    and the selection of values in 'MoD-ART' VS 'MoD-ART extra' are not known.
+    The image files are saved to:
+        - MoD-ART T60 values, lin scale.png
+        - MoD-ART T60 values, log scale.png
     """
     if not os.path.isdir(folder_path):
         raise ValueError('Not a valid folder path:\n\t' + folder_path)
 
+    if all_pole_T60s is None:
+        # The sample rate used to prepare these values can't be loaded.
+        echogram_sample_rate = None
+
+        all_pole_T60s = dict()
+
+        with open(os.path.join(folder_path, 'MoD-ART extra.csv'), 'r') as file:
+            file_iterator = iter(file)
+            for line1 in file_iterator:
+                line2 = next(file_iterator)
+                line3 = next(file_iterator)
+        
+                band_idx, mode_t60 = line1.split(',')
+                band_idx = int(band_idx.strip())
+                mode_t60 = float(mode_t60.strip())
+
+                if band_idx not in all_pole_T60s.keys():
+                    all_pole_T60s[band_idx] = list()
+                
+                all_pole_T60s[band_idx].append(mode_t60)
+        
+        all_pole_T60s = {band_idx: np.array(poles)
+                         for band_idx, poles in all_pole_T60s.items()}
+    
     try:
         import matplotlib.ticker as ticker
         import matplotlib.pyplot as plt
@@ -59,16 +95,20 @@ def plot_T60(folder_path: str,
 
     for band_idx, T60s in all_pole_T60s.items():
         num_selected = min(len(T60s), max_slopes_per_band)
-        plt.scatter(np.full(num_selected, frequencies[band_idx-1]),
-                    T60s[:num_selected], marker='o',
-                    facecolors='none', edgecolors='black')
+
+        if echogram_sample_rate is not None:
+            plt.scatter(np.full(num_selected, frequencies[band_idx-1]),
+                        T60s[:num_selected], marker='o',
+                        facecolors='none', edgecolors='black')
+        
         plt.scatter(np.full(len(T60s), frequencies[band_idx-1]),
                     T60s, marker='+')
 
-    plt.title('The modes circled in black are reported in `MoD-ART.csv`.\nAll modes are reported in `MoD-ART extra.csv`.')
+    if echogram_sample_rate is not None:
+        plt.title('The modes circled in black are reported in `MoD-ART.csv`.\nAll modes are reported in `MoD-ART extra.csv`.')
 
     if frequencies_load_succeded:
-        plt.xlabel('Frequency band center')
+        plt.xlabel('Frequency band center [Hz]')
         plt.xscale('log')
         plt.xticks(frequencies)
         ax.xaxis.set_major_formatter(ticker.ScalarFormatter())
@@ -81,7 +121,10 @@ def plot_T60(folder_path: str,
     plt.grid(True, axis='y')
     plt.ylim(0, None)
 
-    plt.savefig(os.path.join(folder_path, 'MoD-ART (rate {:.0f}) T60 values, lin scale.png'.format(echogram_sample_rate)))
+    if echogram_sample_rate is None:
+        plt.savefig(os.path.join(folder_path, 'MoD-ART T60 values, lin scale.png'))
+    else:
+        plt.savefig(os.path.join(folder_path, 'MoD-ART (rate {:.0f}) T60 values, lin scale.png'.format(echogram_sample_rate)))
 
     plt.yscale('log')
     plt.autoscale(axis='y')
@@ -91,10 +134,15 @@ def plot_T60(folder_path: str,
     ax.yaxis.set_minor_locator(ticker.LogLocator(subs=np.arange(0.01, 1, 0.01)))
     ax.yaxis.set_minor_formatter(ticker.NullFormatter())
 
-    plt.savefig(os.path.join(folder_path, 'MoD-ART (rate {:.0f}) T60 values, log scale.png'.format(echogram_sample_rate)))
+    if echogram_sample_rate is None:
+        plt.savefig(os.path.join(folder_path, 'MoD-ART T60 values, log scale.png'))
+    else:
+        plt.savefig(os.path.join(folder_path, 'MoD-ART (rate {:.0f}) T60 values, log scale.png'.format(echogram_sample_rate)))
 
-    # plt.show()
-    plt.close()
+    if show_figure:
+        plt.show()
+    else:
+        plt.close()
 
 
 def compute_MoDART(folder_path: str,

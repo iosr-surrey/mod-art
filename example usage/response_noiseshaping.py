@@ -145,9 +145,10 @@ if __name__ == '__main__':
     lower_band_edges = frequencies / np.sqrt(2)
     upper_band_edges = frequencies * np.sqrt(2)
 
-    # Random number generator for white noise.
+    # Random number generator for the stochastic signal to be modulated.
     rng = default_rng()
     noise_signal = rng.normal(size=int(aural_sample_rate * response_duration))
+    # noise_signal = rng.poisson(lam=1, size=int(aural_sample_rate * response_duration)).astype(float)
 
     # Ensure the noise signal has unit energy per second, matching the
     #   convention used to generate the echograms.

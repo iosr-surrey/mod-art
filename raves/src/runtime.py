@@ -78,7 +78,7 @@ def energy_contributions(mesh: TriangleMesh,
         raise ValueError('The position must be a 1D array of length 3.')
     
     if output_file_path is None:
-        print('\tNo output folder specified. Computing ray-tracing...')
+        print('\tNo output folder specified.\n\tComputing ray-tracing...')
         load_existing = False
     elif not os.path.isfile(output_file_path):
         print('\tOutput folder specified. File:\n\t\t', output_file_path)
@@ -724,7 +724,7 @@ def run_MoDART(folder_path: str,
         if (residue_file_path is None
                 or not os.path.isfile(residue_file_path)
                 or overwrite_sources):
-            print('Computing residues...')
+            print('\tComputing residues...')
             for mode_idx in range(num_modes):
                 # For the residues, we need to compute the Z-transform of each
                 #   filter setting z at the pole value. See "ART_theory.md" for
@@ -743,7 +743,7 @@ def run_MoDART(folder_path: str,
             if residue_file_path is not None:
                 np.savetxt(residue_file_path, source_residues, fmt='%.18f', delimiter=', ')
         else:
-            print('Loading existing residues... File:\n\t', residue_file_path)
+            print('\tLoading existing residues... File:\n\t\t', residue_file_path)
             source_residues = np.loadtxt(residue_file_path, delimiter=',')
         
     # Evaluate the listener residue components at each position, for each mode.
@@ -776,7 +776,7 @@ def run_MoDART(folder_path: str,
         if (residue_file_path is None
                 or not os.path.isfile(residue_file_path)
                 or overwrite_listeners):
-            # print('Computing residues...')
+            print('\tComputing residues...')
             for mode_idx in range(num_modes):
                 # For the residues, we need to compute the Z-transform of each
                 #   filter setting z at the pole value. See "ART_theory.md" for
@@ -795,7 +795,7 @@ def run_MoDART(folder_path: str,
             if residue_file_path is not None:
                 np.savetxt(residue_file_path, listener_residues, fmt='%.18f', delimiter=', ')
         else:
-            # print('Loading existing residues... File:\n\t', residue_file_path)
+            print('\tLoading existing residues... File:\n\t\t', residue_file_path)
             listener_residues = np.loadtxt(residue_file_path, delimiter=',')
     
     # Add the residues to the returned modal data.
