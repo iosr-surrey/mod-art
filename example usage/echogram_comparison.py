@@ -1,4 +1,5 @@
 import os
+import time
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -44,20 +45,24 @@ if __name__ == '__main__':
     num_listeners = len(listener_positions)
     
     # Generate the echograms with TD-ART.
+    start_time = time.time()
     ART_echograms, frequencies = run_ART(environment_folder,
                                          source_positions,
                                          listener_positions,
                                          echogram_sample_rate=echogram_sample_rate,
                                          echogram_duration=shown_duration,
                                          output_folder_path=echograms_subfolder)
+    ART_runtime = time.time() - start_time
     
     # Generate the echograms with MoD-ART.
+    start_time = time.time()
     MoDART_echograms, _, _ = run_MoDART(environment_folder,
                                         source_positions,
                                         listener_positions,
                                         echogram_sample_rate=echogram_sample_rate,
                                         echogram_duration=shown_duration,
                                         output_folder_path=echograms_subfolder)
+    MoDART_runtime = time.time() - start_time
     
     # Clip the echograms above 0 and convert to dB.
     ART_echograms = np.clip(ART_echograms, 1e-20, None)
@@ -98,11 +103,12 @@ if __name__ == '__main__':
                 
                 ax[s, l].set_title('S{}, L{}'.format(s+1, l+1))
                 if l == 0:
-                    ax[s, l].set_ylabel('Intensity response [W/m2]')
+                    ax[s, l].set_ylabel('Intensity response [dB]')
                 if s == num_sources-1:
                     ax[s, l].set_xlabel('Time [s]')
     
-        plt.suptitle('Frequency band {} ({:.2f}Hz)'.format(b+1, frequencies[b]))
+        plt.suptitle('Runtime: TD-ART {:.3f}s, MoD-ART {:.3f}s (≈{:.0f}%).'.format(ART_runtime, MoDART_runtime, 100. * MoDART_runtime / ART_runtime)
+                     + '\nShowing results for frequency band {} ({:.0f}Hz)'.format(b+1, frequencies[b]))
         plt.tight_layout()
 
         plt.savefig(os.path.join(echograms_subfolder,
