@@ -89,7 +89,7 @@ def plot_T60(folder_path: str,
         frequencies = np.range(1, len(all_pole_T60s)+1)
         frequencies_load_succeded = False
 
-    print('\tPlotting results.')
+    print('Plotting results.')
 
     fig, ax = plt.subplots(dpi=200, figsize=(8, 8))
 
