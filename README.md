@@ -32,8 +32,8 @@ In the latter case (install-free alternative), the command needs to be run from 
 ### Examples
 
 The repository includes example input files describing different environments, and example Python scripts illustrating how to use the package.
-The main resource is the Jupyter notebook tutorial `tutorial.ipynb`, which demonstrates how to use the basic features of the package.
-The notebook includes example results, plots, and audible room impulse responses, which you can view online [here](/example%20usage/tutorial.ipynb).
+The main resource is the Jupyter notebook tutorial `Tutorial.ipynb`, which demonstrates how to use the basic features of the package.
+The notebook includes example results, plots, and audible room impulse responses, which you can view online [here](/example%20usage/Tutorial.ipynb).
 
 Other example scripts are:
 - `echogram_comparison.py`
