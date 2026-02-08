@@ -1,100 +1,17 @@
 import os
 import warnings
 import numpy as np
+
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import matplotlib.patheffects as pathefx
+
 from numpy.random import default_rng
 from scipy.io.wavfile import write
-from scipy.signal import resample_poly, butter, sosfilt
+from scipy.signal import butter, sosfilt
+from scipy.interpolate import make_interp_spline
 
 from raves import raves, run_MoDART
-
-
-def closest_divisor(dividend: int, target: int
-                    ) -> int:
-    """
-    Return a factor of `dividend` whose value is closest to `target`.
-
-    Parameters
-    ----------
-    dividend : int
-        Integer to factor.
-    target : int
-        Desired factor value.
-
-    Returns
-    -------
-    factor: int
-        A factor of `dividend` (i.e. `dividend % factor == 0`) such that
-        `abs(factor - target)` is minimal among all factors of `dividend`.
-
-    """
-    # Start by looking in an arbitrary nonzero range around the target.
-    search_range = max(1, int(target / 16))
-    while True:
-        checked_values = np.arange(target - search_range,
-                                   target + search_range,
-                                   dtype=int)
-
-        # Factors have to be strictly positive.
-        checked_values = checked_values[checked_values > 0]
-
-        is_factor = ((dividend % checked_values) == 0)
-        if np.any(is_factor):
-            factors = checked_values[is_factor]
-            closest = np.argmin(np.abs(factors - target))
-            return factors[closest]
-
-        # If no factor was found in the range, expand the range and try again.
-        # The loop will eventually break, because checked_values will
-        #   eventually include 1.
-        search_range *= 2
-
-
-def smart_upsample(envelope: np.ndarray,
-                   low_fs: int, high_fs: int,
-                   clip: bool = True
-                   ) -> np.ndarray:
-    """
-    Upsamples an envelope for noise-shaping, minimizing upsampling artifacts.
-    Guarantees the total energy is preserved.
-
-    Parameters
-    ----------
-    envelope : numpy.ndarray
-        the envelope to be upsampled
-    low_fs : int
-        The starting sample rate of the envelope.
-    high_fs : int
-        The target sample rate of the envelope (must be >= the starting rate).
-    clip : bool, default: True
-        If True, any negative values in the result are set to 0.
-
-    Returns
-    -------
-    envelope : numpy.ndarray
-        The upampled envelope.
-    """
-    if high_fs != low_fs:
-        assert high_fs > low_fs
-
-        # Resample envelope to the closest prime factor of high_fs (maintaining energy, and non-negativity)
-        near_fs = closest_divisor(high_fs, low_fs)
-
-        old_energy = np.sum(envelope ** 2, axis=0)
-
-        envelope = resample_poly(envelope, up=near_fs, down=low_fs, axis=0)
-        if clip:
-            envelope = envelope.clip(0.)
-
-        new_energy = np.sum(envelope ** 2, axis=0)
-        envelope *= np.sqrt(old_energy / new_energy)[None]
-
-        # Repeat envelope to achieve high_fs
-        repetitions = high_fs // near_fs
-        envelope = np.repeat(envelope, repetitions, axis=0)
-        # Note: divide the energy by the number of repetitions to preserve energy-per-time
-        envelope /= np.sqrt(repetitions)
-
-    return envelope
 
 
 if __name__ == '__main__':
@@ -118,9 +35,9 @@ if __name__ == '__main__':
     #   errors in the propagation delays.
     echogram_sample_rate = 1e4
     # Audio sample rate used by the generated responses.
-    aural_sample_rate = 48000.
+    audio_sample_rate = 48000.
     # Duration of the responses to be generated, in seconds.
-    response_duration = 2.5
+    response_duration = 1.5
 
     # Source and listener positions used for the generated echograms.
     source_positions = np.array([[2.1, 1.9, 1.5],
@@ -139,116 +56,160 @@ if __name__ == '__main__':
                                                   echogram_sample_rate=echogram_sample_rate,
                                                   echogram_duration=response_duration,
                                                   output_folder_path=responses_subfolder)
-
-    # Prepare band edges for bandpass filtering.
-    num_bands = len(frequencies)
-    lower_band_edges = frequencies / np.sqrt(2)
-    upper_band_edges = frequencies * np.sqrt(2)
+    
+    print('Generating responses.')
+    
+    # Take note of the echogram energy, to compare it after upsampling.
+    old_energy = np.sum(MoDART_echograms, axis=-1)
+    
+    # Prepare the audio-rate time intervals at which we'll evaluate the upsampled echogram.
+    echogram_time_axis = np.arange(0, response_duration, 1 / echogram_sample_rate)
+    audio_time_axis = np.arange(0, response_duration, 1 / audio_sample_rate)
+    # We use a linear interpolation, because any other upsampling algorithm risks introducing negative values.
+    linear_spline = make_interp_spline(echogram_time_axis, MoDART_echograms, k=1, axis=-1)
+    upsampled_echograms = linear_spline(audio_time_axis)
+    
+    # Normalize w.r.t. the new sample rate, to preserve the energy-per-second definition of echogram values.
+    upsampled_echograms *= echogram_sample_rate / audio_sample_rate
+    
+    # Compare the new energy to the old one.
+    new_energy = np.sum(upsampled_echograms, axis=-1)
+    # The ratio (averaged over all frequency bands) should be close to 1 for all sources and listeners.
+    print(np.mean(old_energy / new_energy, axis=-1))
 
     # Random number generator for the stochastic signal to be modulated.
     rng = default_rng()
-    noise_signal = rng.normal(size=int(aural_sample_rate * response_duration))
-    # noise_signal = rng.poisson(lam=1, size=int(aural_sample_rate * response_duration)).astype(float)
+    
+    # White noise
+    #   noise_signal = rng.normal(size=len(audio_time_axis))
+    # Poisson process
+    noise_signal = rng.poisson(lam=0.5, size=len(audio_time_axis)).astype(float)
 
     # Ensure the noise signal has unit energy per second, matching the
     #   convention used to generate the echograms.
     noise_signal *= np.sqrt(response_duration / np.sum(noise_signal**2))
+    
+    # Factor for octave-band boundaries.
+    band_bound = np.sqrt(2)
+    # Consider the frequency band centers provided alongside the input data.
+    band_centers = frequencies
+    num_bands = len(frequencies)
+    
+    # Ensure that all frequencies support band-pass filtering.
+    if np.any(band_centers * band_bound >= audio_sample_rate):
+        print('Warning: the audio sample rate is too low for some frequency bands.')
+        # Select only acceptable bands.
+        band_centers = band_centers[band_centers * band_bound < audio_sample_rate]
+        # Update the number of rendered bands.
+        num_bands = len(band_centers)
+        # Drop unused bands from the echogram, to preserve the right shape.
+        upsampled_echograms = upsampled_echograms[:, :, :num_bands]
+    
+    # Prepare an array for the band-pass filtered signals.
+    filtered_noise_signals = np.zeros((num_bands, len(audio_time_axis)))
+    
+    for b in range(num_bands):
+        # Prepare the suitable band-pass filter...
+        sos = butter(6, (band_centers[b] / band_bound,
+                         band_centers[b] * band_bound),
+                     btype='bandpass', output='sos',
+                     fs=audio_sample_rate)
+        # ...and apply it to the stochastic signal.
+        filtered_noise_signals[b] = sosfilt(sos, noise_signal)
+    
+    # Translate the energy envelopes to amplitude envelopes.
+    envelopes = np.sqrt(upsampled_echograms)
+    
+    # The envelope array has shape (S, L, B, T), the noise signals have shape (B, T):
+    #   we need to add two "leading" dimensions, which is done using [None, None].
+    modulated_noise_signals = envelopes * filtered_noise_signals[None, None]
+    
+    # The dimension of index 2 holds the separate frequency bands.
+    # Sum the array along that dimension to obtain the complete room impulse responses.
+    responses = np.sum(modulated_noise_signals, axis=2)
 
-    print('Generating responses.')
-
-    responses_dict = dict()
+    print('Saving response files.')
+    
     for s in range(num_sources):
         for l in range(num_listeners):
-            response = np.zeros_like(noise_signal)
-
-            for b in range(num_bands):
-                sos = butter(7, (lower_band_edges[b], upper_band_edges[b]),
-                             btype='bandpass',
-                             fs=aural_sample_rate, output='sos')
-
-                filtered_noise = sosfilt(sos, noise_signal)
-
-                envelope = np.sqrt(MoDART_echograms[s, l, b])
-
-                envelope = smart_upsample(envelope,
-                                          echogram_sample_rate,
-                                          aural_sample_rate)
-                response += filtered_noise * envelope
-
-            if np.any(np.abs(response) > 1.):
+            if np.any(np.abs(responses[s, l]) > 1.):
                 warnings.warn('The response "S{}, L{}.wav" is clipped.'.format(s+1, l+1))
-                response /= np.max(np.abs(response))
+                responses[s, l] /= np.max(np.abs(responses[s, l]))
 
             file_name = 'S{}, L{}.wav'.format(s+1, l+1)
             write(os.path.join(responses_subfolder, file_name),
-                  int(aural_sample_rate), response)
-            
-            responses_dict[(s, l)] = response
-
+                  int(audio_sample_rate), responses[s, l])
+    
     try:
         from librosa import amplitude_to_db
         from librosa.core import cqt
         from librosa.display import specshow
-        
-        import matplotlib.pyplot as plt
-        import matplotlib.patheffects as pe
     except ImportError:
         print('Install librosa to plot the spectrograms.')
     else:
         print('Plotting constant-Q spectrograms.')
         
-        all_band_edges = np.append(lower_band_edges, upper_band_edges[-1])
-        
         bins_per_octave = 24
-        nyquist = aural_sample_rate / 2
-        n_octaves = np.log2(nyquist / all_band_edges[0])
+
+        fmin = frequencies[0] / 2
+        fmax = audio_sample_rate / 2
+        n_octaves = np.log2(fmax / fmin)
         n_bins = int(np.floor(n_octaves * bins_per_octave))
+            
+        band_boundaries = np.append(band_centers / band_bound,
+                                    band_centers[-1] * band_bound)
         
-        spectrograms_dict = {key: cqt(y=response, sr=aural_sample_rate,
-                                      bins_per_octave=bins_per_octave,
-                                      n_bins=n_bins, fmin=all_band_edges[0])
-                             for key, response in responses_dict.items()}
+        spectrograms = cqt(y=responses, sr=audio_sample_rate,
+                           bins_per_octave=bins_per_octave,
+                           n_bins=n_bins, fmin=fmin)
         
-        max_linear_value = np.max([np.max(np.abs(spec))
-                                   for spec in spectrograms_dict.values()])
+        spectrograms_dB = amplitude_to_db(np.abs(spectrograms), ref=1.0)
         
-        spectrograms_dict = {key: amplitude_to_db(spec, ref=max_linear_value)
-                             for key, spec in spectrograms_dict.items()}
-        
-        max_value = np.max([np.max(spec)
-                            for spec in spectrograms_dict.values()])
-        min_value = max_value - 70
+        max_value = np.max(spectrograms_dB)
+        min_value = max_value - 50
         
         fig, ax = plt.subplots(num_sources, num_listeners,
                                figsize=(4*num_listeners, 3*num_sources),
                                squeeze=False, constrained_layout=True)
-        
+            
         cs = None
         for s in range(num_sources):
             for l in range(num_listeners):
-                cs = specshow(spectrograms_dict[s, l],
+                cs = specshow(spectrograms_dB[s, l], sr=audio_sample_rate,
                               x_axis='time', y_axis='cqt_hz',
-                              ax=ax[s, l], cmap='viridis',
-                              sr=aural_sample_rate,
-                              fmin=all_band_edges[0],
-                              bins_per_octave=bins_per_octave,
+                              ax=ax[s, l], cmap='magma',
+                              fmin=fmin, bins_per_octave=bins_per_octave,
                               vmin=min_value, vmax=max_value)
                 
-                line = ax[s, l].hlines(all_band_edges, 0, response_duration,
-                                       color='white', ls='--', linewidth=1)
-                line.set_path_effects([pe.Stroke(linewidth=1.5,
-                                                 foreground='black'),
-                                       pe.Normal(),])
-     
+                line = ax[s, l].hlines(band_boundaries, 0, response_duration,
+                                        color='white', ls='--', linewidth=1)
+                line.set_path_effects([pathefx.Stroke(linewidth=1.5, foreground='black'),
+                                       pathefx.Normal()])
+        
                 ax[s, l].set_xlim(0, response_duration)
-                ax[s, l].set_ylim(all_band_edges[0] * 0.95, nyquist)
+                ax[s, l].set_ylim(fmin, fmax)
+                
+                ax[s, l].yaxis.set_major_locator(ticker.FixedLocator(band_centers))
+                ax[s, l].yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: (f'{int(x)}'
+                                                                                        if x < 1e3 else
+                                                                                        f'{int(x / 1e3)}k')))
+                ax[s, l].yaxis.set_minor_locator(ticker.NullLocator())
+                ax[s, l].yaxis.set_minor_formatter(ticker.NullFormatter())
                 
                 ax[s, l].set_title('S{}, L{}'.format(s+1, l+1))
-        
-        cbar = fig.colorbar(cs, ax=ax)
-        cbar.set_label('dB')
+                if l == 0:
+                    ax[s, l].set_ylabel('Frequency [Hz]')
+                else:
+                    ax[s, l].set_ylabel('')
+                if s == num_sources-1:
+                    ax[s, l].set_xlabel('Time [s]')
+                else:
+                    ax[s, l].set_xlabel('')
 
-        plt.suptitle('Dotted lines show frequency band limits.')
+        cbar = fig.colorbar(cs, ax=ax, format='{x:.0f}dB')
+
+        plt.suptitle('Constant-Q spectrograms of room impulse responses for different source/listener configurations.'
+                     + '\nDotted lines show frequency band limits.')
         
         plt.savefig(os.path.join(responses_subfolder, 'CQT spectrograms.png'))
                     

@@ -36,11 +36,8 @@ if __name__ == '__main__':
                                  [5.8, 4.1, 1.5],
                                  [7.2, 6.5, 1.5]])
     listener_positions = np.array([[3., 3.5, 1.75],
-                                   [5., 3.5, 1.75],
-                                   [7., 3.5, 1.75],
                                    [9., 3.5, 1.75],
-                                   [9., 5.5, 1.75],
-                                   [9., 7.5, 1.75],])
+                                   [9., 9.5, 1.75],])
     num_sources = len(source_positions)
     num_listeners = len(listener_positions)
     
@@ -71,7 +68,7 @@ if __name__ == '__main__':
     MoDART_echograms = 10 * np.log10(MoDART_echograms)
 
     # Prepare a time axis.
-    time_axis = np.linspace(0, shown_duration, ART_echograms.shape[-1])
+    time_axis = np.arange(0, shown_duration, 1 / echogram_sample_rate)
     num_bands = len(frequencies)
     
     print('Plotting echograms.')
@@ -84,7 +81,7 @@ if __name__ == '__main__':
                          np.min(MoDART_echograms[:, :, b, -1]))
         
         fig, ax = plt.subplots(num_sources, num_listeners,
-                               figsize=(3*num_listeners, 3*num_sources))
+                               figsize=(4*num_listeners, 3*num_sources))
     
         for s in range(num_sources):
             for l in range(num_listeners):
