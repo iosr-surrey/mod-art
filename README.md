@@ -6,7 +6,7 @@ You can either import the main functions into your own Python script, or run the
 To import in a Python script, clone the repository and install it with
 ```
 # From the repository root:
-pip install -e .
+pip install .
 ```
 Then, in your script, use one or more of the following lines:
 ```python
