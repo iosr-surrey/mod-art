@@ -769,13 +769,15 @@ def load_frequencies(folder_path: str) -> np.ndarray:
             raise ValueError('The first row of material.csv should start with the word "Frequencies" and contain the band center frequencies.')
 
 
-def visualize_mesh(folder_path: str, cull_back_faces: bool = True) -> None:
+def visualize_mesh(folder_path: str, cull_back_faces: bool = True,
+                   interactive_window: bool = True) -> np.ndarray:
     """
     Visualize the OBJ mesh using pymeshlab and polyscope.
 
     Loads ``mesh.obj`` from the given folder, registers it as a surface mesh,
     and displays per-face colors. Back-face culling can be enabled to hide
-    back-facing triangles.
+    back-facing triangles. Renders the mesh in an interactive window by default.
+    If `interactive_window` is set to False, a screenshot is returned instead.
 
     Parameters
     ----------
@@ -783,10 +785,15 @@ def visualize_mesh(folder_path: str, cull_back_faces: bool = True) -> None:
         Path to the environment folder.
     cull_back_faces : bool, default True
         If True, enable back-face culling for rendering.
+    interactive_window : bool, default True
+        If True, an interactive window is created (code execution is halted).
+        If False, a screenshot is returned instead.
 
     Returns
     -------
-    None
+    np.ndarray
+        If `interactive_window` is False, screenshot image as an integer-valued
+        array (RGB). Otherwise, returns None.
 
     Notes
     -----
@@ -800,12 +807,16 @@ def visualize_mesh(folder_path: str, cull_back_faces: bool = True) -> None:
                           'Install with: pip install "raves[mesh_vis]"') from e
 
     ms = pymeshlab.MeshSet()
-    ms.load_new_mesh(os.path.join(folder_path, 'mesh.obj'))
+    ms.load_new_mesh(os.path.join(folder_path, "mesh.obj"))
+    mesh = ms.current_mesh()
 
     polyscope.set_verbosity(0)
     polyscope.set_use_prefs_file(False)
     polyscope.set_enable_render_error_checks(False)
-    polyscope.set_give_focus_on_show(True)
+    if interactive_window:
+        polyscope.set_give_focus_on_show(False)
+    else:
+        polyscope.set_allow_headless_backends(True)
 
     def disable_imgui_files():
         try:
@@ -824,19 +835,45 @@ def visualize_mesh(folder_path: str, cull_back_faces: bool = True) -> None:
         finally:
             polyscope.clear_user_callback()
 
-    polyscope.init()
+    if interactive_window:
+        polyscope.init()
+    else:
+        try:
+            polyscope.init("openGL3_egl")
+        except Exception:
+            polyscope.init()
 
     polyscope.set_user_callback(disable_imgui_files)
 
-    ps_mesh = polyscope.register_surface_mesh(os.path.split(folder_path)[-1], ms.current_mesh().vertex_matrix(), ms.current_mesh().face_matrix())
-    ps_mesh.add_color_quantity('face_colors', np.asarray(ms.current_mesh().face_color_matrix())[:, :3],
+    ps_mesh = polyscope.register_surface_mesh(os.path.split(folder_path)[-1],
+                                              mesh.vertex_matrix(), mesh.face_matrix())
+    ps_mesh.add_color_quantity('face_colors', np.asarray(mesh.face_color_matrix())[:, :3],
                                defined_on='faces', enabled=True)
-
-    polyscope.set_up_dir('z_up')
-    polyscope.set_navigation_style('turntable')
     if cull_back_faces:
         ps_mesh.set_back_face_policy('cull')
 
-    polyscope.show()
+    polyscope.set_up_dir('z_up')
+    polyscope.set_navigation_style('turntable')
+    polyscope.reset_camera_to_home_view()
+    
+    # Dummy render to make polyscope actually consider a good starting position
+    dummy = polyscope.screenshot_to_buffer()
+    polyscope.reset_camera_to_home_view()
+
+    turntable_pivot = polyscope.get_view_center()
+    current_camera = polyscope.get_view_camera_parameters().get_position()
+    turntable_radius = np.linalg.norm(current_camera - turntable_pivot)
+
+    diagonal_dir = np.array([-1, -1, 1]) / np.sqrt(3)
+    new_camera_pos = turntable_pivot + turntable_radius * diagonal_dir
+    polyscope.look_at(new_camera_pos, turntable_pivot)
+
+    if interactive_window:
+        polyscope.show()
+        img = None
+    else:
+        img = polyscope.screenshot_to_buffer()
 
     polyscope.remove_all_structures()
+
+    return img
