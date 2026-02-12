@@ -539,6 +539,7 @@ def run_ART(folder_path: str,
 def run_MoDART(folder_path: str,
                source_positions: np.ndarray, listener_positions: np.ndarray,
                overwrite_sources: bool = False, overwrite_listeners: bool = False,
+               avoid_saving_residues: bool = True,
                echogram_sample_rate: float = 5e3,
                echogram_duration: float = 1.,
                num_rays: int = 1000,
@@ -567,6 +568,9 @@ def run_MoDART(folder_path: str,
         If True, compute ray-tracing from sources even if data already exists.
     overwrite_listeners: bool, default: False
         If True, compute ray-tracing from listeners even if data already exists.
+    avoid_saving_residues: bool, default: True
+        If True, always compute resiudes on the fly
+        (they're usually more memory-expensive than compute-expensive).
     echogram_sample_rate: float, default: 5e3
         Sample rate in Hz used to quantize propagation delays.
     echogram_duration: float, default: 1.0
@@ -707,6 +711,9 @@ def run_MoDART(folder_path: str,
             operator_file_path = None
             residue_file_path = None
         
+        if avoid_saving_residues:
+            residue_file_path = None
+        
         # The 2D array returned by this function is a distribution of energy
         #   over the propagation paths, over time. The entire array sums to 1;
         #   it specifies how the point source's unit-energy pulse at time 0
@@ -757,6 +764,9 @@ def run_MoDART(folder_path: str,
             residue_file_path = os.path.join(output_folder_path, file_name)
         else:
             operator_file_path = None
+            residue_file_path = None
+        
+        if avoid_saving_residues:
             residue_file_path = None
         
         # The 2D array returned by this function is a distribution of energy

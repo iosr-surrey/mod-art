@@ -122,7 +122,7 @@ if __name__ == '__main__':
     print('Plotting residue maps.')
 
     # Generate a separate figure for each frequency band.
-    for b in range(np.max(MoDART_data['Band idx'])):
+    for b in range(np.max(MoDART_data['Band idx']) + 1):
         # Select the modes related to this frequency band.
         relevant_modes = np.flatnonzero(MoDART_data['Band idx'] == b+1)
         num_modes = min(3, len(relevant_modes))
