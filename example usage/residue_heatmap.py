@@ -81,6 +81,8 @@ if __name__ == '__main__':
     maps_subfolder = os.path.join(environment_folder, 'Residue_maps')
     os.makedirs(maps_subfolder, exist_ok=True)
 
+    # Number of modes to plot in each frequency band (if present).
+    max_shown_modes = 3
     # All frequency band plots are saved to files; this one is also displayed.
     shown_band = 3
     # Sample rate used for the echograms. Mostly relevant to avoid rounding
@@ -122,10 +124,14 @@ if __name__ == '__main__':
     print('Plotting residue maps.')
 
     # Generate a separate figure for each frequency band.
-    for b in range(np.max(MoDART_data['Band idx']) + 1):
+    for b in range(num_bands):
         # Select the modes related to this frequency band.
-        relevant_modes = np.flatnonzero(MoDART_data['Band idx'] == b+1)
-        num_modes = min(3, len(relevant_modes))
+        relevant_modes = np.flatnonzero(MoDART_data['Band idx'] == b)
+        num_modes = min(max_shown_modes, len(relevant_modes))
+        
+        if num_modes == 0:
+            continue
+        
         relevant_modes = relevant_modes[:num_modes]
 
         # Generate the full residues by combining source and listener terms.

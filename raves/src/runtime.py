@@ -697,7 +697,7 @@ def run_MoDART(folder_path: str,
     # Create residue arrays of the required shapes.
     source_residues = np.zeros((num_sources, num_modes))
     listener_residues = np.zeros((num_listeners, num_modes))
-    
+
     # Evaluate the source residue components at each position, for each mode.
     for source_idx in range(num_sources):
         print('Processing source', source_idx+1)
