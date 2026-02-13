@@ -358,3 +358,11 @@ See the full file at `example environments\Shoebox_6_patches\MoD-ART.csv`.
 -0.0003530233074883864, -0.0024277787532403397, [...], 0.05078152146757643
 -0.0038374243645054023, -0.026565491779966813, [...], 0.34907987912517385
 ```
+
+## How to cite
+
+If you make use of this code in your own research or other projects, please consider citing the following publication:
+* Scerbo M, Schlecht SJ, Ali R, Savioja L, and De Sena E. "Modeling nonuniform energy decay through the modal decomposition of acoustic radiance transfer (MoD-ART)," in IEEE Trans. Audio, Speech and Language Proc., 33:3363–3376, 2025.
+
+You may also be interested in the follow-up publication regarding efficient rendering:
+* Scerbo M, Schlecht SJ, Ali R, Savioja L, and De Sena E. "Efficient multichannel auralization based on the modal decomposition of acoustic radiance transfer (MoD-ART)," in IEEE Trans. Audio, Speech and Language Proc., 33:4748-4759, 2025.
