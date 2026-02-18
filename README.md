@@ -48,47 +48,6 @@ Other example scripts are:
     ![Nine heatmaps showing the constant-Q spectrograms of impulse responses for three sound source positions and three listener positions.](/example%20environments/DampenedMiddle_20_patches/Responses/CQT%20spectrograms.png)
 
 
-### RAVES workflow
-
-- Prepare the environment description (input files `materials.csv`, `mesh.mtl`, `mesh.obj`) following the file format outlined in the following section. Place all three files into the same folder (the folder's name will be the name of your environment).
-- Run the `raves` script, either from a command line console or from a Python script of your own, as shown above. In either case, the first argument should be the path to your environment folder.
-- The files `path_indexing.mtx` and `MoD-ART.csv` (among others) will be created in your environment folder. Copy the five files `materials.csv`, `mesh.mtl`, `mesh.obj`,
-  `path_indexing.mtx`, and `MoD-ART.csv` into your Unity project assets, matching the folder structure shown below.
-
-### Unity project folder structure
-
-Place your mesh files in `PythonExports/YourEnvironmentName/` as shown in the following example.
-The first time your environment is loaded in the Unity editor, a file named `YourEnvironmentName.prefab` will be automatically generated in `ProcessedPrefabs`.
-Make sure the `RAVES-Unity` GitHub repository is cloned in the `Assets` folder as shown.
-
-```
-UnityProjectName/
-├── Assets/
-│   ├── RAVES-Unity/
-│   │   └── [cloned GitHub repository]
-│   ├── Resources/
-│   │   ├── ProcessedPrefabs/
-│   │   │   ├── YourEnvironmentName.prefab
-│   │   │   ├── YourOtherEnvironmentName.prefab
-│   │   │   └── [...]
-│   │   ├── PythonExports/
-│   │   │   ├── YourEnvironmentName/
-│   │   │   │   ├── materials.csv
-│   │   │   │   ├── mesh.mtl
-│   │   │   │   ├── mesh.obj
-│   │   │   │   ├── MoD-ART.csv
-│   │   │   │   └── path_indexing.csv
-│   │   │   ├── YourOtherEnvironmentName/
-│   │   │   │   ├── materials.csv
-│   │   │   │   ├── mesh.mtl
-│   │   │   │   ├── mesh.obj
-│   │   │   │   ├── MoD-ART.csv
-│   │   │   │   └── path_indexing.csv
-│   │   │   └── [...]
-│   │   └── [...]
-│   └── [...]
-└── [...]
-```
 
 ## Preparing the environment mesh
 
@@ -149,13 +108,13 @@ The example files shown here can be found in the `example environments\Shoebox_6
 The mesh geometry should be provided in basic Wavefront format (`mesh.obj`+`mesh.mtl`).
 The first line of `mesh.obj` should be `mtllib mesh.mtl`, with `mesh.mtl` being placed in the same folder as `mesh.obj`.
 All other lines of `mesh.obj` should be restricted to vertex definitions `v`, face definitions `f`, comments `#`, and materials assignments `usemtl`, as detailed in the following.
-Any other lines will be ignored by the acoustic analysis, but may alter the visual appearance of the mesh in Unity.
+Any other lines will be ignored by the acoustic analysis, but may alter the visual appearance of the mesh in other editors.
 
 Vertex definition lines start with `v` followed by three floating-point values, separated by spaces.
 These are the vertex's three-dimensional coordinates. Optionally, the line may include an inline comment (starting with `#`) specifying the vertex index.
 Note that vertex indices start from 1.
 These comments only serve as a human-readable reference, and are ignored by the parser.
-Avoid using this type of "inline" comment on lines starting with `f` or `usemtl`: they create trouble for the Unity parser.
+If you intend to use the mesh files in any other program afterwards, avoid using this type of "inline" comment on lines starting with `f` or `usemtl`: they create trouble for some parsers.
 
 Face definition lines start with `f` followed by three integer numbers, separated by spaces.
 These are the indices of the vertices forming each face, listed counter-clockwise around the surface normal.
@@ -223,9 +182,8 @@ Each definition consists of two lines: the first one is `newmtl Patch_{i}_Mat_{m
 More lines may be added to specify other visual properties, but the two lines above are the bare minimum for correct parsing.
 
 The material properties defined in `mesh.mtl` are purely visual, and have no bearing on the acoustic processing.
-This file only serves to ensure that mesh materials are imported correctly in Unity.
-Unity disregards the materials mentioned in the `.obj` if they have no matching definition in the `.mtl`.
-Nevertheless, these are the visual properties that will be displayed in the Unity editor, so you may find them useful for visual validation of the patch assignment.
+This file only serves to ensure that mesh materials are imported correctly in other programs: some parsers disregard the materials mentioned in the `.obj` if they have no matching definition in the `.mtl`.
+Nevertheless, these are the visual properties that will be displayed in most editors, so you may find them useful for visual validation of the patch assignment.
 
 #### Example
 
@@ -294,14 +252,12 @@ The `compute_ART` script writes propagation path details in the following files:
 - `path_indexing.mtx`
     - Sparse, square, integer-valued matrix relating each pair of surface patch indices to the index of a propagation path.
     Zero elements (not reported in the file) denote invalid paths; patch and path indices both start from 1.
-    This is one of the files which should be copied in the Unity asset folder.
 - `path_delays.csv`
     - Propagation path delays, in seconds. Given by the path lengths (see below) divided by the sound speed, which is computed based on the given temperature.
 - `path_lengths.csv`
     - Propagation path lengths, in meters. Defined as the average distance between pairs of points in the double surface integral between the two surface patches at either end of the path.
 - `path_etendues.csv`
     - Propagation path etendues, i.e., product of projected area and solid angle integrated between the two surface patches at either end of the path.
-    This is required to prepare the exported MoD-ART eigenvectors to be used in Unity.
     This aspect is discussed further in `ART_theory.md`.
 
 Note that `path_lengths.csv` and `path_etendues.csv` only report valid paths, following the indices in `path_indexing.mtx`.
