@@ -1,4 +1,9 @@
-# RAVES preprocessing
+# RAVES acoustic modeling
+
+The `raves` package offers tools to assess room acoustics by building acoustic radiance transfer (ART) models, analyzing them using the modal decomposition of acoustic radiance transfer (MoD-ART) method, generating impulse responses, and more.
+
+An overview of the theory behind ART and MoD-ART is provided in [these notes](/ART_theory.md).
+For a more extensive and formal background, see the papers listed at the end of this page &mdash; don't hesitate to contact me if you have trouble accessing the full text.
 
 ## Installation and usage
 
@@ -33,8 +38,7 @@ In the latter case (install-free alternative), the command needs to be run from 
 
 The repository includes example input files describing different environments, and example Python scripts illustrating how to use the package.
 The main resource is the Jupyter notebook tutorial `Tutorial.ipynb`, which demonstrates how to use the basic features of the package.
-The notebook includes example results, plots, and audible room impulse responses, which you can view online [here](/example%20usage/Tutorial.ipynb).
-
+The notebook includes example results, plots, and audible room impulse responses, which you can view online [here](/example%20usage/Tutorial.ipynb).  
 Other example scripts are:
 - `echogram_comparison.py`
     - For a set of sound source and listener positions, generate echograms with both TD-ART and MoD-ART, and compare the two approaches.
