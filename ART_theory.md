@@ -19,7 +19,7 @@ Under that assumption, the *discretized radiance* propagated by ART is given by 
 Both are valid choices, and different works in the literature disagree on this definition.
 We take the time to discuss the choice here because it affects the way the ART scattering matrix is defined, as well as the weighting which needs to be applied to inputs and outputs of the ART system.
 
-In RAVES, and by extension in this implementation of ART, we *integrate* radiance in each propagation path.
+In RoomAcoustiC++, and by extension in this implementation of ART, we *integrate* radiance in each propagation path.
 This means that the physical quantity being propagated between pairs of surface patches is acoustical *power*:
 
 $$
@@ -75,7 +75,7 @@ The etendue is what translates radiance to power and vice-versa: this property i
 
 
 
-## Considerations for using MoD-ART in RAVES
+## Considerations for using MoD-ART in RoomAcoustiC++
 
 ### ART recursion loop format
 
@@ -120,7 +120,7 @@ We explain this relationship in the following.
 
 ### MoD-ART eigenvectors
 
-The ART system structure we use here is informed by the use of MoD-ART eigenvectors in RAVES (at runtime).
+The ART system structure we use here is informed by the use of MoD-ART eigenvectors in RoomAcoustiC++ (at runtime).
 The operation performed at runtime is as follows.
 Energy* emanated from the sound source is delayed according to the distance between the source and the closest reflecting surface.
 It is not reflected nor scaled by any surface reflection coefficient.
@@ -207,7 +207,7 @@ The solid angles themselves can be evaluated exactly like they are from the sour
 We saw how to do this in the first section: $L_{i \to j} = \frac{P_{i \to j}}{G_{i \to j}}$.
 The output operators need to divide the propagated power by the path etendue.
 
-In the RAVES implementation, the ray-tracing steps (find intersections, bundle per patch, divide by $N_\omega$) are performed at runtime.
+In the RoomAcoustiC++ implementation, the ray-tracing steps (find intersections, bundle per patch, divide by $N_\omega$) are performed at runtime.
 To save some runtime multiplications, the eigenvectors $V$ and $W$ are multiplied by $4\pi$ during the pre-processing.
 The right vectors $V$ are also divided by the relevant path etendues $G_{i \to j}$ to enact the power-to-radiance translation.
 All of these scaling factors are baked into the eigenvectors saved in the output file `MoD-ART.csv`.
@@ -231,7 +231,7 @@ $$
     .
 $$
 
-This scaling is applied when contributions to (and from) propagation paths are computed in RAVES, at runtime.
+This scaling is applied when contributions to (and from) propagation paths are computed in RoomAcoustiC++, at runtime.
 Similarly, the compensation for the initial delay of the whole late reverberation section is $\sigma_i^{t_d}$ where $t_d$ is in seconds.
 
 

@@ -588,7 +588,7 @@ def run_MoDART(folder_path: str,
         Atmospheric pressure (kPa) used for speed-of-sound computation.
 
     Returns
-    -------: numpy.ndarray
+    -------
     echograms
         An array of shape (S, L, B, T) where:
         - S is the number of sources (even if only one is given);
