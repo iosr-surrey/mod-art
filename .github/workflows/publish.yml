@@ -1,0 +1,32 @@
+# https://gist.github.com/emrekgn/53b29e9ee8779f1a6c81fa0d25afdd8c.js
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - "v*.*.*"          # publish only when version tags are pushed
+
+jobs:
+  build-and-publish:
+      runs-on: ubuntu-latest
+      permissions:
+        id-token: write   # required for OIDC
+        contents: read
+
+      steps:
+        - uses: actions/checkout@v4
+
+        - uses: actions/setup-python@v5
+          with:
+            python-version: ">=3.10"
+
+        - name: Install build backend
+          run: python -m pip install --upgrade pip build
+
+        - name: Build dists
+          run: python -m build
+
+        - name: Publish to PyPI
+          uses: pypa/gh-action-pypi-publish@release/v1
+          with:
+            print_hash: true
