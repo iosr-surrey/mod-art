@@ -7,32 +7,35 @@ For a more extensive and formal background, see the papers listed at the end of 
 
 ## Installation and usage
 
-You can either import the main functions into your own Python script, or run the preprocessing from the command line.
-To import in a Python script, clone the repository and install it with
-```
-# From the repository root:
-pip install .
-```
-Then, in your script, use one or more of the following lines:
-```python
-from raves import raves
-from raves import compute_ART
-from raves import compute_MoDART
+The `raves` project is now on PyPI, so you can simply `pip install raves`!
 
-# The '__main__' scope is necessary because `compute_ART` (and, by extension, `raves`)
-#  makes use of multiprocessing, unless you manually set `multiprocess_pool_size=1`.
+After installation, you can either import the main functions into your own Python script, or run the preprocessing from the command line.
+To import in a Python script, use one or more of the following lines:
+```python
+# Full pipeline, which prepares ART and then its MoD:
+from raves import raves
+# Only prepare ART:
+from raves import compute_ART
+# Perform the MoD, assuming ART files exist:
+from raves import compute_MoDART
+# Generate echograms, assuming ART and/or MoD-ART files exist:
+from raves import run_ART, run_MoDART
+
+"""
+The '__main__' scope is necessary because `compute_ART` (and, by extension, `raves`) makes use of multiprocessing, unless you manually set `multiprocess_pool_size=1`.
+"""
 if __name__ == '__main__':
     raves("path/to/your/environment/folder")
 ```
 To launch from the command line, run
 ```bash
-# After installation:
+# After pip-installation:
 $ raves "path/to/your/environment/folder"
 
-# Alternatively (works without pip-install):
+# Alternatively:
 $ python -m raves "path/to/your/environment/folder"
 ```
-In the latter case (install-free alternative), the command needs to be run from the root directory of the repository.
+In the latter case (install-free alternative), the command needs to be run from the root directory of the repository. It may be useful while testing changes to the package.
 
 ### Examples
 
