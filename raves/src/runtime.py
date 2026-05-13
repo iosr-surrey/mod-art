@@ -221,7 +221,11 @@ def operator_value_at_z(operator: csr_array,
         # See "ART_theory.md" for details, specifically the end of section
         #   "ART injection and detection operators".
         for amount, delay in zip(contrib_amounts, contrib_delays):
-            result[path_idx] += amount * (z ** -delay)
+            contrib = amount * (z ** -delay)
+            # In case of underflow (decay too fast and delay too long), void the contribution.
+            if not np.isfinite(contrib):
+                contrib = 0
+            result[path_idx] += contrib
     
     return result
 
